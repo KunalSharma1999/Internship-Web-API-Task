@@ -1,0 +1,70 @@
+<div class="employees">
+<div class="advanced-filters">
+    <app-left-filter (filterSelected)="filterSelected($event)"></app-left-filter>
+    </div>
+    <div class="search-filter-add-display">
+        <nav class="alphabet-nav" id="alphabetNav">
+            <div class="user-logo">
+                <i class="fa fa-user"></i>
+            </div>
+            <div *ngFor="let alphabet of alphabets">
+                <button type="button" (click)="alphabetFilter = alphabet">{{alphabet}}</button>
+            </div>
+        </nav>
+        <div class="search-filter-add">
+            <div class="search">
+                <div class="search-box">
+                    <label for="search">Search</label>
+                    <i class="fa fa-search"></i>
+                    <input type="text" placeholder="Enter any keyword" class="search-bar" id="search-field" [(ngModel)]="searchKeyWord" #searchBar/>
+                </div>
+                <button type="button" (click)="clearSearch()" class="btn-clear">Clear</button>
+            </div>
+        
+            <div class="filter-list">
+                <label for="filters">Filter by</label>
+                <select name="filters" class="filters" id="filter" [(ngModel)]="filterBy">
+                    <option value="" disabled selected>Select a Filter</option>
+                    <option value="preferredName">Preferred Name</option>
+                    <option value="department">Departments</option>
+                    <option value="office">Offices</option>
+                    <option value="jobTitle">Job Titles</option>
+                </select>
+            </div>
+            <button data-modal-target="#modal" id="add-employee" class="btn-add-employee"
+            (click)="openAddEmployeeDialog()">
+            Add Employee
+          </button>
+          <ng-template #content let-modal>
+            <app-add-employee [employeeId]="employeeId" [mode]="mode"></app-add-employee>
+          </ng-template>
+        </div>
+
+<div class="note">
+    <p>
+        <span class="note-heading">Note:</span> Please use the advanced filter options to refine the results.
+    </p>
+</div>
+<div class="output-window">
+    <div class="display">
+    <div class="employee-card" *ngFor="let employee of (employeeService.employees | employeeFilter: filter: alphabetFilter: searchKeyWord: filterBy)" (click)="selectEmployee(employee)">
+        <div class="profile-pic">
+        <img src="assets/img/blank-profile-picture.png" class="dp">
+        </div>
+        <div class = "info">
+            <div class="name">{{employee.PreferredName}}
+            </div>
+            <div class="job-department">{{employee.JobTitle}}<br>{{employee.Department}} Department
+            </div>
+            <div class="icons">
+            <i class="fa fa-phone-square-alt"></i>
+            <i class="fa fa-envelope"></i>
+            <i class="fa fa-comment"></i>
+            <i class="fa fa-star"></i>
+            <i class="fa fa-heart"></i>
+            </div>
+        </div>
+    </div>
+ </div>
+</div>
+    </div>

@@ -1,0 +1,41 @@
+.form-container {
+    padding: 10px 20px 5px;
+    background-color: white;
+}
+
+    .form-container h4 {
+        color: rgb(62,192,253);
+        font-weight: 100;
+        margin: 0 0 10px;
+    }
+
+    .form-container input[type=text], .form-container input[type=email] {
+        width: 100%;
+        border: none;
+        background: #f1f1f1;
+        margin: 5px 0;
+        padding: 4px;
+    }
+
+        .form-container input[type=text]:focus {
+            background-color: #ddd;
+        }
+
+.btn-add, .btn-update{
+    background-color: rgb(0,177,252);
+    margin: 10px 0;
+    color: white;
+    font-size: 12px;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+}
+
+.btn-update {
+    margin-left: 20px;
+}
+
+.error{
+    color: red;
+    font-size: 10px;
+}

@@ -1,0 +1,9 @@
+html {
+    min-height:100%;
+}
+body {
+    min-height:100%;
+    margin: 0 10%;
+    padding: 20px;
+    font-family:Calibri;
+}

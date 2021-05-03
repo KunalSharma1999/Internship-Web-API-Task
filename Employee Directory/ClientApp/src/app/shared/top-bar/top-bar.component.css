@@ -1,0 +1,46 @@
+header {
+    display: flex;
+    font-family: Calibri;
+    border-bottom:1.5px solid rgb(234,234,234);
+}
+
+    header .company-logo .logo{
+        height:40px;
+    }
+
+    header .page-title{
+        padding: 0px 10px 20px;
+        line-height:18px;
+    }
+        header .page-title h4{
+            color: rgb(62,192,253);
+            font-weight: 100;
+            margin: 0 0;
+        }
+
+    header .page-title h6 {
+        color: rgb(148,148,147);
+        font-weight: 100;
+        margin:0 0;
+    }
+    header .my-profile {
+        display:flex;
+        margin-left: auto;
+        line-height: 18px;
+        align-items: flex-end;
+        padding-bottom: 20px;
+    }
+
+    header .my-profile h4 {
+        color: rgb(62,192,253);
+        font-weight: 100;
+        margin: 0;
+    }
+    header .my-profile .profile-name {
+        color: rgb(108,107,107);
+    }
+    header .my-profile .profile-pic .dp{
+        height: 40px;
+        width: 40px;    
+    }
+   

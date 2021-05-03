@@ -1,0 +1,71 @@
+<div id="departments">
+    <h6>Departments</h6>
+    <div>
+        <ul>
+            <li *ngFor="let department of departments | slice:0:4">
+                <a (click)="setFilter(department, filterOption.Department)">
+                {{department}}
+                </a>
+            </li>
+            <div *ngIf="isDepartmentsExpanded">
+                <div *ngFor="let department of departments; let i = index">
+                  <li *ngIf="i >= 4">
+                    <a (click)="setFilter(department, filterOption.Department)">
+                        {{department}}
+                    </a>
+                  </li>
+                </div>
+                <a href="#viewLess" (click)="expandDepartments()" class="view-link">view less</a>
+            </div>
+            <a *ngIf="departments.length > 4 && !isDepartmentsExpanded" href="#viewMore" (click)="expandDepartments()" class="view-link">view more</a>
+        </ul>
+    </div>
+</div>
+
+<div id="offices">
+    <h6>Offices</h6>
+    <div >
+        <ul>
+            <li *ngFor="let office of offices | slice:0:4">
+                <a (click)="setFilter(office, filterOption.Office)">
+                {{office}}
+                </a>
+            </li>
+            <div *ngIf="isOfficesExpanded">
+                <div *ngFor="let office of offices; let i = index">
+                  <li *ngIf="i >= 4">
+                    <a (click)="setFilter(office, filterOption.Office)">
+                        {{office}}
+                    </a>
+                  </li>
+                </div>
+                <a href="#viewLess" (click)="expandOffices()" class="view-link">view less</a>
+            </div>
+            <a *ngIf="offices.length > 4 && !isOfficesExpanded" href="#viewMore" (click)="expandOffices()" class="view-link">view more</a>
+        </ul>
+    </div>
+</div>
+
+<div id="jobTitles">
+    <h6>Job Titles</h6>
+    <div >
+        <ul>
+            <li *ngFor="let jobTitle of jobTitles | slice:0:4">
+                <a (click)="setFilter(jobTitle, filterOption.JobTitle)">
+                {{jobTitle}}
+                </a>
+            </li>
+            <div *ngIf="isJobTitlesExpanded">
+                <div *ngFor="let jobTitle of jobTitles; let i = index">
+                  <li *ngIf="i >= 4">
+                    <a (click)="setFilter(jobTitle, filterOption.JobTitle)">
+                        {{jobTitle}}
+                    </a>
+                  </li>
+                </div>
+                <a href="#viewLess" (click)="expandJobTitles()" class="view-link">view less</a>
+            </div>
+            <a *ngIf="jobTitles.length > 4 && !isJobTitlesExpanded" href="#viewMore" (click)="expandJobTitles()" class="view-link">view more</a>
+        </ul>
+    </div>
+</div>

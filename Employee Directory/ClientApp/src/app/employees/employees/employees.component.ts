@@ -1,0 +1,59 @@
+import { Component, OnInit, ViewChild} from '@angular/core';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { Employee } from 'src/app/models/Employee';
+import { Filter } from 'src/app/models/Filter';
+import { Alphabets } from 'src/app/shared/constants/constants';
+import { Mode } from 'src/app/shared/enums/mode';
+import { EmployeeService } from 'src/app/shared/services/employee.service';
+
+@Component({
+  selector: 'app-employees',
+  templateUrl: './employees.component.html',
+  styleUrls: ['./employees.component.css']
+})
+
+export class EmployeesComponent implements OnInit {
+  @ViewChild('content') modalDialogContent;
+  alphabets = Alphabets;
+  filter: Filter;
+  alphabetFilter = '';
+  searchKeyWord = '';
+  filterBy = '';
+  employeeId: number;
+  mode: Mode;
+
+  constructor(
+    private modalService: NgbModal,
+    public employeeService: EmployeeService) {
+  }
+
+  ngOnInit(){
+    this.employeeService.refreshEmployees();
+  }
+
+  filterSelected(filter: Filter) {
+    this.filter = filter;
+  }
+
+  clearSearch() {
+    this.searchKeyWord = '';
+    this.alphabetFilter = '';
+    this.filter = null;
+  }
+
+  selectEmployee(employee: Employee) {
+    this.employeeId = employee.Id;
+    this.mode = Mode.Edit;
+    this.openEmployeeDialog();
+  }
+
+  openAddEmployeeDialog() {
+    this.mode = Mode.Add;
+    this.openEmployeeDialog();
+  }
+
+  private openEmployeeDialog() {
+    this.modalService.open(this.modalDialogContent, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
+    }).catch(() => {});
+  }
+}

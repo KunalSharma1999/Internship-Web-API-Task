@@ -1,0 +1,169 @@
+.employees{
+    display: flex;
+    width: 100%;
+}
+
+.advanced-filters{
+  width: 17%;
+}
+
+.search-filter-add-display{
+    width:83%;
+}
+
+.note .note-heading {
+    font-size: 10px;
+    color: rgb(109,108,108);
+    font-weight: bolder;
+}
+
+.note p {
+    font-size: 10px;
+    color: rgb(148,148,147);
+}
+
+.output-window {
+    border: 1px solid rgb(227,226,226);
+    height: 100%;
+    padding: 10px;
+}
+
+.display{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.employee-card {
+    display: flex;
+    width: 25%;
+    box-sizing: border-box;
+    background-color: rgb(233,232,232);
+    border: 10px solid white;
+    padding: 5px;
+    cursor: pointer;
+}
+
+.fa-phone-square, .fa-envelope, .fa-comment, .fa-star, .fa-heart {
+    color: rgb(150,149,149);
+    margin: 2px 4px;
+}
+
+.employee-card .dp {
+    height: 55px;
+    width: 50px;
+}
+
+.employee-card .name {
+    font-size: 10px;
+    color: rgb(103,103,103);
+    font-weight: 600;
+    padding: 0 4px;
+}
+
+.employee-card .job-department {
+    font-size: 8px;
+    color: rgb(155,156,156);
+    padding: 0px 4px;
+}
+
+.employee-card .icons {
+    font-size: 8px;
+    display: flex;
+}
+
+.alphabet-nav {
+    width: 100%;
+    display: flex;
+    margin: 20px 0 10px;
+}
+
+    .alphabet-nav button, .alphabet-nav .user-logo {
+        border: none;
+        width: 28.2px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 13px;
+        font-weight: 500;
+        padding: 5px;
+        margin: 0 1px;
+        color: white;
+        background-color: rgb(0,177,252);
+    }
+
+    .alphabet-nav button {
+        cursor: pointer;
+    }
+
+    .alphabet-nav .user-logo {
+        padding: 5px 2px;
+    }
+
+.search-filter-add{
+    display: flex;
+    width: 100%;
+}
+
+.search {
+    display: flex;
+}
+
+    .search label {
+        color: rgb(113,112,112);
+        font-size: 13px;
+    }
+    .search-box .fa-search {
+        position: absolute;
+        color: rgb(202,201,201);
+        font-size: 12px;
+        margin: 0 10px;
+        padding: 5px;
+    }
+
+    .search-box .search-bar {
+        margin: 0 10px;
+        padding: 5px 20px;
+        font-size: 10px;
+        color: rgb(187,187,187);
+        border-width: thin;
+        border-color: rgb(202,201,201);
+    }
+
+.btn-clear {
+    color: white;
+    font-size: 10px;
+    margin: 0 10px;
+    padding: 3px 15px;
+    background-color: rgb(105,186,0);
+    border: none;
+    cursor: pointer;
+}
+
+  
+.filters {
+    margin: 0 10px;
+    font-size: 10px;
+    padding: 5px;
+    color: rgb(187,187,187);
+}
+
+.filter-list {
+    margin: 0 10px;
+}
+
+.filter-list label{
+    color: rgb(113,112,112);
+    font-size: 13px;
+}
+
+.btn-add-employee {
+    margin-left: auto;
+    color: white;
+    padding: 5px;
+    font-size: 13px;
+    font-weight: bold;
+    background-color: rgb(0,177,252);
+    border: none;
+    cursor: pointer;
+}
+
