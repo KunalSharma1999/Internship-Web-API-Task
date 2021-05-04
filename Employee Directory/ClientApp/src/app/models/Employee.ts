@@ -1,26 +1,26 @@
 export class Employee{
-    public Id:number;
-    public FirstName: string
-    public LastName: string
-    public PreferredName: string
-    public Email: string
-    public JobTitle: string
-    public Office: string
-    public Department: string
-    public PhoneNumber: string
-    public SkypeId: string
+    public id:number;
+    public firstName: string
+    public lastName: string
+    public preferredName: string
+    public email: string
+    public jobTitle: string
+    public office: string
+    public department: string
+    public phoneNumber: string
+    public skypeId: string
 
     constructor(args: any){
         args = !!args ? args : {};
-        this.Id = args.Id;
-        this.FirstName = args.FirstName;
-        this.LastName = args.LastName;
-        this.PreferredName = args.PreferredName;
-        this.Email = args.Email;
-        this.JobTitle = args.JobTitle;
-        this.Office = args.Office;
-        this.Department = args.Department;
-        this.PhoneNumber = args.PhoneNumber;
-        this.SkypeId = args.SkypeId;
+        this.id = args.id;
+        this.firstName = args.firstName;
+        this.lastName = args.lastName;
+        this.preferredName = args.preferredName;
+        this.email = args.Email;
+        this.jobTitle = args.jobTitle;
+        this.office = args.office;
+        this.department = args.department;
+        this.phoneNumber = args.phoneNumber;
+        this.skypeId = args.skypeId;
     }
 }

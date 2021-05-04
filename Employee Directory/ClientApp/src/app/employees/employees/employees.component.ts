@@ -16,9 +16,9 @@ export class EmployeesComponent implements OnInit {
   @ViewChild('content') modalDialogContent;
   alphabets = Alphabets;
   filter: Filter;
-  alphabetFilter = '';
-  searchKeyWord = '';
-  filterBy = '';
+  alphabetFilter: string = null;
+  searchKeyWord: string = null;
+  filterBy: string = '';
   employeeId: number;
   mode: Mode;
 
@@ -42,7 +42,7 @@ export class EmployeesComponent implements OnInit {
   }
 
   selectEmployee(employee: Employee) {
-    this.employeeId = employee.Id;
+    this.employeeId = employee.id;
     this.mode = Mode.Edit;
     this.openEmployeeDialog();
   }

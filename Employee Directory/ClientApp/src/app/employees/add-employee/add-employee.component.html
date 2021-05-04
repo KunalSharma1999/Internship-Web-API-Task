@@ -3,26 +3,26 @@
         <h4>{{formTitle}}</h4>
         <div class="form-group">
         <label for="firstName"><b>First Name</b></label>
-        <input type="text" placeholder="Enter First Name" class="form-control" formControlName="FirstName">
-        <span class="error" *ngIf="form.FirstName.invalid && form.FirstName.touched">firstName is invalid</span>
+        <input type="text" placeholder="Enter First Name" class="form-control" formControlName="firstName">
+        <span class="error" *ngIf="form.firstName.invalid && form.firstName.touched">First Name is invalid</span>
         </div>
         <div class="form-group">
         <label for="lastName"><b>Last Name</b></label>
-        <input type="text" placeholder="Enter Last Name" class="form-control" formControlName="LastName">
-        <span class="error" *ngIf="form.LastName.invalid && form.LastName.touched">lastName is invalid</span>
+        <input type="text" placeholder="Enter Last Name" class="form-control" formControlName="lastName">
+        <span class="error" *ngIf="form.lastName.invalid && form.lastName.touched">Last Name is invalid</span>
         </div>
         <div class="form-group">
         <label for="preferredName"><b>Preferred Name</b></label>
-        <input type="text" placeholder="Enter Preferred Name" class="form-control" formControlName="PreferredName" (click)="updatePreferredName()">
+        <input type="text" placeholder="Enter Preferred Name" class="form-control" formControlName="preferredName" (click)="updatePreferredName()">
         </div>
         <div class="form-group">
         <label for="email"><b>Email</b></label>
-        <input type="email" placeholder="Enter Email" class="form-control" formControlName="Email">
-        <span class="error" *ngIf="form.Email.invalid && form.Email.touched">email is invalid</span>
+        <input type="email" placeholder="Enter Email" class="form-control" formControlName="email">
+        <span class="error" *ngIf="form.email.invalid && form.email.touched">Email is invalid</span>
         </div>
         <div class="form-group">
         <label for="jobTitle"><b>Job Title</b></label>
-        <select class="form-control" formControlName="JobTitle">
+        <select class="form-control" formControlName="jobTitle">
             <option value="" disabled selected>Select Job Title</option>
             <option *ngFor="let jobTitle of lookupService.getJobTitles()" value="{{jobTitle}}">
                 {{jobTitle}}
@@ -31,7 +31,7 @@
         </div>
         <div class="form-group">
         <label for="office"><b>Office</b></label>
-        <select class="form-control" formControlName="Office">
+        <select class="form-control" formControlName="office">
             <option value="" disabled selected>Select Office</option>
             <option *ngFor="let office of lookupService.getOffices()" value="{{office}}">
                 {{office}}
@@ -40,7 +40,7 @@
         </div>
         <div class="form-group">
         <label for="department"><b>Department</b></label>
-        <select class="form-control" formControlName="Department">
+        <select class="form-control" formControlName="department">
             <option value="" disabled selected>Select Department</option>
             <option *ngFor="let department of lookupService.getDepartments()" value="{{department}}">
                 {{department}}
@@ -49,13 +49,13 @@
         </div>
         <div class="form-group">
         <label for="phoneNumber"><b>Phone Number</b></label>
-        <input type="text" placeholder="Enter Phone Number" class="form-control" formControlName="PhoneNumber">
-        <span class="error" *ngIf="form.PhoneNumber.invalid && form.PhoneNumber.touched">phoneNumber is invalid</span>
+        <input type="text" placeholder="Enter Phone Number" class="form-control" formControlName="phoneNumber">
+        <span class="error" *ngIf="form.phoneNumber.invalid && form.phoneNumber.touched">Phone Number is invalid</span>
         </div>
         <div class="form-group">
         <label for="skypeId"><b>Skype ID</b></label>
-        <input type="text" placeholder="Enter Skype ID" class="form-control" formControlName="SkypeId">
-        <span class="error" *ngIf="form.SkypeId.invalid && form.SkypeId.touched">skypeId is invalid</span>
+        <input type="text" placeholder="Enter Skype ID" class="form-control" formControlName="skypeId">
+        <span class="error" *ngIf="form.skypeId.invalid && form.skypeId.touched">SkypeId is invalid</span>
         </div>
     </form>
     <button [disabled]="employeeForm.invalid"  class="btn-update" (click)="saveEmployee()">Save</button>

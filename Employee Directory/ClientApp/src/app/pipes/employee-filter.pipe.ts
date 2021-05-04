@@ -23,7 +23,7 @@ export class EmployeeFilterPipe implements PipeTransform {
 
     if (alphabetFilter) {
         employees = employees.filter(employee => {
-            return employee.PreferredName.toLowerCase().startsWith(alphabetFilter.toLowerCase());
+            return employee.preferredName.toLowerCase().startsWith(alphabetFilter.toLowerCase());
         });
     }
 
@@ -37,9 +37,9 @@ export class EmployeeFilterPipe implements PipeTransform {
         }
         else {
             employees = employees.filter(employee => {
-                return employee.Department.toLowerCase().includes(searchKeyword) ||
-                    employee.JobTitle.toLowerCase().includes(searchKeyword) ||
-                    employee.PreferredName.toLowerCase().includes(searchKeyword);
+                return employee.department.toLowerCase().includes(searchKeyword) ||
+                    employee.jobTitle.toLowerCase().includes(searchKeyword) ||
+                    employee.preferredName.toLowerCase().includes(searchKeyword);
             });
         }
     }

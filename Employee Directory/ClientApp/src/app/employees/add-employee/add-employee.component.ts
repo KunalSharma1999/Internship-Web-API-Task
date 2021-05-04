@@ -25,22 +25,23 @@ export class AddEmployeeComponent implements OnInit {
   }
 
     employeeForm = new FormGroup({
-    FirstName: new FormControl('',[Validators.required, Validators.pattern(/^[a-zA-Z ]+$/)]),
-    LastName: new FormControl('',[Validators.required, Validators.pattern(/^[a-zA-Z ]+$/)]),
-    PreferredName: new FormControl('',Validators.required),
-    Email: new FormControl('',[Validators.required, Validators.pattern(/^[a-zA-Z0-9\.]+@[a-zA-Z]+\.[a-zA-Z]{2,3}$/)]),
-    JobTitle: new FormControl('', Validators.required),
-    Office: new FormControl('', Validators.required),
-    Department: new FormControl('', Validators.required),
-    PhoneNumber: new FormControl('',[Validators.required, Validators.pattern(/^\d{10}$/)]),
-    SkypeId: new FormControl('',Validators.required)
+    firstName: new FormControl('',[Validators.required, Validators.pattern(/^[a-zA-Z ]+$/)]),
+    lastName: new FormControl('',[Validators.required, Validators.pattern(/^[a-zA-Z ]+$/)]),
+    preferredName: new FormControl('',Validators.required),
+    email: new FormControl('',[Validators.required, Validators.pattern(/^[a-zA-Z0-9\.]+@[a-zA-Z]+\.[a-zA-Z]{2,3}$/)]),
+    jobTitle: new FormControl('', Validators.required),
+    office: new FormControl('', Validators.required),
+    department: new FormControl('', Validators.required),
+    phoneNumber: new FormControl('',[Validators.required, Validators.pattern(/^\d{10}$/)]),
+    skypeId: new FormControl('',Validators.required)
     })
 
   saveEmployee() {   
     const employee = this.employeeForm.value;  
     this.addEmployee(employee);
     this.modalService.dismissAll();  
-    this.employeeForm.reset();  
+    this.employeeForm.reset();
+    this.employeeService.refreshEmployees();
   } 
 
   addEmployee(employee:Employee){
@@ -53,7 +54,7 @@ export class AddEmployeeComponent implements OnInit {
     }
     else
     {
-    employee.Id = this.employeeIdUpdate;
+    employee.id = this.employeeIdUpdate;
     this.employeeService.updateEmployee(employee).subscribe(() => {  
       this.employeeIdUpdate = null;
       this.employeeForm.reset();  
@@ -63,7 +64,7 @@ export class AddEmployeeComponent implements OnInit {
 
   loadEmployeeToEdit(employeeId: number) {  
     this.employeeService.getEmployeeById(employeeId).subscribe(employee=> {   
-      this.employeeIdUpdate = employee.Id;
+      this.employeeIdUpdate = employee.id;
       this.employeeForm.patchValue(employee);
 
     });  
@@ -83,7 +84,7 @@ export class AddEmployeeComponent implements OnInit {
   }
 
   updatePreferredName() {
-    this.employeeForm.get('PreferredName').setValue(this.employeeForm.get('FirstName').value + ' ' + this.employeeForm.get('LastName').value);
+    this.employeeForm.get('preferredName').setValue(this.employeeForm.get('firstName').value + ' ' + this.employeeForm.get('lastName').value);
   }
 
   dismissModal() {

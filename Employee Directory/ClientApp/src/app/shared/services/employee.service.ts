@@ -8,7 +8,7 @@ import { Employee } from '../../models/Employee';
   providedIn: 'root'
 })
 export class EmployeeService {
-  url = 'https://localhost:44347//Api/Employee';
+  url = 'https://localhost:44377/api/Employees';
 
   employees: Employee[]; 
   constructor(private http: HttpClient) {
@@ -21,7 +21,7 @@ export class EmployeeService {
   }  
 
   refreshEmployees(){  
-    return this.http.get<Employee[]>(this.url + '/AllEmployeeDetails').toPromise().then(res => this.employees = res as Employee[]); 
+    return this.http.get(this.url + '/AllEmployeeDetails').toPromise().then(res => this.employees = res as Employee[]); 
   }   
 
   getEmployeeById(id:number): Observable<Employee> {  
@@ -29,8 +29,8 @@ export class EmployeeService {
   }  
 
   updateEmployee(employee: Employee): Observable<Employee> {  
-    const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json'}) };  
-    return this.http.put<Employee>(this.url + '/UpdateEmployeeDetails/',  
+    const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
+    return this.http.put<Employee>(this.url + '/UpdateEmployeeDetails/' + employee.id,  
     employee, httpOptions);  
   }  
 }
