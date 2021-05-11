@@ -1,0 +1,72 @@
+<div class="containers">
+  <div class="department-container">
+  <h1>Departments</h1>
+  <div *ngFor="let department of departments" (click)="selectDepartment(department)" class="items">
+    {{department.name}}
+  </div>
+  <button data-modal-target="#modal" (click)="openAddDepartmentDialog()" class="btn-add">
+    Add Department
+  </button>
+  <ng-template #departmentContent let-modal>
+    <form [formGroup]="departmentForm" class="form-container">
+      <h1>Department</h1>
+      <div class="form-group">
+        <label for="name"><b>Name</b></label>
+        <input type="text" placeholder="Enter Name" class="form-control" formControlName="name">
+        <span class="error" *ngIf="dForm.name.invalid && dForm.name.touched">Name is invalid</span>
+      </div>
+    </form>
+    <button [disabled]="departmentForm.invalid" (click)="saveDepartment()">Save</button>
+  </ng-template>
+   </div>
+  <div class="office-container">
+  <h1>Offices</h1>
+  <div *ngFor="let office of offices" (click)="selectOffice(office)" class="items">
+    {{office.name}}
+  </div>
+  <button data-modal-target="#modal" (click)="openAddOfficeDialog()" class="btn-add">
+    Add Office
+  </button>
+  <ng-template #officeContent let-modal>
+    <form [formGroup]="officeForm" class="form-container">
+      <h4>Office</h4>
+      <div class="form-group">
+        <label for="name"><b>Name</b></label>
+        <input type="text" placeholder="Enter Name" class="form-control" formControlName="name">
+        <span class="error" *ngIf="oForm.name.invalid && oForm.name.touched">Name is invalid</span>
+      </div>
+    </form>
+    <button [disabled]="officeForm.invalid" (click)="saveOffice()">Save</button>
+  </ng-template>
+    </div>
+  <div class="job-title-container">
+  <h1>Job Titles</h1>
+  <div *ngFor="let jobTitle of jobTitles" (click)="selectJobTitle(jobTitle)" class="items">
+    {{jobTitle.name}}
+  </div>
+  <button data-modal-target="#modal" (click)="openAddJobTitleDialog()" class="btn-add">
+    Add Job Title
+  </button>
+  <ng-template #jobTitleContent let-modal>
+    <form [formGroup]="jobTitleForm" class="form-container">
+      <h4>Job Title</h4>
+      <div class="form-group">
+        <label for="name"><b>Name</b></label>
+        <input type="text" placeholder="Enter Name" class="form-control" formControlName="name">
+        <span class="error" *ngIf="jForm.name.invalid && jForm.name.touched">Name is invalid</span>
+      </div>
+      <div class="form-group">
+        <label for="departmentId"><b>Department Id</b></label>
+        <select class="form-control" formControlName="departmentId">
+          <option value="" disabled selected>Select Department Id</option>
+          <option *ngFor="let department of departments" value="{{department.id}}">
+            {{department.id}} ({{department.name}})
+          </option>
+        </select>
+      </div>
+    </form>
+    <button [disabled]="jobTitleForm.invalid" (click)="saveJobTitle()">Save</button>
+  </ng-template>
+  </div>
+ </div>
+<a routerLink="/">Back to Home</a>

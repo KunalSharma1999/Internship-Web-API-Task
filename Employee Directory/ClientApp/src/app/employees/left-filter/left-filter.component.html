@@ -3,15 +3,15 @@
     <div>
         <ul>
             <li *ngFor="let department of departments | slice:0:4">
-                <a (click)="setFilter(department, filterOption.Department)">
-                {{department}}
+                <a (click)="setFilter(department.name, filterOption.Department)">
+                {{department.name}}
                 </a>
             </li>
             <div *ngIf="isDepartmentsExpanded">
                 <div *ngFor="let department of departments; let i = index">
                   <li *ngIf="i >= 4">
-                    <a (click)="setFilter(department, filterOption.Department)">
-                        {{department}}
+                    <a (click)="setFilter(department.name, filterOption.Department)">
+                        {{department.name}}
                     </a>
                   </li>
                 </div>
@@ -27,15 +27,15 @@
     <div >
         <ul>
             <li *ngFor="let office of offices | slice:0:4">
-                <a (click)="setFilter(office, filterOption.Office)">
-                {{office}}
+                <a (click)="setFilter(office.name, filterOption.Office)">
+                {{office.name}}
                 </a>
             </li>
             <div *ngIf="isOfficesExpanded">
                 <div *ngFor="let office of offices; let i = index">
                   <li *ngIf="i >= 4">
-                    <a (click)="setFilter(office, filterOption.Office)">
-                        {{office}}
+                    <a (click)="setFilter(office.name, filterOption.Office)">
+                        {{office.name}}
                     </a>
                   </li>
                 </div>
@@ -51,15 +51,15 @@
     <div >
         <ul>
             <li *ngFor="let jobTitle of jobTitles | slice:0:4">
-                <a (click)="setFilter(jobTitle, filterOption.JobTitle)">
-                {{jobTitle}}
+                <a (click)="setFilter(jobTitle.name, filterOption.JobTitle)">
+                {{jobTitle.name}}
                 </a>
             </li>
             <div *ngIf="isJobTitlesExpanded">
                 <div *ngFor="let jobTitle of jobTitles; let i = index">
                   <li *ngIf="i >= 4">
-                    <a (click)="setFilter(jobTitle, filterOption.JobTitle)">
-                        {{jobTitle}}
+                    <a (click)="setFilter(jobTitle.name, filterOption.JobTitle)">
+                        {{jobTitle.name}}
                     </a>
                   </li>
                 </div>

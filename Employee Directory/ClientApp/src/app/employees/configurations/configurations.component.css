@@ -1,0 +1,38 @@
+.containers {
+  display: flex;
+  width: 100%;
+  text-align: center;
+}
+  .containers h1 {
+    color: rgb(62,192,253);
+  }
+
+  .containers .items {
+    color: rgb(148,148,147);
+    margin: 3px;
+    padding: 3px;
+    cursor: pointer;
+  }
+
+  .containers .department-container {
+    width: 33.33%;
+  }
+
+  .containers .office-container {
+    width: 33.33%;
+  }
+
+  .containers .job-title-container {
+    width: 33.33%;
+  }
+
+  .containers .btn-add {
+    margin: 3px;
+    color: white;
+    padding: 3px;
+    font-size: 13px;
+    font-weight: bold;
+    background-color: rgb(0,177,252);
+    border: none;
+    cursor: pointer;
+  }

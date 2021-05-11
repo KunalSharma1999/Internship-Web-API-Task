@@ -4,7 +4,12 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { EmployeeService } from 'src/app/shared/services/employee.service';
 import { Mode } from 'src/app/shared/enums/mode';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { LookupService } from 'src/app/shared/services/lookup.service';
+import { DepartmentService } from 'src/app/shared/services/department.service';
+import { OfficeService } from 'src/app/shared/services/office.service';
+import { JobTitleService } from 'src/app/shared/services/jobtitle.service';
+import { Department } from '../../models/Department';
+import { JobTitle } from '../../models/JobTitle';
+import { Office } from '../../models/Office';
 
 @Component({
   selector: 'app-add-employee',
@@ -19,9 +24,21 @@ export class AddEmployeeComponent implements OnInit {
   employeeIdUpdate = null; 
 
   formTitle: string = "Enter Employee Details";
-  constructor(private employeeService : EmployeeService,  private modalService: NgbModal, public lookupService: LookupService) { }
+  constructor(private employeeService: EmployeeService, private modalService: NgbModal,
+public departmentService: DepartmentService, public officeService: OfficeService, public jobTitleService: JobTitleService  ) { }
 
-  ngOnInit(): void {  
+  departments: Department[] = [];
+  offices: Office[] = [];
+  jobTitles: JobTitle[] = [];
+
+  ngOnInit(): void {
+    this.loadSelectOptions();
+  }
+
+  loadSelectOptions() {
+    this.departmentService.getDepartments().subscribe(departments => this.departments = departments);
+    this.officeService.getOffices().subscribe(offices => this.offices = offices);
+    this.jobTitleService.getJobTitles().subscribe(jobTitles => this.jobTitles = jobTitles);
   }
 
     employeeForm = new FormGroup({
@@ -29,11 +46,14 @@ export class AddEmployeeComponent implements OnInit {
     lastName: new FormControl('',[Validators.required, Validators.pattern(/^[a-zA-Z ]+$/)]),
     preferredName: new FormControl('',Validators.required),
     email: new FormControl('',[Validators.required, Validators.pattern(/^[a-zA-Z0-9\.]+@[a-zA-Z]+\.[a-zA-Z]{2,3}$/)]),
-    jobTitle: new FormControl('', Validators.required),
-    office: new FormControl('', Validators.required),
-    department: new FormControl('', Validators.required),
+    jobTitle: new FormControl(''),
+    office: new FormControl(''),
+    department: new FormControl(''),
     phoneNumber: new FormControl('',[Validators.required, Validators.pattern(/^\d{10}$/)]),
-    skypeId: new FormControl('',Validators.required)
+    skypeId: new FormControl('',Validators.required),
+    departmentId: new FormControl('', Validators.required),
+    officeId: new FormControl('', Validators.required),
+    jobTitleId: new FormControl('', Validators.required)
     })
 
   saveEmployee() {   
@@ -45,7 +65,7 @@ export class AddEmployeeComponent implements OnInit {
   } 
 
   addEmployee(employee:Employee){
-    if (this.employeeIdUpdate == null) { 
+    if (this.employeeIdUpdate == null) {
       this.employeeService.addEmployee(employee).subscribe(  
         () => {    
           this.employeeForm.reset();  

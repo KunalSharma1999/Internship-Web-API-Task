@@ -79,7 +79,7 @@
 
     .alphabet-nav button, .alphabet-nav .user-logo {
         border: none;
-        width: 28.2px;
+        width: 28.3px;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -156,8 +156,12 @@
     font-size: 13px;
 }
 
+.buttons{
+    margin-left:auto;
+}
+
 .btn-add-employee {
-    margin-left: auto;
+    margin-left:10px;
     color: white;
     padding: 5px;
     font-size: 13px;

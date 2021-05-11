@@ -1,19 +1,20 @@
-﻿using Employee_Directory.Models;
+﻿using Employee_Directory.Contracts;
+using Employee_Directory.Models;
 using System;
 using System.Collections.Generic;
 
-namespace Employee_Directory.Repository
+namespace Employee_Directory.Services
 {
-    public class EmployeeRepository: IEmployeeRepository
+    public class JobTitleServices: IJobTitleServices
     {
         PetaPoco.Database db = new PetaPoco.Database("Data Source=localhost;Initial Catalog=EmployeeDB;Integrated Security=True", "System.Data.SqlClient");
 
 
-        public IEnumerable<Employee> GetAllEmployees()
+        public IEnumerable<JobTitle> GetAllJobTitles()
         {
             try
             {
-                return db.Query<Employee>("Select * from Employees");
+                return db.Query<JobTitle>("Select * from Jobtitles");
             }
             catch (Exception)
             {
@@ -21,11 +22,11 @@ namespace Employee_Directory.Repository
             }
         }
 
-        public void AddEmployee(Employee employee)
+        public void AddJobTitle(JobTitle jobTitle)
         {
             try
             {
-                db.Insert("Employees", employee);
+                db.Insert("JobTitles", jobTitle);
             }
             catch
             {
@@ -33,12 +34,12 @@ namespace Employee_Directory.Repository
             }
         }
 
-        public void UpdateEmployee(int id, Employee employee)
+        public void UpdateJobTitle(int id, JobTitle jobTitle)
         {
             try
             {
-                employee.Id = id;
-                db.Update("Employees", "ID", employee);
+                jobTitle.Id = id;
+                db.Update("JobTitles", "Id", jobTitle);
             }
             catch
             {
@@ -46,11 +47,11 @@ namespace Employee_Directory.Repository
             }
         }
 
-        public Employee GetEmployeeData(int id)
+        public JobTitle GetJobTitleById(int id)
         {
             try
             {
-                return db.SingleOrDefault<Employee>("SELECT * FROM Employees WHERE Id=@0", id);
+                return db.SingleOrDefault<JobTitle>("SELECT * FROM JobTitles WHERE Id=@0", id);
             }
             catch
             {

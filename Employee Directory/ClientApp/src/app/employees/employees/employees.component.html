@@ -31,10 +31,15 @@
                     <option value="jobTitle">Job Titles</option>
                 </select>
             </div>
+          <div class="buttons">
+            <button class="btn-add-employee" (click)="btnClick()">
+              Configurations
+            </button>
             <button data-modal-target="#modal" id="add-employee" class="btn-add-employee"
             (click)="openAddEmployeeDialog()">
             Add Employee
           </button>
+            </div>
           <ng-template #content let-modal>
             <app-add-employee [employeeId]="employeeId" [mode]="mode"></app-add-employee>
           </ng-template>

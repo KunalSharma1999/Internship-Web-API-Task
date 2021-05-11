@@ -1,7 +1,12 @@
 import { Component, Input, OnInit, Output, EventEmitter} from '@angular/core';
 import { Filter } from 'src/app/models/Filter';
 import { FilterOptions } from 'src/app/shared/enums/filter-options';
-import { LookupService } from 'src/app/shared/services/lookup.service';
+import { DepartmentService } from 'src/app/shared/services/department.service';
+import { OfficeService } from 'src/app/shared/services/office.service';
+import { JobTitleService } from 'src/app/shared/services/jobtitle.service';
+import { Department } from '../../models/Department';
+import { JobTitle } from '../../models/JobTitle';
+import { Office } from '../../models/Office';
 
 @Component({
   selector: 'app-left-filter',
@@ -12,21 +17,21 @@ export class LeftFilterComponent implements OnInit {
 
   @Output() filterSelected: EventEmitter<Filter> = new EventEmitter();
 
-  departments: string[] = [];
-  offices: string[] = [];
-  jobTitles: string[] = [];
+  departments: Department[] = [];
+  offices: Office[] = [];
+  jobTitles: JobTitle[] = [];
 
   get filterOption() {
       return FilterOptions;
   }
 
-  constructor(private readonly lookupService: LookupService) {
+  constructor(private readonly departmentService: DepartmentService, private readonly officeService: OfficeService, private readonly jobTitleService: JobTitleService) {
   }
 
   ngOnInit() {
-      this.departments = this.lookupService.getDepartments();
-      this.offices = this.lookupService.getOffices();
-      this.jobTitles = this.lookupService.getJobTitles();
+    this.departmentService.getDepartments().subscribe(departments => this.departments = departments);
+    this.officeService.getOffices().subscribe(offices => this.offices = offices);
+    this.jobTitleService.getJobTitles().subscribe(jobTitles => this.jobTitles = jobTitles);
   }
 
   setFilter(value: string, filterOption: FilterOptions) {

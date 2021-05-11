@@ -1,4 +1,5 @@
-using Employee_Directory.Repository;
+using Employee_Directory.Contracts;
+using Employee_Directory.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
@@ -27,7 +28,10 @@ namespace Employee_Directory
                 configuration.RootPath = "ClientApp/dist";
             });
 
-            services.AddScoped(typeof(IEmployeeRepository), typeof(EmployeeRepository));
+            services.AddScoped(typeof(IEmployeeServices), typeof(EmployeeServices));
+            services.AddScoped(typeof(IDepartmentServices), typeof(DepartmentServices));
+            services.AddScoped(typeof(IOfficeServices), typeof(OfficeServices));
+            services.AddScoped(typeof(IJobTitleServices), typeof(JobTitleServices));
 
             services.AddCors();
         }

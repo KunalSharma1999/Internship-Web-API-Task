@@ -1,62 +1,62 @@
 <div class="form-popup" id="myForm">
-    <form [formGroup]="employeeForm" class="form-container">
-        <h4>{{formTitle}}</h4>
-        <div class="form-group">
-        <label for="firstName"><b>First Name</b></label>
-        <input type="text" placeholder="Enter First Name" class="form-control" formControlName="firstName">
-        <span class="error" *ngIf="form.firstName.invalid && form.firstName.touched">First Name is invalid</span>
-        </div>
-        <div class="form-group">
-        <label for="lastName"><b>Last Name</b></label>
-        <input type="text" placeholder="Enter Last Name" class="form-control" formControlName="lastName">
-        <span class="error" *ngIf="form.lastName.invalid && form.lastName.touched">Last Name is invalid</span>
-        </div>
-        <div class="form-group">
-        <label for="preferredName"><b>Preferred Name</b></label>
-        <input type="text" placeholder="Enter Preferred Name" class="form-control" formControlName="preferredName" (click)="updatePreferredName()">
-        </div>
-        <div class="form-group">
-        <label for="email"><b>Email</b></label>
-        <input type="email" placeholder="Enter Email" class="form-control" formControlName="email">
-        <span class="error" *ngIf="form.email.invalid && form.email.touched">Email is invalid</span>
-        </div>
-        <div class="form-group">
-        <label for="jobTitle"><b>Job Title</b></label>
-        <select class="form-control" formControlName="jobTitle">
-            <option value="" disabled selected>Select Job Title</option>
-            <option *ngFor="let jobTitle of lookupService.getJobTitles()" value="{{jobTitle}}">
-                {{jobTitle}}
-            </option>
-        </select>
-        </div>
-        <div class="form-group">
-        <label for="office"><b>Office</b></label>
-        <select class="form-control" formControlName="office">
-            <option value="" disabled selected>Select Office</option>
-            <option *ngFor="let office of lookupService.getOffices()" value="{{office}}">
-                {{office}}
-            </option>
-        </select>
-        </div>
-        <div class="form-group">
-        <label for="department"><b>Department</b></label>
-        <select class="form-control" formControlName="department">
-            <option value="" disabled selected>Select Department</option>
-            <option *ngFor="let department of lookupService.getDepartments()" value="{{department}}">
-                {{department}}
-            </option>
-        </select>
-        </div>
-        <div class="form-group">
-        <label for="phoneNumber"><b>Phone Number</b></label>
-        <input type="text" placeholder="Enter Phone Number" class="form-control" formControlName="phoneNumber">
-        <span class="error" *ngIf="form.phoneNumber.invalid && form.phoneNumber.touched">Phone Number is invalid</span>
-        </div>
-        <div class="form-group">
-        <label for="skypeId"><b>Skype ID</b></label>
-        <input type="text" placeholder="Enter Skype ID" class="form-control" formControlName="skypeId">
-        <span class="error" *ngIf="form.skypeId.invalid && form.skypeId.touched">SkypeId is invalid</span>
-        </div>
-    </form>
-    <button [disabled]="employeeForm.invalid"  class="btn-update" (click)="saveEmployee()">Save</button>
+  <form [formGroup]="employeeForm" class="form-container">
+    <h4>{{formTitle}}</h4>
+    <div class="form-group">
+      <label for="firstName"><b>First Name</b></label>
+      <input type="text" placeholder="Enter First Name" class="form-control" formControlName="firstName">
+      <span class="error" *ngIf="form.firstName.invalid && form.firstName.touched">First Name is invalid</span>
+    </div>
+    <div class="form-group">
+      <label for="lastName"><b>Last Name</b></label>
+      <input type="text" placeholder="Enter Last Name" class="form-control" formControlName="lastName">
+      <span class="error" *ngIf="form.lastName.invalid && form.lastName.touched">Last Name is invalid</span>
+    </div>
+    <div class="form-group">
+      <label for="preferredName"><b>Preferred Name</b></label>
+      <input type="text" placeholder="Enter Preferred Name" class="form-control" formControlName="preferredName" (click)="updatePreferredName()">
+    </div>
+    <div class="form-group">
+      <label for="email"><b>Email</b></label>
+      <input type="email" placeholder="Enter Email" class="form-control" formControlName="email">
+      <span class="error" *ngIf="form.email.invalid && form.email.touched">Email is invalid</span>
+    </div>
+    <div class="form-group">
+      <label for="jobTitle"><b>Job Title</b></label>
+      <select class="form-control" formControlName="jobTitleId">
+        <option value="" disabled selected>Select Job Title</option>
+        <option *ngFor="let jobTitle of jobTitles" value="{{jobTitle.id}}">
+          {{jobTitle.name}}
+        </option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="office"><b>Office</b></label>
+      <select class="form-control" formControlName="officeId">
+        <option value="" disabled selected>Select Office</option>
+        <option *ngFor="let office of offices" value="{{office.id}}">
+          {{office.name}}
+        </option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="department"><b>Department</b></label>
+      <select class="form-control" formControlName="departmentId">
+        <option value="" disabled selected>Select Department</option>
+        <option *ngFor="let department of departments" value="{{department.id}}">
+          {{department.name}}
+        </option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="phoneNumber"><b>Phone Number</b></label>
+      <input type="text" placeholder="Enter Phone Number" class="form-control" formControlName="phoneNumber">
+      <span class="error" *ngIf="form.phoneNumber.invalid && form.phoneNumber.touched">Phone Number is invalid</span>
+    </div>
+    <div class="form-group">
+      <label for="skypeId"><b>Skype ID</b></label>
+      <input type="text" placeholder="Enter Skype ID" class="form-control" formControlName="skypeId">
+      <span class="error" *ngIf="form.skypeId.invalid && form.skypeId.touched">SkypeId is invalid</span>
+    </div>
+  </form>
+  <button [disabled]="employeeForm.invalid" class="btn-update" (click)="saveEmployee()">Save</button>
 </div>

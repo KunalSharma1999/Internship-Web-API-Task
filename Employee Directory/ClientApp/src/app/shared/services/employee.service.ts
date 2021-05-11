@@ -16,21 +16,21 @@ export class EmployeeService {
 
   addEmployee(employee:Employee): Observable<Employee> {  
     const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json'}) };  
-    return this.http.post<Employee>(this.url + '/InsertEmployeeDetails/',  
+    return this.http.post<Employee>(this.url + '/insertemployeedetails/',  
     employee, httpOptions);  
   }  
 
   refreshEmployees(){  
-    return this.http.get(this.url + '/AllEmployeeDetails').toPromise().then(res => this.employees = res as Employee[]); 
+    return this.http.get(this.url + '/allemployeedetails').toPromise().then(res => this.employees = res as Employee[]);
   }   
 
   getEmployeeById(id:number): Observable<Employee> {  
-    return this.http.get<Employee>(this.url + '/GetEmployeeDetailsById/' + id);  
+    return this.http.get<Employee>(this.url + '/getemployeedetailsbyid/' + id);  
   }  
 
   updateEmployee(employee: Employee): Observable<Employee> {  
     const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
-    return this.http.put<Employee>(this.url + '/UpdateEmployeeDetails/' + employee.id,  
+    return this.http.put<Employee>(this.url + '/updateemployeedetails/' + employee.id,  
     employee, httpOptions);  
   }  
 }

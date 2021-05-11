@@ -5,6 +5,8 @@ import { EmployeesComponent } from './employees/employees.component';
 import { FormsModule , ReactiveFormsModule} from '@angular/forms';
 import { AddEmployeeComponent } from './add-employee/add-employee.component';
 import { EmployeeFilterPipe } from '../pipes/employee-filter.pipe';
+import { ConfigurationsComponent } from './configurations/configurations.component';
+import { RouterModule } from '@angular/router'
 
 
 
@@ -13,16 +15,19 @@ import { EmployeeFilterPipe } from '../pipes/employee-filter.pipe';
     LeftFilterComponent,
     EmployeesComponent,
     AddEmployeeComponent,
-    EmployeeFilterPipe
+    EmployeeFilterPipe,
+    ConfigurationsComponent
   ],
   imports: [
     CommonModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    RouterModule
   ],
   exports: [
     LeftFilterComponent,
-    EmployeesComponent
+    EmployeesComponent,
+    ConfigurationsComponent
   ]
 })
 export class EmployeeModule { }

@@ -1,9 +1,9 @@
 ﻿using Employee_Directory.Models;
 using System.Collections.Generic;
 
-namespace Employee_Directory.Repository
+namespace Employee_Directory.Contracts
 {
-    public interface IEmployeeRepository
+    public interface IEmployeeServices
     {
         IEnumerable<Employee> GetAllEmployees();
         void AddEmployee(Employee employee);
