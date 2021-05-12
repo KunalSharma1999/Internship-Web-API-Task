@@ -16,7 +16,7 @@
         <span class="error" *ngIf="dForm.name.invalid && dForm.name.touched">Name is invalid</span>
       </div>
     </form>
-    <button [disabled]="departmentForm.invalid" (click)="saveDepartment()">Save</button>
+    <button [disabled]="departmentForm.invalid" (click)="saveDepartment()" class="btn-add">Save</button>
   </ng-template>
    </div>
   <div class="office-container">
@@ -36,7 +36,7 @@
         <span class="error" *ngIf="oForm.name.invalid && oForm.name.touched">Name is invalid</span>
       </div>
     </form>
-    <button [disabled]="officeForm.invalid" (click)="saveOffice()">Save</button>
+    <button [disabled]="officeForm.invalid" (click)="saveOffice()" class="btn-add">Save</button>
   </ng-template>
     </div>
   <div class="job-title-container">
@@ -65,7 +65,7 @@
         </select>
       </div>
     </form>
-    <button [disabled]="jobTitleForm.invalid" (click)="saveJobTitle()">Save</button>
+    <button [disabled]="jobTitleForm.invalid" (click)="saveJobTitle()" class="btn-add">Save</button>
   </ng-template>
   </div>
  </div>

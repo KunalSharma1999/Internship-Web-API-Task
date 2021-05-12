@@ -4,9 +4,9 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Department } from '../../models/Department';
 import { JobTitle } from '../../models/JobTitle';
 import { Office } from '../../models/Office';
-import { DepartmentService } from '../../shared/services/department.service';
-import { JobTitleService } from '../../shared/services/jobtitle.service';
-import { OfficeService } from '../../shared/services/office.service';
+import { DepartmentService } from '../../services/department.service';
+import { JobTitleService } from '../../services/jobtitle.service';
+import { OfficeService } from '../../services/office.service';
 
 @Component({
   selector: 'app-configurations',

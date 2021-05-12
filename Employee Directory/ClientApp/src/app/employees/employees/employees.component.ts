@@ -5,9 +5,9 @@ import { Employee } from 'src/app/models/Employee';
 import { Filter } from 'src/app/models/Filter';
 import { Alphabets } from 'src/app/shared/constants/constants';
 import { Mode } from 'src/app/shared/enums/mode';
-import { EmployeeService } from 'src/app/shared/services/employee.service';
+import { EmployeeService } from 'src/app/services/employee.service';
 import { JobTitle } from '../../models/JobTitle';
-import { JobTitleService } from '../../shared/services/jobtitle.service';
+import { JobTitleService } from '../../services/jobtitle.service';
 
 @Component({
   selector: 'app-employees',

@@ -4,9 +4,9 @@ import { LeftFilterComponent } from './left-filter/left-filter.component';
 import { EmployeesComponent } from './employees/employees.component';
 import { FormsModule , ReactiveFormsModule} from '@angular/forms';
 import { AddEmployeeComponent } from './add-employee/add-employee.component';
-import { EmployeeFilterPipe } from '../pipes/employee-filter.pipe';
 import { ConfigurationsComponent } from './configurations/configurations.component';
 import { RouterModule } from '@angular/router'
+import { EmployeeFilterPipe } from '../shared/pipes/employee-filter.pipe';
 
 
 

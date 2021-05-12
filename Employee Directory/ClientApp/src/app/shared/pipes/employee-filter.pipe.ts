@@ -1,7 +1,7 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { Employee } from '../models/Employee';
-import { Filter } from '../models/Filter';
-import { FilterOptions } from '../shared/enums/filter-options';
+import { Employee } from '../../models/Employee';
+import { Filter } from '../../models/Filter';
+import { FilterOptions } from '../enums/filter-options';
 
 @Pipe({
   name: 'employeeFilter'

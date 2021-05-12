@@ -1,9 +1,9 @@
 import { Component, Input, OnInit, Output, EventEmitter} from '@angular/core';
 import { Filter } from 'src/app/models/Filter';
 import { FilterOptions } from 'src/app/shared/enums/filter-options';
-import { DepartmentService } from 'src/app/shared/services/department.service';
-import { OfficeService } from 'src/app/shared/services/office.service';
-import { JobTitleService } from 'src/app/shared/services/jobtitle.service';
+import { DepartmentService } from 'src/app/services/department.service';
+import { OfficeService } from 'src/app/services/office.service';
+import { JobTitleService } from 'src/app/services/jobtitle.service';
 import { Department } from '../../models/Department';
 import { JobTitle } from '../../models/JobTitle';
 import { Office } from '../../models/Office';

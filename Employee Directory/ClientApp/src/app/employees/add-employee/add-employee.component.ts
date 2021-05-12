@@ -1,12 +1,12 @@
 import { Component, OnInit , Input} from '@angular/core';
 import { Employee } from 'src/app/models/Employee';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { EmployeeService } from 'src/app/shared/services/employee.service';
+import { EmployeeService } from 'src/app/services/employee.service';
 import { Mode } from 'src/app/shared/enums/mode';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { DepartmentService } from 'src/app/shared/services/department.service';
-import { OfficeService } from 'src/app/shared/services/office.service';
-import { JobTitleService } from 'src/app/shared/services/jobtitle.service';
+import { DepartmentService } from 'src/app/services/department.service';
+import { OfficeService } from 'src/app/services/office.service';
+import { JobTitleService } from 'src/app/services/jobtitle.service';
 import { Department } from '../../models/Department';
 import { JobTitle } from '../../models/JobTitle';
 import { Office } from '../../models/Office';

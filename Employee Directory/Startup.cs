@@ -28,10 +28,10 @@ namespace Employee_Directory
                 configuration.RootPath = "ClientApp/dist";
             });
 
-            services.AddScoped(typeof(IEmployeeServices), typeof(EmployeeServices));
-            services.AddScoped(typeof(IDepartmentServices), typeof(DepartmentServices));
-            services.AddScoped(typeof(IOfficeServices), typeof(OfficeServices));
-            services.AddScoped(typeof(IJobTitleServices), typeof(JobTitleServices));
+            services.AddScoped<IEmployeeServices, EmployeeServices>();
+            services.AddScoped<IDepartmentServices, DepartmentServices>();
+            services.AddScoped<IOfficeServices, OfficeServices>();
+            services.AddScoped<IJobTitleServices, JobTitleServices>();
 
             services.AddCors();
         }
@@ -40,7 +40,7 @@ namespace Employee_Directory
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             app.UseCors(options =>
-            options.WithOrigins("http://localhost:4200")
+            options.AllowAnyOrigin()
             .AllowAnyMethod()
             .AllowAnyHeader()
             );
