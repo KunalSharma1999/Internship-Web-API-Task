@@ -9,6 +9,9 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { EmployeeService } from './services/employee.service';
 import { TopBarComponent } from './shared/components/top-bar/top-bar.component';
+import { ToastrModule } from 'ngx-toastr';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -21,7 +24,9 @@ import { TopBarComponent } from './shared/components/top-bar/top-bar.component';
     ReactiveFormsModule,
     EmployeeModule,
     NgbModule,
-    HttpClientModule
+    HttpClientModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot()
   ],
   providers: [HttpClientModule, EmployeeService],
   bootstrap: [AppComponent]

@@ -10,6 +10,7 @@ import { JobTitleService } from 'src/app/services/jobtitle.service';
 import { Department } from '../../models/Department';
 import { JobTitle } from '../../models/JobTitle';
 import { Office } from '../../models/Office';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-add-employee',
@@ -24,7 +25,7 @@ export class AddEmployeeComponent implements OnInit {
   employeeIdUpdate = null; 
 
   formTitle: string = "Enter Employee Details";
-  constructor(private employeeService: EmployeeService, private modalService: NgbModal,
+  constructor(private employeeService: EmployeeService, private modalService: NgbModal, private toastr: ToastrService,
 public departmentService: DepartmentService, public officeService: OfficeService, public jobTitleService: JobTitleService  ) { }
 
   departments: Department[] = [];
@@ -68,7 +69,8 @@ public departmentService: DepartmentService, public officeService: OfficeService
     if (this.employeeIdUpdate == null) {
       this.employeeService.addEmployee(employee).subscribe(  
         () => {    
-          this.employeeForm.reset();  
+          this.employeeForm.reset();
+          this.toastr.success('Submitted successfully', 'Employee Details Register');
         }  
       );
     }
@@ -77,7 +79,8 @@ public departmentService: DepartmentService, public officeService: OfficeService
     employee.id = this.employeeIdUpdate;
     this.employeeService.updateEmployee(employee).subscribe(() => {  
       this.employeeIdUpdate = null;
-      this.employeeForm.reset();  
+      this.employeeForm.reset();
+      this.toastr.success('Updated successfully', 'Employee Details Register');
     });
     }
   }

@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ToastrService } from 'ngx-toastr';
 import { Department } from '../../models/Department';
 import { JobTitle } from '../../models/JobTitle';
 import { Office } from '../../models/Office';
@@ -19,7 +20,7 @@ export class ConfigurationsComponent implements OnInit {
   offices: Office[] = [];
   jobTitles: JobTitle[] = [];
 
-  constructor(private readonly departmentService: DepartmentService, private readonly officeService: OfficeService, private readonly jobTitleService: JobTitleService, private modalService: NgbModal,) {
+  constructor(private readonly departmentService: DepartmentService, private readonly officeService: OfficeService, private readonly jobTitleService: JobTitleService, private modalService: NgbModal, private toastr: ToastrService) {
   }
 
   ngOnInit() {
@@ -69,6 +70,7 @@ export class ConfigurationsComponent implements OnInit {
       this.departmentService.addDepartment(department).subscribe(
         () => {
           this.departmentForm.reset();
+          this.toastr.success('Submitted successfully', 'Department Details Register');
         })
     }
     else {
@@ -76,6 +78,7 @@ export class ConfigurationsComponent implements OnInit {
       this.departmentService.updateDepartment(department).subscribe(() => {
         this.departmentIdUpdate = null;
         this.departmentForm.reset();
+        this.toastr.success('Updated successfully', 'Department Details Register');
       });
     }
   }
@@ -122,6 +125,7 @@ export class ConfigurationsComponent implements OnInit {
       this.officeService.addOffice(office).subscribe(
         () => {
           this.officeForm.reset();
+          this.toastr.success('Submitted successfully', 'Office Details Register');
         })
     }
     else {
@@ -129,6 +133,7 @@ export class ConfigurationsComponent implements OnInit {
       this.officeService.updateOffice(office).subscribe(() => {
         this.officeIdUpdate = null;
         this.officeForm.reset();
+        this.toastr.success('Updated successfully', 'Office Details Register');
       });
     }
   }
@@ -175,6 +180,7 @@ export class ConfigurationsComponent implements OnInit {
       this.jobTitleService.addJobTitle(jobTitle).subscribe(
         () => {
           this.jobTitleForm.reset();
+          this.toastr.success('Submitted successfully', 'JobTitle Details Register');
         })
     }
     else {
@@ -182,6 +188,7 @@ export class ConfigurationsComponent implements OnInit {
       this.jobTitleService.updateJobTitle(jobTitle).subscribe(() => {
         this.jobTitleIdUpdate = null;
         this.jobTitleForm.reset();
+        this.toastr.success('Updated successfully', 'JobTitle Details Register');
       });
     }
   }
