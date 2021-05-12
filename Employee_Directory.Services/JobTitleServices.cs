@@ -7,7 +7,7 @@ namespace Employee_Directory.Services
 {
     public class JobTitleServices: IJobTitleServices
     {
-        readonly PetaPoco.Database db = new PetaPoco.Database("Data Source=localhost;Initial Catalog=EmployeeDB;Integrated Security=True", "System.Data.SqlClient");
+        private readonly PetaPoco.Database db = new PetaPoco.Database("Data Source=localhost;Initial Catalog=EmployeeDB;Integrated Security=True", "System.Data.SqlClient");
 
         public IEnumerable<JobTitle> GetJobTitles()
         {

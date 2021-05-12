@@ -25,9 +25,16 @@ namespace Employee_Directory.Controllers
 
         [HttpGet]
         [Route("getemployee/{id}")]
-        public Employee GetEmployee(int id)
+        public IActionResult GetEmployee(int id)
         {
-            return employeeContext.GetEmployee(id);
+            Employee employee = employeeContext.GetEmployee(id);
+
+            if (employee == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(employee);
         }
 
         [HttpPost]
