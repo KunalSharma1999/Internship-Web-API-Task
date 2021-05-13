@@ -1,5 +1,9 @@
-﻿namespace Employee_Directory.Models
+﻿using PetaPoco;
+
+namespace Employee_Directory.Models
 {
+    [TableName("Employees")]
+    [PrimaryKey("Id")]
     public class Employee
     {
         public int Id { get; set; }

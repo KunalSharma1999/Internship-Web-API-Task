@@ -2,6 +2,7 @@
 using Employee_Directory.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Employee_Directory.Controllers
 {
@@ -9,39 +10,38 @@ namespace Employee_Directory.Controllers
     [ApiController]
     public class OfficesController : ControllerBase
     {
-        private readonly IOfficeServices officeContext;
+        private readonly IOfficeService officeContext;
 
-        public OfficesController(IOfficeServices oc)
+        public OfficesController(IOfficeService oc)
         {
             officeContext = oc;
         }
 
         [HttpGet]
-        [Route("offices")]
         public IEnumerable<Office> Get()
         {
-            return officeContext.GetOffices();
+            return officeContext.Get();
         }
 
         [HttpGet]
-        [Route("getoffice/{id}")]
-        public Office Getoffice(int id)
+        [Route("{id}")]
+        public async Task<Office> Getoffice(int id)
         {
-            return officeContext.GetOffice(id);
+            return await officeContext.Get(id);
         }
 
         [HttpPost]
-        [Route("saveoffice")]
-        public void Post([FromBody] Office office)
+        public Office Post([FromBody] Office office)
         {
-            officeContext.Add(office);
+            var res = officeContext.Add(office);
+            return res != null ? office : null;
         }
 
         [HttpPut]
-        [Route("saveoffice")]
-        public void Put([FromBody] Office office)
+        public Office Put([FromBody] Office office)
         {
-            officeContext.Add(office);
+            var res = officeContext.Update(office);
+            return res != null ? office : null;
         }
     }
 }

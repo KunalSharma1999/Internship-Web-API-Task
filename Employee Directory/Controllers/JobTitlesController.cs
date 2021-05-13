@@ -2,6 +2,7 @@
 using Employee_Directory.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Employee_Directory.Controllers
 {
@@ -9,39 +10,38 @@ namespace Employee_Directory.Controllers
     [ApiController]
     public class JobTitlesController : ControllerBase
     {
-        private readonly IJobTitleServices jobTitleContext;
+        private readonly IJobTitleService jobTitleContext;
 
-        public JobTitlesController(IJobTitleServices jc)
+        public JobTitlesController(IJobTitleService jc)
         {
             jobTitleContext = jc;
         }
 
         [HttpGet]
-        [Route("jobtitles")]
         public IEnumerable<JobTitle> Get()
         {
-            return jobTitleContext.GetJobTitles();
+            return jobTitleContext.Get();
         }
 
         [HttpGet]
-        [Route("getjobtitle/{id}")]
-        public JobTitle GetJobTitle(int id)
+        [Route("{id}")]
+        public async Task<JobTitle> Get(int id)
         {
-            return jobTitleContext.GetJobTitle(id);
+            return await jobTitleContext.Get(id);
         }
 
         [HttpPost]
-        [Route("savejobtitle")]
-        public void Post([FromBody] JobTitle jobtitle)
+        public JobTitle Post([FromBody] JobTitle jobtitle)
         {
-            jobTitleContext.Add(jobtitle);
+            var res = jobTitleContext.Add(jobtitle);
+            return res != null ? jobtitle : null;
         }
 
         [HttpPut]
-        [Route("savejobtitle")]
-        public void Put([FromBody] JobTitle jobtitle)
+        public JobTitle Put([FromBody] JobTitle jobtitle)
         {
-            jobTitleContext.Add(jobtitle);
+            var res = jobTitleContext.Update(jobtitle);
+            return res != null ? jobtitle : null;
         }
     }
 }

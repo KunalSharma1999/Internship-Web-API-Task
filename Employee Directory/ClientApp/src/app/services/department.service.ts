@@ -16,22 +16,20 @@ export class DepartmentService {
   department: Department;
 
   getDepartments(): Observable<Department[]>{
-    return this.http.get<Department[]>(this.url+'/departments');
+    return this.http.get<Department[]>(this.url);
   }
 
   getDepartmentById(id: number){
-    return this.http.get<Department>(this.url + '/getdepartment/' + id).toPromise().then(res => this.department = res as Department);
+    return this.http.get<Department>(this.url + '/' + id).toPromise().then(res => this.department = res as Department);
   }
 
   addDepartment(department: Department): Observable<Department> {
     const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
-    return this.http.post<Department>(this.url + '/savedepartment/',
-      department, httpOptions);
+    return this.http.post<Department>(this.url, department, httpOptions);
   }
 
   updateDepartment(department: Department): Observable<Department> {
     const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
-    return this.http.put<Department>(this.url + '/savedepartment/',
-      department, httpOptions);
+    return this.http.put<Department>(this.url, department, httpOptions);
   }  
 }

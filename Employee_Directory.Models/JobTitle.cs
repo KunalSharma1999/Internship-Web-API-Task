@@ -1,5 +1,9 @@
-﻿namespace Employee_Directory.Models
+﻿using PetaPoco;
+
+namespace Employee_Directory.Models
 {
+    [TableName("JobTitles")]
+    [PrimaryKey("Id")]
     public class JobTitle
     {
         public int Id { get; set; }

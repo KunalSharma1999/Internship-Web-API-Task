@@ -17,22 +17,20 @@ export class JobTitleService {
   jobTitle: JobTitle;
 
   getJobTitles(): Observable<JobTitle[]> {
-    return this.http.get<JobTitle[]>(this.url + '/jobtitles');
+    return this.http.get<JobTitle[]>(this.url);
   }
 
   getJobTitleById(id: number) {
-    return this.http.get(this.url + '/getjobtitle/' + id).pipe(map((data: JobTitle) => { return data}));
+    return this.http.get(this.url + '/' + id).pipe(map((data: JobTitle) => { return data}));
   }
 
   addJobTitle(jobTitle: JobTitle): Observable<JobTitle> {
     const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
-    return this.http.post<JobTitle>(this.url + '/savejobTitle/',
-      jobTitle, httpOptions);
+    return this.http.post<JobTitle>(this.url, jobTitle, httpOptions);
   }
 
   updateJobTitle(jobTitle: JobTitle): Observable<JobTitle> {
     const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
-    return this.http.put<JobTitle>(this.url + '/savejobTitle/',
-      jobTitle, httpOptions);
+    return this.http.put<JobTitle>(this.url, jobTitle, httpOptions);
   }  
 }

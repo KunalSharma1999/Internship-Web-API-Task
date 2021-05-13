@@ -2,6 +2,7 @@
 using Employee_Directory.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Employee_Directory.Controllers
 {
@@ -9,39 +10,38 @@ namespace Employee_Directory.Controllers
     [ApiController]
     public class DepartmentsController : ControllerBase
     {
-        private readonly IDepartmentServices departmentContext;
+        private readonly IDepartmentService departmentContext;
 
-        public DepartmentsController(IDepartmentServices dc)
+        public DepartmentsController(IDepartmentService dc)
         {
             departmentContext = dc;
         }
 
         [HttpGet]
-        [Route("departments")]
         public IEnumerable<Department> Get()
         {
-            return departmentContext.GetDepartments();
+            return departmentContext.Get();
         }
 
         [HttpGet]
-        [Route("getdepartment/{id}")]
-        public Department GetDepartment(int id)
+        [Route("{id}")]
+        public async Task<Department> Get(int id)
         {
-            return departmentContext.GetDepartment(id);
+            return await departmentContext.Get(id);
         }
 
         [HttpPost]
-        [Route("savedepartment")]
-        public void Post([FromBody] Department department)
+        public Department Post([FromBody] Department department)
         {
-            departmentContext.Add(department);
+            var res = departmentContext.Add(department);
+            return res != null ? department : null;
         }
 
         [HttpPut]
-        [Route("saveedepartment")]
-        public void Put([FromBody] Department department)
+        public Department Put([FromBody] Department department)
         {
-            departmentContext.Add(department);
+            var res = departmentContext.Update(department);
+            return res != null ? department : null;
         }
     }
 }

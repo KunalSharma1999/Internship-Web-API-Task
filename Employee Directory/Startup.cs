@@ -28,10 +28,16 @@ namespace Employee_Directory
                 configuration.RootPath = "ClientApp/dist";
             });
 
-            services.AddScoped<IEmployeeServices, EmployeeServices>();
-            services.AddScoped<IDepartmentServices, DepartmentServices>();
-            services.AddScoped<IOfficeServices, OfficeServices>();
-            services.AddScoped<IJobTitleServices, JobTitleServices>();
+            services.AddScoped<IEmployeeService, EmployeeService>();
+            services.AddScoped<IDepartmentService, DepartmentService>();
+            services.AddScoped<IOfficeService, OfficeService>();
+            services.AddScoped<IJobTitleService, JobTitleService>();
+
+            services.AddScoped((a) =>
+            {
+                return new PetaPoco.Database(connectionString: Configuration.GetConnectionString("DefaultConnection"), providerName: "System.Data.SqlClient");
+            }
+            );
 
             services.AddCors();
         }

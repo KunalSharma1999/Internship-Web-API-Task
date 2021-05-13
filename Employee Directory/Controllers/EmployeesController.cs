@@ -2,6 +2,7 @@
 using Employee_Directory.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Employee_Directory.Controllers
 {
@@ -9,46 +10,38 @@ namespace Employee_Directory.Controllers
     [ApiController]
     public class EmployeesController : ControllerBase
     {
-        private IEmployeeServices employeeContext;
+        private readonly IEmployeeService employeeContext;
        
-        public EmployeesController(IEmployeeServices ec)
+        public EmployeesController(IEmployeeService ec)
         {
             employeeContext = ec;
         }
 
         [HttpGet]
-        [Route("employees")]
         public IEnumerable<Employee> Get()
         {
-            return employeeContext.GetEmployees();
+            return employeeContext.Get();
         }
 
         [HttpGet]
-        [Route("getemployee/{id}")]
-        public IActionResult GetEmployee(int id)
+        [Route("{id}")]
+        public async Task<Employee> Get(int id)
         {
-            Employee employee = employeeContext.GetEmployee(id);
-
-            if (employee == null)
-            {
-                return NotFound();
-            }
-
-            return Ok(employee);
+            return await employeeContext.Get(id);
         }
 
         [HttpPost]
-        [Route("saveemployee")]
-        public void Post([FromBody] Employee employee)
+        public Employee Post([FromBody] Employee employee)
         {
-            employeeContext.Add(employee);
+            var res = employeeContext.Add(employee);
+            return res!=null ? employee : null;
         }
 
         [HttpPut]
-        [Route("saveemployee")]
-        public void Put([FromBody] Employee employee)
+        public Employee Put([FromBody] Employee employee)
         {
-            employeeContext.Add(employee);
+            var res = employeeContext.Update(employee);
+            return res != null ? employee : null;
         }
     }
 }

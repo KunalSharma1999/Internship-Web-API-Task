@@ -16,22 +16,20 @@ export class OfficeService {
   office: Office;
 
   getOffices(): Observable<Office[]> {
-    return this.http.get<Office[]>(this.url + '/offices');
+    return this.http.get<Office[]>(this.url);
   }
 
   getOfficeById(id: number) {
-    return this.http.get<Office>(this.url + '/getoffice/' + id).toPromise().then(res => this.office = res as Office);
+    return this.http.get<Office>(this.url + '/' + id).toPromise().then(res => this.office = res as Office);
   }
 
   addOffice(office: Office): Observable<Office> {
     const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
-    return this.http.post<Office>(this.url + '/saveoffice/',
-      office, httpOptions);
+    return this.http.post<Office>(this.url, office, httpOptions);
   }
 
   updateOffice(office: Office): Observable<Office> {
     const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
-    return this.http.put<Office>(this.url + '/saveoffice/',
-      office, httpOptions);
+    return this.http.put<Office>(this.url, office, httpOptions);
   }  
 }

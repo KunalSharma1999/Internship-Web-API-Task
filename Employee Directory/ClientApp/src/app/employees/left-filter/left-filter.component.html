@@ -15,9 +15,9 @@
                     </a>
                   </li>
                 </div>
-                <a href="#viewLess" (click)="expandDepartments()" class="view-link">view less</a>
+                <a (click)="expandDepartments()" class="view-link">view less</a>
             </div>
-            <a *ngIf="departments.length > 4 && !isDepartmentsExpanded" href="#viewMore" (click)="expandDepartments()" class="view-link">view more</a>
+            <a *ngIf="departments.length > 4 && !isDepartmentsExpanded" (click)="expandDepartments()" class="view-link">view more</a>
         </ul>
     </div>
 </div>
@@ -39,9 +39,9 @@
                     </a>
                   </li>
                 </div>
-                <a href="#viewLess" (click)="expandOffices()" class="view-link">view less</a>
+                <a (click)="expandOffices()" class="view-link">view less</a>
             </div>
-            <a *ngIf="offices.length > 4 && !isOfficesExpanded" href="#viewMore" (click)="expandOffices()" class="view-link">view more</a>
+            <a *ngIf="offices.length > 4 && !isOfficesExpanded" (click)="expandOffices()" class="view-link">view more</a>
         </ul>
     </div>
 </div>
@@ -63,9 +63,9 @@
                     </a>
                   </li>
                 </div>
-                <a href="#viewLess" (click)="expandJobTitles()" class="view-link">view less</a>
+                <a (click)="expandJobTitles()" class="view-link">view less</a>
             </div>
-            <a *ngIf="jobTitles.length > 4 && !isJobTitlesExpanded" href="#viewMore" (click)="expandJobTitles()" class="view-link">view more</a>
+            <a *ngIf="jobTitles.length > 4 && !isJobTitlesExpanded" (click)="expandJobTitles()" class="view-link">view more</a>
         </ul>
     </div>
 </div>
