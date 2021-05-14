@@ -31,17 +31,17 @@ namespace Employee_Directory.Controllers
         }
 
         [HttpPost]
-        public Office Post([FromBody] Office office)
+        public async Task<Office> Post([FromBody] Office office)
         {
-            var res = officeContext.Add(office);
+            var res = await officeContext.Add(office);
             return res != null ? office : null;
         }
 
         [HttpPut]
-        public Office Put([FromBody] Office office)
+        public async Task<Office> Put([FromBody] Office office)
         {
-            var res = officeContext.Update(office);
-            return res != null ? office : null;
+            var res = await officeContext.Update(office);
+            return res != 0 ? office : null;
         }
     }
 }

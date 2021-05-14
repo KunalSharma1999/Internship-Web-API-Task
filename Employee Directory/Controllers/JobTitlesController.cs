@@ -31,17 +31,17 @@ namespace Employee_Directory.Controllers
         }
 
         [HttpPost]
-        public JobTitle Post([FromBody] JobTitle jobtitle)
+        public async Task<JobTitle> Post([FromBody] JobTitle jobtitle)
         {
-            var res = jobTitleContext.Add(jobtitle);
+            var res = await jobTitleContext.Add(jobtitle);
             return res != null ? jobtitle : null;
         }
 
         [HttpPut]
-        public JobTitle Put([FromBody] JobTitle jobtitle)
+        public async Task<JobTitle> Put([FromBody] JobTitle jobtitle)
         {
-            var res = jobTitleContext.Update(jobtitle);
-            return res != null ? jobtitle : null;
+            var res = await jobTitleContext.Update(jobtitle);
+            return res != 0 ? jobtitle : null;
         }
     }
 }

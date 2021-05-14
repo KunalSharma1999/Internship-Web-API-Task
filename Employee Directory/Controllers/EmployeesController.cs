@@ -31,17 +31,17 @@ namespace Employee_Directory.Controllers
         }
 
         [HttpPost]
-        public Employee Post([FromBody] Employee employee)
+        public async Task<Employee> Post([FromBody] Employee employee)
         {
-            var res = employeeContext.Add(employee);
-            return res!=null ? employee : null;
+            var res = await employeeContext.Add(employee);
+            return res != null ? employee : null;
         }
 
         [HttpPut]
-        public Employee Put([FromBody] Employee employee)
+        public async Task<Employee> Put([FromBody] Employee employee)
         {
-            var res = employeeContext.Update(employee);
-            return res != null ? employee : null;
+            var res = await employeeContext.Update(employee);
+            return res != 0 ? employee : null;
         }
     }
 }

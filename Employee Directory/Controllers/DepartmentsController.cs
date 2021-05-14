@@ -31,17 +31,17 @@ namespace Employee_Directory.Controllers
         }
 
         [HttpPost]
-        public Department Post([FromBody] Department department)
+        public async Task<Department> Post([FromBody] Department department)
         {
-            var res = departmentContext.Add(department);
+            var res = await departmentContext.Add(department);
             return res != null ? department : null;
         }
 
         [HttpPut]
-        public Department Put([FromBody] Department department)
+        public async Task<Department> Put([FromBody] Department department)
         {
-            var res = departmentContext.Update(department);
-            return res != null ? department : null;
+            var res = await departmentContext.Update(department);
+            return res != 0 ? department : null;
         }
     }
 }
