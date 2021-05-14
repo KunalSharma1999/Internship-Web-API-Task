@@ -43,5 +43,13 @@ namespace Employee_Directory.Controllers
             int? res = await employeeContext.Update(employee);
             return res != null ? employee : null;
         }
+
+        [HttpDelete]
+        [Route("{id}")]
+        public async Task<bool> Delete(int id)
+        {
+            int? res = await employeeContext.Delete(id);
+            return res != null;
+        }
     }
 }

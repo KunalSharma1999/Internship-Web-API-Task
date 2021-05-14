@@ -22,6 +22,7 @@ export class OfficesComponent implements OnInit {
   }
 
   officeForm = new FormGroup({
+    id: new FormControl(''),
     name: new FormControl('', [Validators.required, Validators.pattern(/^[a-zA-Z ]+$/)])
   })
 
@@ -39,6 +40,7 @@ export class OfficesComponent implements OnInit {
     if (this.officeIdUpdate == null) {
       this.officeService.addOffice(office).subscribe(
         () => {
+          this.officeService.refreshOffices();
           this.officeForm.reset();
           this.toastr.success('Submitted successfully', 'Office Details Register');
         })
@@ -46,6 +48,7 @@ export class OfficesComponent implements OnInit {
     else {
       office.id = this.officeIdUpdate;
       this.officeService.updateOffice(office).subscribe(() => {
+        this.officeService.refreshOffices();
         this.officeIdUpdate = null;
         this.officeForm.reset();
         this.toastr.success('Updated successfully', 'Office Details Register');

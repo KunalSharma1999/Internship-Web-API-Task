@@ -33,7 +33,8 @@ export class AddEmployeeComponent implements OnInit {
     this.jobTitleService.refreshJobTitles();
   }
 
-    employeeForm = new FormGroup({
+  employeeForm = new FormGroup({
+    id: new FormControl(''),
     firstName: new FormControl('',[Validators.required, Validators.pattern(/^[a-zA-Z ]+$/)]),
     lastName: new FormControl('',[Validators.required, Validators.pattern(/^[a-zA-Z ]+$/)]),
     preferredName: new FormControl('',Validators.required),
@@ -56,10 +57,25 @@ export class AddEmployeeComponent implements OnInit {
     this.employeeService.refreshEmployees();
   } 
 
+  deleteEmployee() {
+    if (confirm('Are you sure to delete this record?')) {
+      const employee = this.employeeForm.value;
+      this.employeeService.deleteEmployee(employee.id).subscribe(
+        () => {
+          this.employeeService.refreshEmployees();
+          this.employeeForm.reset();
+          this.toastr.info('Deleted sucessfully', 'Employee Details Register');
+        }
+      );
+    }
+    this.modalService.dismissAll();
+  }
+
   addEmployee(employee:Employee){
     if (this.employeeIdUpdate == null) {
       this.employeeService.addEmployee(employee).subscribe(  
-        () => {    
+        () => {
+          this.employeeService.refreshEmployees();
           this.employeeForm.reset();
           this.toastr.success('Submitted successfully', 'Employee Details Register');
         }  
@@ -68,7 +84,8 @@ export class AddEmployeeComponent implements OnInit {
     else
     {
     employee.id = this.employeeIdUpdate;
-    this.employeeService.updateEmployee(employee).subscribe(() => {  
+      this.employeeService.updateEmployee(employee).subscribe(() => {
+        this.employeeService.refreshEmployees();
       this.employeeIdUpdate = null;
       this.employeeForm.reset();
       this.toastr.success('Updated successfully', 'Employee Details Register');

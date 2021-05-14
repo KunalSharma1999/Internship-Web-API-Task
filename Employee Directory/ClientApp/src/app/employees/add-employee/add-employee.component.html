@@ -59,4 +59,5 @@
     </div>
   </form>
   <button [disabled]="employeeForm.invalid" class="btn-add" (click)="saveEmployee()">Save</button>
+  <button *ngIf="mode === Modes.Edit" class="btn-danger" (click)="deleteEmployee()">Delete</button>
 </div>

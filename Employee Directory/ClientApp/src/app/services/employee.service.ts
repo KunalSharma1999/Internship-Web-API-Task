@@ -31,5 +31,9 @@ export class EmployeeService {
   updateEmployee(employee: Employee): Observable<Employee> {  
     const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
     return this.http.put<Employee>(this.url, employee, httpOptions);  
-  }  
+  }
+
+  deleteEmployee(id: number): Observable<Employee> {
+    return this.http.delete<Employee>(this.url + '/' + id);
+  }
 }

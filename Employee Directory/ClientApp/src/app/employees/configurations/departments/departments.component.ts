@@ -23,6 +23,7 @@ export class DepartmentsComponent implements OnInit {
   }
 
   departmentForm = new FormGroup({
+    id: new FormControl(''),
     name: new FormControl('', [Validators.required, Validators.pattern(/^[a-zA-Z ]+$/)])
   })
 
@@ -40,6 +41,7 @@ export class DepartmentsComponent implements OnInit {
     if (this.departmentIdUpdate == null) {
       this.departmentService.addDepartment(department).subscribe(
         () => {
+          this.departmentService.refreshDepartments();
           this.departmentForm.reset();
           this.toastr.success('Submitted successfully', 'Department Details Register');
         })
@@ -47,6 +49,7 @@ export class DepartmentsComponent implements OnInit {
     else {
       department.id = this.departmentIdUpdate;
       this.departmentService.updateDepartment(department).subscribe(() => {
+        this.departmentService.refreshDepartments();
         this.departmentIdUpdate = null;
         this.departmentForm.reset();
         this.toastr.success('Updated successfully', 'Department Details Register');

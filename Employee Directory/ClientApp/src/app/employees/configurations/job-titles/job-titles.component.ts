@@ -30,6 +30,7 @@ export class JobTitlesComponent implements OnInit {
   }
 
   jobTitleForm = new FormGroup({
+    id: new FormControl(''),
     name: new FormControl('', [Validators.required, Validators.pattern(/^[a-zA-Z ]+$/)]),
     departmentId: new FormControl('', Validators.required)
   })
@@ -48,6 +49,7 @@ export class JobTitlesComponent implements OnInit {
     if (this.jobTitleIdUpdate == null) {
       this.jobTitleService.addJobTitle(jobTitle).subscribe(
         () => {
+          this.jobTitleService.refreshJobTitles();
           this.jobTitleForm.reset();
           this.toastr.success('Submitted successfully', 'JobTitle Details Register');
         })
@@ -55,6 +57,7 @@ export class JobTitlesComponent implements OnInit {
     else {
       jobTitle.id = this.jobTitleIdUpdate;
       this.jobTitleService.updateJobTitle(jobTitle).subscribe(() => {
+        this.jobTitleService.refreshJobTitles();
         this.jobTitleIdUpdate = null;
         this.jobTitleForm.reset();
         this.toastr.success('Updated successfully', 'JobTitle Details Register');

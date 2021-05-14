@@ -34,5 +34,10 @@ namespace Employee_Directory.Services
         {
               return await db.UpdateAsync(employee);
         }
+
+        public async Task<int> Delete(int id)
+        {
+            return await db.DeleteAsync<Employee>(id);
+        }
     }
 }
