@@ -1,0 +1,17 @@
+<form [formGroup]="jobTitleForm" class="form-container">
+  <div class="form-group">
+    <label for="name"><b>Name</b></label>
+    <input type="text" placeholder="Enter Name" class="form-control" formControlName="name">
+    <span class="error" *ngIf="form.name.invalid && form.name.touched">Name is invalid</span>
+  </div>
+  <div class="form-group">
+    <label for="departmentId"><b>Department Id</b></label>
+    <select class="form-control" formControlName="departmentId">
+      <option value="" disabled selected>Select Department Id</option>
+      <option *ngFor="let department of departments" value="{{department.id}}">
+        {{department.id}} ({{department.name}})
+      </option>
+    </select>
+  </div>
+</form>
+<button [disabled]="jobTitleForm.invalid" (click)="saveJobTitle()" class="btn-add">Save</button>

@@ -6,7 +6,6 @@ import { Filter } from 'src/app/models/Filter';
 import { Alphabets } from 'src/app/shared/constants/constants';
 import { Mode } from 'src/app/shared/enums/mode';
 import { EmployeeService } from 'src/app/services/employee.service';
-import { JobTitle } from '../../models/JobTitle';
 import { JobTitleService } from '../../services/jobtitle.service';
 
 @Component({
@@ -26,12 +25,7 @@ export class EmployeesComponent implements OnInit {
   mode: Mode;
 
   constructor(
-    private modalService: NgbModal,
-    public employeeService: EmployeeService,
-    public jobTitleService: JobTitleService,
-    private router: Router 
-  ) {
-  }
+    private modalService: NgbModal, public employeeService: EmployeeService, public jobTitleService: JobTitleService, private router: Router) {}
 
   ngOnInit(){
     this.employeeService.refreshEmployees();

@@ -16,17 +16,14 @@ import { Office } from '../../models/Office';
 export class LeftFilterComponent implements OnInit {
 
   @Output() filterSelected: EventEmitter<Filter> = new EventEmitter();
-
   departments: Department[] = [];
   offices: Office[] = [];
   jobTitles: JobTitle[] = [];
+  isDepartmentsExpanded = false;
+  isOfficesExpanded = false;
+  isJobTitlesExpanded = false;
 
-  get filterOption() {
-      return FilterOptions;
-  }
-
-  constructor(private readonly departmentService: DepartmentService, private readonly officeService: OfficeService, private readonly jobTitleService: JobTitleService) {
-  }
+  constructor(private readonly departmentService: DepartmentService, private readonly officeService: OfficeService, private readonly jobTitleService: JobTitleService) {}
 
   ngOnInit() {
     this.departmentService.getDepartments().subscribe(departments => this.departments = departments);
@@ -34,22 +31,23 @@ export class LeftFilterComponent implements OnInit {
     this.jobTitleService.getJobTitles().subscribe(jobTitles => this.jobTitles = jobTitles);
   }
 
+  get filterOption() {
+    return FilterOptions;
+  }
+
   setFilter(value: string, filterOption: FilterOptions) {
       const filter = new Filter({value: value, filterType: filterOption});
       this.filterSelected.emit(filter)
   }
   
-  isDepartmentsExpanded = false;
   expandDepartments() {
     this.isDepartmentsExpanded = !this.isDepartmentsExpanded;
   }
 
-  isOfficesExpanded = false;
   expandOffices() {
     this.isOfficesExpanded = !this.isOfficesExpanded;
   }
 
-  isJobTitlesExpanded = false;
   expandJobTitles() {
     this.isJobTitlesExpanded = !this.isJobTitlesExpanded;
   }

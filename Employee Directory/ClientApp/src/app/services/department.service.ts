@@ -13,14 +13,12 @@ export class DepartmentService {
 
   url = `${environment.baseApi}/Departments`;
 
-  department: Department;
-
   getDepartments(): Observable<Department[]>{
     return this.http.get<Department[]>(this.url);
   }
 
   getDepartmentById(id: number){
-    return this.http.get<Department>(this.url + '/' + id).toPromise().then(res => this.department = res as Department);
+    return this.http.get<Department>(this.url + '/' + id);
   }
 
   addDepartment(department: Department): Observable<Department> {

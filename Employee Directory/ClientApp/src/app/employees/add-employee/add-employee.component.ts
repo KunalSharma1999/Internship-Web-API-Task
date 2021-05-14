@@ -21,16 +21,13 @@ export class AddEmployeeComponent implements OnInit {
 
   @Input() employeeId: number;
   @Input() mode: Mode;  
-
   employeeIdUpdate = null; 
-
   formTitle: string = "Enter Employee Details";
-  constructor(private employeeService: EmployeeService, private modalService: NgbModal, private toastr: ToastrService,
-public departmentService: DepartmentService, public officeService: OfficeService, public jobTitleService: JobTitleService  ) { }
-
   departments: Department[] = [];
   offices: Office[] = [];
   jobTitles: JobTitle[] = [];
+
+  constructor(private employeeService: EmployeeService, private modalService: NgbModal, private toastr: ToastrService, public departmentService: DepartmentService, public officeService: OfficeService, public jobTitleService: JobTitleService) {}
 
   ngOnInit(): void {
     this.loadSelectOptions();
@@ -108,10 +105,6 @@ public departmentService: DepartmentService, public officeService: OfficeService
 
   updatePreferredName() {
     this.employeeForm.get('preferredName').setValue(this.employeeForm.get('firstName').value + ' ' + this.employeeForm.get('lastName').value);
-  }
-
-  dismissModal() {
-    this.modalService.dismissAll();
   }
 }
 

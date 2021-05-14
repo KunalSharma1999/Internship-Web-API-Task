@@ -1,0 +1,9 @@
+<form [formGroup]="officeForm" class="form-container">
+  <h4>Office</h4>
+  <div class="form-group">
+    <label for="name"><b>Name</b></label>
+    <input type="text" placeholder="Enter Name" class="form-control" formControlName="name">
+    <span class="error" *ngIf="form.name.invalid && form.name.touched">Name is invalid</span>
+  </div>
+</form>
+<button [disabled]="officeForm.invalid" (click)="saveOffice()" class="btn-add">Save</button>

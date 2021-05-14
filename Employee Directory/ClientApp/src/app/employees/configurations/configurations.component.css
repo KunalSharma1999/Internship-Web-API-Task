@@ -36,12 +36,3 @@
     border: none;
     cursor: pointer;
   }
-
-  .form-container{
-      padding:20px;
-  }
-
-.error {
-  color: red;
-  font-size: 10px;
-}

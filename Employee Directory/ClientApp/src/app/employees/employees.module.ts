@@ -7,6 +7,9 @@ import { AddEmployeeComponent } from './add-employee/add-employee.component';
 import { ConfigurationsComponent } from './configurations/configurations.component';
 import { RouterModule } from '@angular/router'
 import { EmployeeFilterPipe } from '../shared/pipes/employee-filter.pipe';
+import { DepartmentsComponent } from './configurations/departments/departments.component';
+import { OfficesComponent } from './configurations/offices/offices.component';
+import { JobTitlesComponent } from './configurations/job-titles/job-titles.component';
 
 
 
@@ -16,7 +19,10 @@ import { EmployeeFilterPipe } from '../shared/pipes/employee-filter.pipe';
     EmployeesComponent,
     AddEmployeeComponent,
     EmployeeFilterPipe,
-    ConfigurationsComponent
+    ConfigurationsComponent,
+    DepartmentsComponent,
+    OfficesComponent,
+    JobTitlesComponent
   ],
   imports: [
     CommonModule,

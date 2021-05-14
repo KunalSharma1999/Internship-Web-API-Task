@@ -13,14 +13,12 @@ export class OfficeService {
 
   url = `${environment.baseApi}/Offices`;
 
-  office: Office;
-
   getOffices(): Observable<Office[]> {
     return this.http.get<Office[]>(this.url);
   }
 
   getOfficeById(id: number) {
-    return this.http.get<Office>(this.url + '/' + id).toPromise().then(res => this.office = res as Office);
+    return this.http.get<Office>(this.url + '/' + id);
   }
 
   addOffice(office: Office): Observable<Office> {
