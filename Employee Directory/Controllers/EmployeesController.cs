@@ -40,8 +40,8 @@ namespace Employee_Directory.Controllers
         [HttpPut]
         public async Task<Employee> Put([FromBody] Employee employee)
         {
-            var res = await employeeContext.Update(employee);
-            return res != 0 ? employee : null;
+            int? res = await employeeContext.Update(employee);
+            return res != null ? employee : null;
         }
     }
 }

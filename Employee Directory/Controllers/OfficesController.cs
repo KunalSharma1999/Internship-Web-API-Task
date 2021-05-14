@@ -40,8 +40,8 @@ namespace Employee_Directory.Controllers
         [HttpPut]
         public async Task<Office> Put([FromBody] Office office)
         {
-            var res = await officeContext.Update(office);
-            return res != 0 ? office : null;
+            int? res = await officeContext.Update(office);
+            return res != null ? office : null;
         }
     }
 }
