@@ -21,7 +21,7 @@ namespace Employee_Directory.Services
 
         public async Task<Employee> Get(int id)
         {
-            return await db.SingleAsync<Employee>(id);
+            return await db.SingleAsync<Employee>(Constants.Employee.GetEmployee,id);
         }
 
         public async Task<object> Add(Employee employee)

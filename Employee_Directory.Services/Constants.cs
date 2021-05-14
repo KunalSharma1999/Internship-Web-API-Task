@@ -12,22 +12,16 @@
         public static class Department
         {
             public const string GetDepartments = "Select * from Departments";
-
-            public const string GetDepartment = "SELECT * FROM Departments WHERE Id=@0";
         }
 
         public static class Office
         {
             public const string GetOffices = "Select * from Offices";
-
-            public const string GetOffice = "SELECT * FROM Offices WHERE Id=@0";
         }
 
         public static class JobTitle
         {
             public const string GetJobTitles = "Select * from JobTitles";
-
-            public const string GetJobTitle = "SELECT * FROM JobTitles WHERE Id=@0";
         }
     }
  }
