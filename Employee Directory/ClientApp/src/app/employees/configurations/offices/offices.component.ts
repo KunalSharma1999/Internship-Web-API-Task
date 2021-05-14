@@ -13,18 +13,12 @@ import { Mode } from '../../../shared/enums/mode';
 })
 export class OfficesComponent implements OnInit {
   officeIdUpdate = null;
-  offices: Office[] = [];
   @Input() officeId: number;
   @Input() officeMode: Mode;
 
   constructor(private readonly officeService: OfficeService, private modalService: NgbModal, private toastr: ToastrService) { }
 
   ngOnInit(): void {
-    this.loadOffices();
-  }
-
-  loadOffices() {
-    this.officeService.getOffices().subscribe(offices => this.offices = offices);
   }
 
   officeForm = new FormGroup({
@@ -38,7 +32,7 @@ export class OfficesComponent implements OnInit {
     this.addOffice(office);
     this.modalService.dismissAll();
     this.officeForm.reset();
-    this.officeService.getOffices();
+    this.officeService.refreshOffices();
   }
 
   addOffice(office: Office) {

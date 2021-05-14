@@ -16,19 +16,20 @@ import { Office } from '../../models/Office';
 export class LeftFilterComponent implements OnInit {
 
   @Output() filterSelected: EventEmitter<Filter> = new EventEmitter();
-  departments: Department[] = [];
-  offices: Office[] = [];
-  jobTitles: JobTitle[] = [];
   isDepartmentsExpanded = false;
   isOfficesExpanded = false;
   isJobTitlesExpanded = false;
 
-  constructor(private readonly departmentService: DepartmentService, private readonly officeService: OfficeService, private readonly jobTitleService: JobTitleService) {}
+  constructor(public readonly departmentService: DepartmentService, public readonly officeService: OfficeService, public readonly jobTitleService: JobTitleService) {}
 
   ngOnInit() {
-    this.departmentService.getDepartments().subscribe(departments => this.departments = departments);
-    this.officeService.getOffices().subscribe(offices => this.offices = offices);
-    this.jobTitleService.getJobTitles().subscribe(jobTitles => this.jobTitles = jobTitles);
+    this.loadConfigurations();
+  }
+
+  loadConfigurations() {
+    this.departmentService.refreshDepartments();
+    this.officeService.refreshOffices();
+    this.jobTitleService.refreshJobTitles();
   }
 
   get filterOption() {

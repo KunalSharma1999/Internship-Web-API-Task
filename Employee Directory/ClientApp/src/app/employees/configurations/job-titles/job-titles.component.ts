@@ -16,18 +16,17 @@ import { Mode } from '../../../shared/enums/mode';
 export class JobTitlesComponent implements OnInit {
 
   jobTitleIdUpdate = null;
-  departments: Department[] = [];
   @Input() jobTitleId: number;
   @Input() jobTitleMode: Mode;
 
-  constructor(private readonly departmentService: DepartmentService, private readonly jobTitleService: JobTitleService, private modalService: NgbModal, private toastr: ToastrService) { }
+  constructor(public readonly departmentService: DepartmentService, private readonly jobTitleService: JobTitleService, private modalService: NgbModal, private toastr: ToastrService) { }
 
   ngOnInit(): void {
     this.loadDepartments();
   }
 
   loadDepartments() {
-    this.departmentService.getDepartments().subscribe(departments => this.departments = departments);
+    this.departmentService.refreshDepartments();
   }
 
   jobTitleForm = new FormGroup({
@@ -42,7 +41,7 @@ export class JobTitlesComponent implements OnInit {
     this.addJobTitle(jobTitle);
     this.modalService.dismissAll();
     this.jobTitleForm.reset();
-    this.jobTitleService.getJobTitles();
+    this.jobTitleService.refreshJobTitles();
   }
 
   addJobTitle(jobTitle: JobTitle) {

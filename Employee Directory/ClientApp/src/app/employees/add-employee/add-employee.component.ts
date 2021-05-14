@@ -23,9 +23,6 @@ export class AddEmployeeComponent implements OnInit {
   @Input() mode: Mode;  
   employeeIdUpdate = null; 
   formTitle: string = "Enter Employee Details";
-  departments: Department[] = [];
-  offices: Office[] = [];
-  jobTitles: JobTitle[] = [];
 
   constructor(private employeeService: EmployeeService, private modalService: NgbModal, private toastr: ToastrService, public departmentService: DepartmentService, public officeService: OfficeService, public jobTitleService: JobTitleService) {}
 
@@ -34,9 +31,9 @@ export class AddEmployeeComponent implements OnInit {
   }
 
   loadSelectOptions() {
-    this.departmentService.getDepartments().subscribe(departments => this.departments = departments);
-    this.officeService.getOffices().subscribe(offices => this.offices = offices);
-    this.jobTitleService.getJobTitles().subscribe(jobTitles => this.jobTitles = jobTitles);
+    this.departmentService.refreshDepartments();
+    this.officeService.refreshOffices();
+    this.jobTitleService.refreshJobTitles();
   }
 
     employeeForm = new FormGroup({

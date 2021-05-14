@@ -24,7 +24,7 @@
       <label for="jobTitle"><b>Job Title</b></label>
       <select class="form-control" formControlName="jobTitleId">
         <option value="" disabled selected>Select Job Title</option>
-        <option *ngFor="let jobTitle of jobTitles" value="{{jobTitle.id}}">
+        <option *ngFor="let jobTitle of jobTitleService.jobTitles" value="{{jobTitle.id}}">
           {{jobTitle.name}}
         </option>
       </select>
@@ -33,7 +33,7 @@
       <label for="office"><b>Office</b></label>
       <select class="form-control" formControlName="officeId">
         <option value="" disabled selected>Select Office</option>
-        <option *ngFor="let office of offices" value="{{office.id}}">
+        <option *ngFor="let office of officeService.offices" value="{{office.id}}">
           {{office.name}}
         </option>
       </select>
@@ -42,7 +42,7 @@
       <label for="department"><b>Department</b></label>
       <select class="form-control" formControlName="departmentId">
         <option value="" disabled selected>Select Department</option>
-        <option *ngFor="let department of departments" value="{{department.id}}">
+        <option *ngFor="let department of departmentService.departments" value="{{department.id}}">
           {{department.name}}
         </option>
       </select>

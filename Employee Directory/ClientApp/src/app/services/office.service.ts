@@ -11,10 +11,12 @@ export class OfficeService {
 
   constructor(private http: HttpClient) { }
 
+  offices: Office[] = [];
+
   url = `${environment.baseApi}/Offices`;
 
-  getOffices(): Observable<Office[]> {
-    return this.http.get<Office[]>(this.url);
+  refreshOffices(){
+    return this.http.get(this.url).toPromise().then(res => this.offices = res as Office[]);
   }
 
   getOfficeById(id: number) {

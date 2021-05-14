@@ -14,9 +14,6 @@ import { Mode } from '../../shared/enums/mode';
   styleUrls: ['./configurations.component.css']
 })
 export class ConfigurationsComponent implements OnInit {
-  departments: Department[] = [];
-  offices: Office[] = [];
-  jobTitles: JobTitle[] = [];
   departmentId: number;
   departmentMode: Mode;
   @ViewChild('departmentContent') modalDepartmentDialogContent;
@@ -27,7 +24,7 @@ export class ConfigurationsComponent implements OnInit {
   jobTitleMode: Mode;
   @ViewChild('jobTitleContent') modalJobTitleDialogContent;
 
-  constructor(private readonly departmentService: DepartmentService, private readonly jobTitleService: JobTitleService, private readonly officeService: OfficeService, private modalService: NgbModal) {
+  constructor(public readonly departmentService: DepartmentService, public readonly jobTitleService: JobTitleService, public readonly officeService: OfficeService, private modalService: NgbModal) {
   }
 
   ngOnInit() {
@@ -35,9 +32,9 @@ export class ConfigurationsComponent implements OnInit {
   }
 
   loadConfigurations(){
-    this.departmentService.getDepartments().subscribe(departments => this.departments = departments);
-    this.officeService.getOffices().subscribe(offices => this.offices = offices);
-    this.jobTitleService.getJobTitles().subscribe(jobTitles => this.jobTitles = jobTitles);
+    this.departmentService.refreshDepartments();
+    this.officeService.refreshOffices();
+    this.jobTitleService.refreshJobTitles();
   }
   
   selectDepartment(department: Department) {

@@ -9,12 +9,14 @@ import { environment } from '../../environments/environment';
 })
 export class DepartmentService {
 
+  departments: Department[] = [];
+
   constructor(private http: HttpClient) { }
 
   url = `${environment.baseApi}/Departments`;
 
-  getDepartments(): Observable<Department[]>{
-    return this.http.get<Department[]>(this.url);
+  refreshDepartments(){
+    return this.http.get(this.url).toPromise().then(res => this.departments = res as Department[]);
   }
 
   getDepartmentById(id: number){

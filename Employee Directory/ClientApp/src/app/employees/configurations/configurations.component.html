@@ -1,7 +1,7 @@
 <div class="containers">
   <div class="department-container">
   <h1>Departments</h1>
-  <div *ngFor="let department of departments" (click)="selectDepartment(department)" class="items">
+  <div *ngFor="let department of departmentService.departments" (click)="selectDepartment(department)" class="items">
     {{department.name}}
   </div>
   <button data-modal-target="#modal" (click)="openAddDepartmentDialog()" class="btn-add">
@@ -13,7 +13,7 @@
    </div>
   <div class="office-container">
   <h1>Offices</h1>
-  <div *ngFor="let office of offices" (click)="selectOffice(office)" class="items">
+  <div *ngFor="let office of officeService.offices" (click)="selectOffice(office)" class="items">
     {{office.name}}
   </div>
   <button data-modal-target="#modal" (click)="openAddOfficeDialog()" class="btn-add">
@@ -25,7 +25,7 @@
     </div>
   <div class="job-title-container">
   <h1>Job Titles</h1>
-  <div *ngFor="let jobTitle of jobTitles" (click)="selectJobTitle(jobTitle)" class="items">
+  <div *ngFor="let jobTitle of jobTitleService.jobTitles" (click)="selectJobTitle(jobTitle)" class="items">
     {{jobTitle.name}}
   </div>
   <button data-modal-target="#modal" (click)="openAddJobTitleDialog()" class="btn-add">

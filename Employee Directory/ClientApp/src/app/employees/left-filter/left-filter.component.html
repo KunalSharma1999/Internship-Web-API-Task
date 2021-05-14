@@ -2,13 +2,13 @@
     <h6>Departments</h6>
     <div>
         <ul>
-            <li *ngFor="let department of departments | slice:0:4">
+            <li *ngFor="let department of departmentService.departments | slice:0:4">
                 <a (click)="setFilter(department.name, filterOption.Department)">
                 {{department.name}}
                 </a>
             </li>
             <div *ngIf="isDepartmentsExpanded">
-                <div *ngFor="let department of departments; let i = index">
+                <div *ngFor="let department of departmentService.departments; let i = index">
                   <li *ngIf="i >= 4">
                     <a (click)="setFilter(department.name, filterOption.Department)">
                         {{department.name}}
@@ -17,7 +17,7 @@
                 </div>
                 <a (click)="expandDepartments()" class="view-link">view less</a>
             </div>
-            <a *ngIf="departments.length > 4 && !isDepartmentsExpanded" (click)="expandDepartments()" class="view-link">view more</a>
+            <a *ngIf="departmentService.departments.length > 4 && !isDepartmentsExpanded" (click)="expandDepartments()" class="view-link">view more</a>
         </ul>
     </div>
 </div>
@@ -26,13 +26,13 @@
     <h6>Offices</h6>
     <div >
         <ul>
-            <li *ngFor="let office of offices | slice:0:4">
+            <li *ngFor="let office of officeService.offices | slice:0:4">
                 <a (click)="setFilter(office.name, filterOption.Office)">
                 {{office.name}}
                 </a>
             </li>
             <div *ngIf="isOfficesExpanded">
-                <div *ngFor="let office of offices; let i = index">
+                <div *ngFor="let office of officeService.offices; let i = index">
                   <li *ngIf="i >= 4">
                     <a (click)="setFilter(office.name, filterOption.Office)">
                         {{office.name}}
@@ -41,7 +41,7 @@
                 </div>
                 <a (click)="expandOffices()" class="view-link">view less</a>
             </div>
-            <a *ngIf="offices.length > 4 && !isOfficesExpanded" (click)="expandOffices()" class="view-link">view more</a>
+            <a *ngIf="officeService.offices.length > 4 && !isOfficesExpanded" (click)="expandOffices()" class="view-link">view more</a>
         </ul>
     </div>
 </div>
@@ -50,13 +50,13 @@
     <h6>Job Titles</h6>
     <div >
         <ul>
-            <li *ngFor="let jobTitle of jobTitles | slice:0:4">
+            <li *ngFor="let jobTitle of jobTitleService.jobTitles | slice:0:4">
                 <a (click)="setFilter(jobTitle.name, filterOption.JobTitle)">
                 {{jobTitle.name}}
                 </a>
             </li>
             <div *ngIf="isJobTitlesExpanded">
-                <div *ngFor="let jobTitle of jobTitles; let i = index">
+                <div *ngFor="let jobTitle of jobTitleService.jobTitles; let i = index">
                   <li *ngIf="i >= 4">
                     <a (click)="setFilter(jobTitle.name, filterOption.JobTitle)">
                         {{jobTitle.name}}
@@ -65,7 +65,7 @@
                 </div>
                 <a (click)="expandJobTitles()" class="view-link">view less</a>
             </div>
-            <a *ngIf="jobTitles.length > 4 && !isJobTitlesExpanded" (click)="expandJobTitles()" class="view-link">view more</a>
+            <a *ngIf="jobTitleService.jobTitles.length > 4 && !isJobTitlesExpanded" (click)="expandJobTitles()" class="view-link">view more</a>
         </ul>
     </div>
 </div>

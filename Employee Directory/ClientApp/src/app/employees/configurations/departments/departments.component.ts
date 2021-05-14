@@ -20,11 +20,6 @@ export class DepartmentsComponent implements OnInit {
   constructor(private readonly departmentService: DepartmentService, private modalService: NgbModal, private toastr: ToastrService) { }
 
   ngOnInit(): void {
-    this.loadDepartments();
-  }
-
-  loadDepartments() {
-    this.departmentService.getDepartments().subscribe(departments => this.departments = departments);
   }
 
   departmentForm = new FormGroup({
@@ -38,7 +33,7 @@ export class DepartmentsComponent implements OnInit {
     this.addDepartment(department);
     this.modalService.dismissAll();
     this.departmentForm.reset();
-    this.departmentService.getDepartments();
+    this.departmentService.refreshDepartments();
   }
 
   addDepartment(department: Department) {

@@ -9,12 +9,14 @@ import { environment } from '../../environments/environment';
 })
 export class JobTitleService {
 
+  jobTitles: JobTitle[] = [];
+
   constructor(private http: HttpClient) { }
 
   url = `${environment.baseApi}/JobTitles`;
 
-  getJobTitles(): Observable<JobTitle[]> {
-    return this.http.get<JobTitle[]>(this.url);
+  refreshJobTitles() {
+    return this.http.get(this.url).toPromise().then(res => this.jobTitles = res as JobTitle[])
   }
 
   getJobTitleById(id: number) {
