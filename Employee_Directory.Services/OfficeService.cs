@@ -16,7 +16,7 @@ namespace Employee_Directory.Services
 
         public IEnumerable<Office> Get()
         {
-            return db.Query<Office>(Constants.Office.GetOffices);
+            return db.Query<Office>();
         }
 
         public async Task<Office> Get(int id)

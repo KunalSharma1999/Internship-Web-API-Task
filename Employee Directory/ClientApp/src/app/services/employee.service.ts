@@ -4,6 +4,7 @@ import { HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Employee } from '../models/Employee';
 import { environment } from '../../environments/environment';
+import { EmployeeCard } from '../models/EmployeeCard';
 
 @Injectable({
   providedIn: 'root'
@@ -11,13 +12,13 @@ import { environment } from '../../environments/environment';
 export class EmployeeService {
   url = `${environment.baseApi}/Employees`;
 
-  employees;
+  employees: EmployeeCard[] = [];
 
   constructor(private http: HttpClient) {
   }
 
   refreshEmployees(){  
-    return this.http.get(this.url).toPromise().then(res => this.employees = res);
+    return this.http.get(this.url).toPromise().then(res => this.employees = res as EmployeeCard[]);
   }   
 
   getEmployeeById(id: number):any {

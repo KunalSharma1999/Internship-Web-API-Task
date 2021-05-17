@@ -16,7 +16,7 @@ namespace Employee_Directory.Services
 
         public IEnumerable<JobTitle> Get()
         {
-             return db.Query<JobTitle>(Constants.JobTitle.GetJobTitles);
+             return db.Query<JobTitle>();
         }
 
         public async Task<JobTitle> Get(int id)

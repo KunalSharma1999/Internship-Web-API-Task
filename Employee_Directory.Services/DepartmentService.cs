@@ -16,7 +16,7 @@ namespace Employee_Directory.Services
 
         public IEnumerable<Department> Get()
         {
-            return db.Query<Department>(Constants.Department.GetDepartments);
+            return db.Query<Department>();
         }
 
         public async Task<Department> Get(int id)

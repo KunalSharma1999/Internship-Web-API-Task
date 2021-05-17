@@ -1,11 +1,12 @@
 ﻿using Employee_Directory.Models;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Employee_Directory.Contracts
 {
     public interface IEmployeeService
     {
-        object Get();
+        IEnumerable<EmployeeCard> Get();
 
         Task<Employee> Get(int id);
 

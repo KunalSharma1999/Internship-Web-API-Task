@@ -18,7 +18,7 @@ namespace Employee_Directory.Controllers
         }
 
         [HttpGet]
-        public object Get()
+        public IEnumerable<EmployeeCard> Get()
         {
             return employeeContext.Get();
         }
