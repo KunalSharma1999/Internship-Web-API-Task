@@ -7,7 +7,7 @@ import { FilterOptions } from '../enums/filter-options';
   name: 'employeeFilter'
 })
 export class EmployeeFilterPipe implements PipeTransform {
-  transform(employees: Employee[], filter: Filter, alphabetFilter: string, searchKeyword: string, filterBy: string) {
+  transform(employees, filter: Filter, alphabetFilter: string, searchKeyword: string, filterBy: string) {
     if (filter && !alphabetFilter && !searchKeyword) {
         switch (filter.filterType) {
             case FilterOptions.Department:

@@ -39,9 +39,6 @@ export class AddEmployeeComponent implements OnInit {
     lastName: new FormControl('',[Validators.required, Validators.pattern(/^[a-zA-Z ]+$/)]),
     preferredName: new FormControl('',Validators.required),
     email: new FormControl('',[Validators.required, Validators.pattern(/^[a-zA-Z0-9\.]+@[a-zA-Z]+\.[a-zA-Z]{2,3}$/)]),
-    jobTitle: new FormControl(''),
-    office: new FormControl(''),
-    department: new FormControl(''),
     phoneNumber: new FormControl('',[Validators.required, Validators.pattern(/^\d{10}$/)]),
     skypeId: new FormControl('',Validators.required),
     departmentId: new FormControl('', Validators.required),
@@ -93,13 +90,11 @@ export class AddEmployeeComponent implements OnInit {
     }
   }
 
-  loadEmployeeToEdit(employeeId: number) {  
-    this.employeeService.getEmployeeById(employeeId).subscribe(employee=> {   
-      this.employeeIdUpdate = employee.id;
-      this.employeeForm.patchValue(employee);
-
-    });  
-  
+  loadEmployeeToEdit(employeeId: number) {
+    this.employeeService.getEmployeeById(employeeId).then(res => { 
+      this.employeeIdUpdate = res.id;
+      this.employeeForm.patchValue(res);
+    });
   } 
 
   get Modes() {

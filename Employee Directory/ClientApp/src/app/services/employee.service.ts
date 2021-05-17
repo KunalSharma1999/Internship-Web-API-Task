@@ -11,16 +11,17 @@ import { environment } from '../../environments/environment';
 export class EmployeeService {
   url = `${environment.baseApi}/Employees`;
 
-  employees: Employee[]; 
+  employees;
+
   constructor(private http: HttpClient) {
   }
 
   refreshEmployees(){  
-    return this.http.get(this.url).toPromise().then(res => this.employees = res as Employee[]);
+    return this.http.get(this.url).toPromise().then(res => this.employees = res);
   }   
 
-  getEmployeeById(id:number): Observable<Employee> {  
-    return this.http.get<Employee>(this.url + '/' + id);  
+  getEmployeeById(id: number):any {
+    return this.http.get(this.url + '/' + id).toPromise();  
   }
 
   addEmployee(employee: Employee): Observable<Employee> {

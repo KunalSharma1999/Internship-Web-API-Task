@@ -1,6 +1,7 @@
 ﻿using Employee_Directory.Contracts;
 using Employee_Directory.Models;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Employee_Directory.Services
@@ -14,14 +15,14 @@ namespace Employee_Directory.Services
             this.db = database;
         }
 
-        public IEnumerable<Employee> Get()
+        public object Get()
         {
-            return db.Query<Employee>(Constants.Employee.GetEmployees);
+            return db.Query<object>(Constants.Employee.GetEmployees).ToList();
         }
 
         public async Task<Employee> Get(int id)
         {
-            return await db.SingleAsync<Employee>(Constants.Employee.GetEmployee,id);
+            return await db.SingleAsync<Employee>(id);
         }
 
         public async Task<object> Add(Employee employee)

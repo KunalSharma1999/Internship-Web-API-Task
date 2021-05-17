@@ -41,8 +41,8 @@ export class EmployeesComponent implements OnInit {
     this.filter = null;
   }
 
-  selectEmployee(employee: Employee) {
-    this.employeeId = employee.id;
+  selectEmployee(id: number) {
+    this.employeeId = id;
     this.mode = Mode.Edit;
     this.openEmployeeDialog();
   }
