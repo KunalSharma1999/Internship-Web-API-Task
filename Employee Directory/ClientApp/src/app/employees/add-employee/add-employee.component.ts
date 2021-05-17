@@ -24,17 +24,9 @@ export class AddEmployeeComponent implements OnInit {
   constructor(private employeeService: EmployeeService, private modalService: NgbModal, private toastr: ToastrService, public departmentService: DepartmentService, public officeService: OfficeService, public jobTitleService: JobTitleService) {}
 
   ngOnInit(): void {
-    this.loadSelectOptions();
-  }
-
-  loadSelectOptions() {
-    this.departmentService.refreshDepartments();
-    this.officeService.refreshOffices();
-    this.jobTitleService.refreshJobTitles();
   }
 
   employeeForm = new FormGroup({
-    id: new FormControl(''),
     firstName: new FormControl('',[Validators.required, Validators.pattern(/^[a-zA-Z ]+$/)]),
     lastName: new FormControl('',[Validators.required, Validators.pattern(/^[a-zA-Z ]+$/)]),
     preferredName: new FormControl('',Validators.required),
@@ -46,20 +38,19 @@ export class AddEmployeeComponent implements OnInit {
     jobTitleId: new FormControl('', Validators.required)
     })
 
-  saveEmployee() {   
+  saveEmployee() {
     const employee = this.employeeForm.value;  
     this.addEmployee(employee);
     this.modalService.dismissAll();  
     this.employeeForm.reset();
-    this.employeeService.refreshEmployees();
   } 
 
   deleteEmployee() {
     if (confirm('Are you sure to delete this record?')) {
-      const employee = this.employeeForm.value;
-      this.employeeService.deleteEmployee(employee.id).subscribe(
+      this.employeeService.deleteEmployee(this.employeeIdUpdate).subscribe(
         () => {
           this.employeeService.refreshEmployees();
+          this.employeeIdUpdate = null;
           this.employeeForm.reset();
           this.toastr.info('Deleted sucessfully', 'Employee Details Register');
         }
@@ -91,9 +82,9 @@ export class AddEmployeeComponent implements OnInit {
   }
 
   loadEmployeeToEdit(employeeId: number) {
-    this.employeeService.getEmployeeById(employeeId).then(res => { 
-      this.employeeIdUpdate = res.id;
-      this.employeeForm.patchValue(res);
+    this.employeeService.getEmployeeById(employeeId).then(employee => { 
+      this.employeeIdUpdate = employee.id;
+      this.employeeForm.patchValue(employee);
     });
   } 
 

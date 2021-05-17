@@ -22,15 +22,9 @@ export class JobTitlesComponent implements OnInit {
   constructor(public readonly departmentService: DepartmentService, private readonly jobTitleService: JobTitleService, private modalService: NgbModal, private toastr: ToastrService) { }
 
   ngOnInit(): void {
-    this.loadDepartments();
-  }
-
-  loadDepartments() {
-    this.departmentService.refreshDepartments();
   }
 
   jobTitleForm = new FormGroup({
-    id: new FormControl(''),
     name: new FormControl('', [Validators.required, Validators.pattern(/^[a-zA-Z ]+$/)]),
     departmentId: new FormControl('', Validators.required)
   })
@@ -42,7 +36,6 @@ export class JobTitlesComponent implements OnInit {
     this.addJobTitle(jobTitle);
     this.modalService.dismissAll();
     this.jobTitleForm.reset();
-    this.jobTitleService.refreshJobTitles();
   }
 
   addJobTitle(jobTitle: JobTitle) {
@@ -70,7 +63,7 @@ export class JobTitlesComponent implements OnInit {
       }
     }
 
-    loadJobTitleToEdit(jobTitleId: number) {
+  loadJobTitleToEdit(jobTitleId: number) {
       this.jobTitleService.getJobTitleById(jobTitleId).subscribe(jobTitle => {
         this.jobTitleIdUpdate = jobTitle.id;
         this.jobTitleForm.patchValue(jobTitle);

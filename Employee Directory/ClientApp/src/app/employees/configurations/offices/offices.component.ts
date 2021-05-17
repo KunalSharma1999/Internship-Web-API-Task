@@ -22,7 +22,6 @@ export class OfficesComponent implements OnInit {
   }
 
   officeForm = new FormGroup({
-    id: new FormControl(''),
     name: new FormControl('', [Validators.required, Validators.pattern(/^[a-zA-Z ]+$/)])
   })
 
@@ -33,7 +32,6 @@ export class OfficesComponent implements OnInit {
     this.addOffice(office);
     this.modalService.dismissAll();
     this.officeForm.reset();
-    this.officeService.refreshOffices();
   }
 
   addOffice(office: Office) {

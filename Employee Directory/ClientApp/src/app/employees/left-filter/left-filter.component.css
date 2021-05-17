@@ -22,4 +22,5 @@ ul {
     text-decoration: none;
     color: rgb(62,192,253);
     font-size: 8px;
+    cursor: pointer;
 }

@@ -23,7 +23,6 @@ export class DepartmentsComponent implements OnInit {
   }
 
   departmentForm = new FormGroup({
-    id: new FormControl(''),
     name: new FormControl('', [Validators.required, Validators.pattern(/^[a-zA-Z ]+$/)])
   })
 
@@ -34,7 +33,6 @@ export class DepartmentsComponent implements OnInit {
     this.addDepartment(department);
     this.modalService.dismissAll();
     this.departmentForm.reset();
-    this.departmentService.refreshDepartments();
   }
 
   addDepartment(department: Department) {
