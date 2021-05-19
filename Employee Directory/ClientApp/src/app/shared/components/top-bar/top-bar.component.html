@@ -9,10 +9,13 @@
     <div class="my-profile">
         <h4>
             Welcome,
-            <span class="profile-name">Andrew Philips</span>
+            <div *ngIf="userDetails">
+            <span class="profile-name">{{userDetails.fullName}}</span>
+            </div>
         </h4>
         <div class="profile-pic">
             <img src="assets/img/blank-profile-picture.png" class="dp">
         </div>
+        <button class="btn btn-sm btn-danger" (click)="onLogout()">Logout</button>
     </div>
 </header>
