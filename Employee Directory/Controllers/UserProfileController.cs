@@ -1,10 +1,8 @@
 ﻿using Employee_Directory.Models;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -22,7 +20,6 @@ namespace Employee_Directory.Controllers
 
         [HttpGet]
         [Authorize]
-        //GET : /api/UserProfile
         public async Task<Object> GetUserProfile()
         {
             string userId = User.Claims.First(c => c.Type == "UserID").Value;

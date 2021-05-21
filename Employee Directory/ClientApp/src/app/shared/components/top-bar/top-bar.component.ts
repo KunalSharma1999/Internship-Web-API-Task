@@ -27,5 +27,6 @@ export class TopBarComponent implements OnInit {
   onLogout() {
     localStorage.removeItem('token');
     this.router.navigate(['/user/login']);
+    this.userDetails=null;
   }
 }

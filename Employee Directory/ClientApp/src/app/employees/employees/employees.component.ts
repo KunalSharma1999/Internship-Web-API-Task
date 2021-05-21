@@ -1,7 +1,6 @@
 import { Component, OnInit, ViewChild} from '@angular/core';
 import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { Employee } from 'src/app/models/Employee';
 import { Filter } from 'src/app/models/Filter';
 import { Alphabets } from 'src/app/shared/constants/constants';
 import { Mode } from 'src/app/shared/enums/mode';
@@ -48,7 +47,7 @@ export class EmployeesComponent implements OnInit {
   }
 
   btnClick() {
-    this.router.navigateByUrl("/configurations-component");
+    this.router.navigateByUrl("/configurations");
   }
 
   openAddEmployeeDialog() {

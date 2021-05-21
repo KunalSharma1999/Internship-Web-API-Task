@@ -6,12 +6,10 @@
         <h4>Employee Directory</h4>
         <h6>The Ultimate People Directory Experience</h6>
     </div>
-    <div class="my-profile">
+    <div class="my-profile" *ngIf="userDetails">
         <h4>
             Welcome,
-            <div *ngIf="userDetails">
             <span class="profile-name">{{userDetails.fullName}}</span>
-            </div>
         </h4>
         <div class="profile-pic">
             <img src="assets/img/blank-profile-picture.png" class="dp">
