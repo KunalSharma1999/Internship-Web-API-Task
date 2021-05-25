@@ -41,6 +41,7 @@ namespace Employee_Directory
             services.AddScoped<IDepartmentService, DepartmentService>();
             services.AddScoped<IOfficeService, OfficeService>();
             services.AddScoped<IJobTitleService, JobTitleService>();
+            services.AddScoped<IAuthenticationService, AuthenticationService>();
 
             services.AddScoped((a) =>
             {
