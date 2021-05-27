@@ -1,12 +1,17 @@
 ﻿using Employee_Directory.Contracts;
 using Employee_Directory.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI.Services;
+using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using System;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
+using System.Security.Policy;
 using System.Text;
+using System.Text.Encodings.Web;
 using System.Threading.Tasks;
 
 namespace Employee_Directory.Services
@@ -15,12 +20,17 @@ namespace Employee_Directory.Services
     {
         private readonly UserManager<ApplicationUser> _userManager;
 
+        private readonly IEmailSender _emailSender;
+
         private readonly ApplicationSettings _appSettings;
 
-        public AuthenticationService(UserManager <ApplicationUser> userManager, IOptions<ApplicationSettings> appSettings)
+        public object Request { get; private set; }
+
+        public AuthenticationService(UserManager <ApplicationUser> userManager, IOptions<ApplicationSettings> appSettings, IEmailSender emailSender)
         {
             _userManager = userManager;
             _appSettings = appSettings.Value;
+            _emailSender = emailSender;
         }
 
         public async Task<IdentityResult> Register(ApplicationUserModel model)
@@ -35,6 +45,15 @@ namespace Employee_Directory.Services
             try
             {
                 var result = await _userManager.CreateAsync(applicationUser, model.Password);
+                if (result.Succeeded)
+                {
+                    var code = await _userManager.GenerateEmailConfirmationTokenAsync(applicationUser);
+                    code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
+                    var callbackUrl = _appSettings.Client_URL + "/user/login";
+
+                    await _emailSender.SendEmailAsync(applicationUser.Email, "Confirm your email",
+                        $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
+                }
                 return result;
             }
             catch (Exception)
