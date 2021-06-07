@@ -9,8 +9,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Employee_Directory.Contracts\Employee_Directory.Contracts.csproj" />
-    <ProjectReference Include="..\Employee_Directory.Models\Employee_Directory.Models.csproj" />
+    <ProjectReference Include="..\Employee_Directory.Contracts\EmployeeDirectory.Contracts.csproj" />
+    <ProjectReference Include="..\Employee_Directory.Models\EmployeeDirectory.Models.csproj" />
   </ItemGroup>
 
 </Project>
