@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EmployeeDirectoryAuth.Data.Migrations.IdentityServer.ApplicationDb
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210607052328_InitialIdentityServerApplicationDbMigration")]
+    [Migration("20210610081807_InitialIdentityServerApplicationDbMigration")]
     partial class InitialIdentityServerApplicationDbMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

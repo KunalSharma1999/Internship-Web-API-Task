@@ -14,6 +14,9 @@
         <div class="profile-pic">
             <img src="assets/img/blank-profile-picture.png" class="dp">
         </div>
-        <button class="btn btn-sm btn-danger" (click)="onLogout()">Logout</button>
+    </div>
+    <div class="auth">
+    <button *ngIf="!isUserAuthenticated" class="btn btn-sm btn-danger" (click)="login()">Login</button>
+    <button *ngIf="isUserAuthenticated" class="btn btn-sm btn-danger" (click)="logout()">Logout</button>
     </div>
 </header>

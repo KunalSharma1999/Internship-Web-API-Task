@@ -11,7 +11,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EmployeeDirectory.Models", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EmployeeDirectory.Contracts", "Employee_Directory.Contracts\EmployeeDirectory.Contracts.csproj", "{05065B54-D499-44B3-8D25-A050F1E58B4B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmployeeDirectoryAuth", "EmployeeDirectoryAuth\EmployeeDirectoryAuth.csproj", "{52C59ECF-BAA2-4C7C-AD1C-7AC27CB2DE45}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EmployeeDirectoryAuth", "EmployeeDirectoryAuth\EmployeeDirectoryAuth.csproj", "{52C59ECF-BAA2-4C7C-AD1C-7AC27CB2DE45}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApi", "WebApi\WebApi.csproj", "{DCAE5D51-5B64-4965-BF2E-AB086F8A813C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{52C59ECF-BAA2-4C7C-AD1C-7AC27CB2DE45}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{52C59ECF-BAA2-4C7C-AD1C-7AC27CB2DE45}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{52C59ECF-BAA2-4C7C-AD1C-7AC27CB2DE45}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DCAE5D51-5B64-4965-BF2E-AB086F8A813C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DCAE5D51-5B64-4965-BF2E-AB086F8A813C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DCAE5D51-5B64-4965-BF2E-AB086F8A813C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DCAE5D51-5B64-4965-BF2E-AB086F8A813C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

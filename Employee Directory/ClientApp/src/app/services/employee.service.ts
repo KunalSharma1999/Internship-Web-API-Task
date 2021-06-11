@@ -10,7 +10,7 @@ import { EmployeeCard } from '../models/EmployeeCard';
   providedIn: 'root'
 })
 export class EmployeeService {
-  url = `${environment.baseApi}/Employees`;
+  url = "https://localhost:44322/api/Employees";
 
   employees: EmployeeCard[] = [];
 

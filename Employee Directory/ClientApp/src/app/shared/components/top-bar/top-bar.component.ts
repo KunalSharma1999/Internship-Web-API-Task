@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { TopBarService } from 'src/app/services/top-bar.service';
 import { UserService } from 'src/app/services/user.service';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-top-bar',
@@ -10,21 +11,24 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class TopBarComponent implements OnInit {
 
+  public isUserAuthenticated: boolean = false;
   userDetails;
 
-  constructor(private router: Router, private service: UserService, private topBarService: TopBarService) { }
+  constructor(private _authService: AuthService, private router: Router, private service: UserService, private topBarService: TopBarService) { }
 
   ngOnInit(): void {
-    this.topBarService.notifyObservable$.subscribe(res => {
-        this.service.getUserProfile().subscribe(
-          res => {
-            this.userDetails = res;
-          },
-          err => {
-            console.log(err);
-          },
-        );
-    })
+    this._authService.loginChanged
+      .subscribe(res => {
+        this.isUserAuthenticated = res;
+      })
+  }
+
+  public login = () => {
+    this._authService.login();
+  }
+
+  public logout = () => {
+    this._authService.logout();
   }
 
   onLogout() {

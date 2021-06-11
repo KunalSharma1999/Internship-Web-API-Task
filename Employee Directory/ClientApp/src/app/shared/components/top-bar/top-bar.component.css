@@ -23,7 +23,7 @@ header {
         font-weight: 100;
         margin:0 0;
     }
-    header .my-profile {
+    header .my-profile, header .auth {
         display:flex;
         margin-left: auto;
         line-height: 18px;

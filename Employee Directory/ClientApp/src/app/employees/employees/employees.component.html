@@ -52,7 +52,7 @@
 </div>
 <div class="output-window">
     <div class="display">
-    <div class="employee-card" *ngFor="let employee of (employeeService.employees | employeeFilter: filter: alphabetFilter: searchKeyWord: filterBy)" (click)="selectEmployee(employee.id)">
+    <div class="employee-card" *ngFor="let employee of (employees | employeeFilter: filter: alphabetFilter: searchKeyWord: filterBy)" (click)="selectEmployee(employee.id)">
         <div class="profile-pic">
         <img src="assets/img/blank-profile-picture.png" class="dp">
         </div>

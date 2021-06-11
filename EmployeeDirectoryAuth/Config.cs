@@ -2,6 +2,7 @@
 // Licensed under the Apache License, Version 2.0. See LICENSE in the project root for license information.
 
 
+using IdentityServer4;
 using IdentityServer4.Models;
 using System.Collections.Generic;
 
@@ -19,8 +20,8 @@ namespace EmployeeDirectoryAuth
         public static IEnumerable<ApiScope> ApiScopes =>
             new ApiScope[]
             {
-                new ApiScope("scope1"),
-                new ApiScope("scope2"),
+                new ApiScope("employeeApi"),
+             
             };
 
         public static IEnumerable<Client> Clients =>
@@ -35,7 +36,7 @@ namespace EmployeeDirectoryAuth
                     AllowedGrantTypes = GrantTypes.ClientCredentials,
                     ClientSecrets = { new Secret("511536EF-F270-4058-80CA-1C89C192F69A".Sha256()) },
 
-                    AllowedScopes = { "scope1" }
+                    AllowedScopes = { "employeeApi" }
                 },
 
                 // interactive client using code flow + pkce
@@ -51,8 +52,37 @@ namespace EmployeeDirectoryAuth
                     PostLogoutRedirectUris = { "https://localhost:44300/signout-callback-oidc" },
 
                     AllowOfflineAccess = true,
-                    AllowedScopes = { "openid", "profile", "scope2" }
+                    AllowedScopes = { "openid", "profile", "employeeApi" }
                 },
+                new Client
+                {
+                    ClientName = "Angular-Client",
+                    ClientId = "angular-client",
+                    AllowedGrantTypes = GrantTypes.Code,
+                    RedirectUris = new List<string>{ "http://localhost:4200/signin-callback", "http://localhost:4200/assets/silent-callback.html" },
+                    RequirePkce = true,
+                    AllowAccessTokensViaBrowser = true,
+                    AllowedScopes =
+                    {
+                        IdentityServerConstants.StandardScopes.OpenId,
+                        IdentityServerConstants.StandardScopes.Profile,
+                        "employeeApi"
+                    },
+                    AllowedCorsOrigins = { "http://localhost:4200" },
+                    RequireClientSecret = false,
+                    PostLogoutRedirectUris = new List<string> { "http://localhost:4200/signout-callback" },
+                    RequireConsent = false,
+                    AccessTokenLifetime = 600
+                }
+            };
+
+        public static IEnumerable<ApiResource> ApiResources =>
+            new List<ApiResource>
+            {
+                new ApiResource("employeeApi")
+                {
+                    Scopes = { "employeeApi" }
+                }
             };
     }
 }
