@@ -8,6 +8,7 @@ import { DepartmentService } from 'src/app/services/department.service';
 import { OfficeService } from 'src/app/services/office.service';
 import { JobTitleService } from 'src/app/services/jobtitle.service';
 import { ToastrService } from 'ngx-toastr';
+import { EmployeeCard } from 'src/app/models/EmployeeCard';
 
 @Component({
   selector: 'app-add-employee',
@@ -20,6 +21,7 @@ export class AddEmployeeComponent implements OnInit {
   @Input() mode: Mode;  
   employeeIdUpdate = null; 
   formTitle: string = "Enter Employee Details";
+  employees: EmployeeCard[];
 
   constructor(private employeeService: EmployeeService, private modalService: NgbModal, private toastr: ToastrService, public departmentService: DepartmentService, public officeService: OfficeService, public jobTitleService: JobTitleService) {}
 
@@ -49,7 +51,7 @@ export class AddEmployeeComponent implements OnInit {
     if (confirm('Are you sure to delete this record?')) {
       this.employeeService.deleteEmployee(this.employeeIdUpdate).subscribe(
         () => {
-          this.employeeService.refreshEmployees();
+          this.getEmployees();
           this.employeeIdUpdate = null;
           this.employeeForm.reset();
           this.toastr.info('Deleted sucessfully', 'Employee Details Register');
@@ -63,7 +65,7 @@ export class AddEmployeeComponent implements OnInit {
     if (this.employeeIdUpdate == null) {
       this.employeeService.addEmployee(employee).subscribe(  
         () => {
-          this.employeeService.refreshEmployees();
+          this.getEmployees();
           this.employeeForm.reset();
           this.toastr.success('Submitted successfully', 'Employee Details Register');
         }  
@@ -73,7 +75,7 @@ export class AddEmployeeComponent implements OnInit {
     {
     employee.id = this.employeeIdUpdate;
       this.employeeService.updateEmployee(employee).subscribe(() => {
-        this.employeeService.refreshEmployees();
+      this.getEmployees();
       this.employeeIdUpdate = null;
       this.employeeForm.reset();
       this.toastr.success('Updated successfully', 'Employee Details Register');
@@ -102,6 +104,13 @@ export class AddEmployeeComponent implements OnInit {
 
   updatePreferredName() {
     this.employeeForm.get('preferredName').setValue(this.employeeForm.get('firstName').value + ' ' + this.employeeForm.get('lastName').value);
+  }
+
+  public getEmployees = () => {
+    this.employeeService.getEmployees()
+    .subscribe(res => {
+      this.employees = res as EmployeeCard[];
+    })
   }
 }
 

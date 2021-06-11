@@ -11,10 +11,8 @@ import { EmployeeService } from './services/employee.service';
 import { TopBarComponent } from './shared/components/top-bar/top-bar.component';
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { UserService } from './services/user.service';
 import { SigninRedirectCallbackComponent } from './signin-redirect-callback/signin-redirect-callback.component';
 import { SignoutRedirectCallbackComponent } from './signout-redirect-callback/signout-redirect-callback.component';
-import { NotFoundComponent } from './error-pages/not-found/not-found.component';
 import { AuthInterceptorService } from './shared/services/auth-interceptor.service';
 
 @NgModule({
@@ -22,8 +20,7 @@ import { AuthInterceptorService } from './shared/services/auth-interceptor.servi
     AppComponent,
     TopBarComponent,
     SigninRedirectCallbackComponent,
-    SignoutRedirectCallbackComponent,
-    NotFoundComponent
+    SignoutRedirectCallbackComponent
   ],
   imports: [
     BrowserModule,
@@ -38,7 +35,7 @@ import { AuthInterceptorService } from './shared/services/auth-interceptor.servi
       progressBar: true
     })
   ],
-  providers: [HttpClientModule, EmployeeService, UserService, { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true }],
+  providers: [HttpClientModule, EmployeeService, { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

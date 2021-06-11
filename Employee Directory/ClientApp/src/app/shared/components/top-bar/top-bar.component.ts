@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { TopBarService } from 'src/app/services/top-bar.service';
-import { UserService } from 'src/app/services/user.service';
 import { AuthService } from '../../services/auth.service';
 
 @Component({
@@ -12,9 +10,8 @@ import { AuthService } from '../../services/auth.service';
 export class TopBarComponent implements OnInit {
 
   public isUserAuthenticated: boolean = false;
-  userDetails;
 
-  constructor(private _authService: AuthService, private router: Router, private service: UserService, private topBarService: TopBarService) { }
+  constructor(private _authService: AuthService, private router: Router) { }
 
   ngOnInit(): void {
     this._authService.loginChanged
@@ -29,11 +26,5 @@ export class TopBarComponent implements OnInit {
 
   public logout = () => {
     this._authService.logout();
-  }
-
-  onLogout() {
-    localStorage.removeItem('token');
-    this.router.navigate(['/user/login']);
-    this.userDetails=null;
   }
 }

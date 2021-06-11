@@ -31,6 +31,10 @@ header {
         padding-bottom: 20px;
     }
 
+    header .auth{
+        margin-left: 0;
+    }
+
     header .my-profile h4 {
         display: flex;
         color: rgb(62,192,253);

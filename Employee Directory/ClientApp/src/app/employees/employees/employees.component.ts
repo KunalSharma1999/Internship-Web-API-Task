@@ -6,7 +6,6 @@ import { Alphabets } from 'src/app/shared/constants/constants';
 import { Mode } from 'src/app/shared/enums/mode';
 import { EmployeeService } from 'src/app/services/employee.service';
 import { JobTitleService } from '../../services/jobtitle.service';
-import { RepositoryService } from 'src/app/shared/services/repository.service';
 import { EmployeeCard } from 'src/app/models/EmployeeCard';
 
 @Component({
@@ -27,7 +26,7 @@ export class EmployeesComponent implements OnInit {
   public employees: EmployeeCard[];
 
   constructor(
-    private repository: RepositoryService, private modalService: NgbModal, public employeeService: EmployeeService, public jobTitleService: JobTitleService, private router: Router) {}
+    private modalService: NgbModal, public employeeService: EmployeeService, public jobTitleService: JobTitleService, private router: Router) {}
 
   ngOnInit(){
     this.getEmployees();
@@ -38,8 +37,7 @@ export class EmployeesComponent implements OnInit {
   }
 
   public getEmployees = () => {
-    const apiAddress: string = "api/Employees";
-    this.repository.getData(apiAddress)
+    this.employeeService.getEmployees()
     .subscribe(res => {
       this.employees = res as EmployeeCard[];
     })

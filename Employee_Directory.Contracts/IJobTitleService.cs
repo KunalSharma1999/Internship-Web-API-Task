@@ -2,7 +2,7 @@
 
 namespace Employee_Directory.Contracts
 {
-    public interface IJobTitleService: IContract<JobTitle>
+    public interface IJobTitleService: IConfiguraton<JobTitle>
     {
     }
 }

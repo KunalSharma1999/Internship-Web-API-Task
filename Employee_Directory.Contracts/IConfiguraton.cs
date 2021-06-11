@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 
 namespace Employee_Directory.Contracts
 {
-    public interface IContract<T>
+    public interface IConfiguraton<T>
     {
         IEnumerable<T> Get();
 

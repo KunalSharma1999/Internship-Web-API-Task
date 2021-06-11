@@ -5,21 +5,30 @@ import { Observable } from 'rxjs';
 import { Employee } from '../models/Employee';
 import { environment } from '../../environments/environment';
 import { EmployeeCard } from '../models/EmployeeCard';
+import { Constants } from '../shared/constants';
+import { EnvironmentUrlService } from '../shared/services/environment-url.service';
+import { AuthService } from '../shared/services/auth.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class EmployeeService {
-  url = "https://localhost:44322/api/Employees";
+  url = Constants.apiRoot+"/Employees";
+  
+  route = "api/Employees";
 
   employees: EmployeeCard[] = [];
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient,  private envUrl: EnvironmentUrlService, private _authService: AuthService) {
   }
 
-  refreshEmployees(){  
-    return this.http.get(this.url).toPromise().then(res => this.employees = res as EmployeeCard[]);
-  }   
+  public getEmployees = () => {
+    return this.http.get(this.createCompleteRoute(this.route, this.envUrl.urlAddress));
+  }
+ 
+  private createCompleteRoute = (route: string, envAddress: string) => {
+    return `${envAddress}/${route}`;
+  }
 
   getEmployeeById(id: number):any {
     return this.http.get(this.url + '/' + id).toPromise();  

@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 namespace WebApi.Controllers
 {
     [Route("api/[controller]")]
+    [Authorize]
     [ApiController]
     public class EmployeesController : ControllerBase
     {
@@ -18,7 +19,6 @@ namespace WebApi.Controllers
             employeeContext = ec;
         }
 
-        [Authorize]
         [HttpGet]
         public IEnumerable<EmployeeCard> Get()
         {
