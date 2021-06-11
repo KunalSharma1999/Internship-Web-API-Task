@@ -11,13 +11,9 @@ import { EmployeeService } from './services/employee.service';
 import { TopBarComponent } from './shared/components/top-bar/top-bar.component';
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { UserComponent } from './user/user.component';
-import { RegistrationComponent } from './user/registration/registration.component';
-import { LoginComponent } from './user/login/login.component';
 import { UserService } from './services/user.service';
 import { SigninRedirectCallbackComponent } from './signin-redirect-callback/signin-redirect-callback.component';
 import { SignoutRedirectCallbackComponent } from './signout-redirect-callback/signout-redirect-callback.component';
-import { HomeComponent } from './home/home.component';
 import { NotFoundComponent } from './error-pages/not-found/not-found.component';
 import { AuthInterceptorService } from './shared/services/auth-interceptor.service';
 
@@ -25,12 +21,8 @@ import { AuthInterceptorService } from './shared/services/auth-interceptor.servi
   declarations: [
     AppComponent,
     TopBarComponent,
-    UserComponent,
-    RegistrationComponent,
-    LoginComponent,
     SigninRedirectCallbackComponent,
     SignoutRedirectCallbackComponent,
-    HomeComponent,
     NotFoundComponent
   ],
   imports: [
