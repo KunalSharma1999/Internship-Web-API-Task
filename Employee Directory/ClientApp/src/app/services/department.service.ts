@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Department } from '../models/Department';
 import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
+import { Constants } from '../shared/constants';
 
 @Injectable({
   providedIn: 'root'
@@ -13,8 +14,8 @@ export class DepartmentService {
 
   constructor(private http: HttpClient) { }
 
-  url = `${environment.baseApi}/Departments`;
-
+  url = `${environment.urlAddress}/` + Constants.departmentRoute;
+  
   refreshDepartments(){
     return this.http.get(this.url).toPromise().then(res => this.departments = res as Department[]);
   }

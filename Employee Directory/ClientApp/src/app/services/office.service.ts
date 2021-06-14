@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Office } from '../models/Office';
 import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
+import { Constants } from '../shared/constants';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,7 @@ export class OfficeService {
 
   offices: Office[] = [];
 
-  url = `${environment.baseApi}/Offices`;
+  url = `${environment.urlAddress}/` + Constants.officeRoute;
 
   refreshOffices(){
     return this.http.get(this.url).toPromise().then(res => this.offices = res as Office[]);

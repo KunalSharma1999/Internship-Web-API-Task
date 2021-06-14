@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { JobTitle } from '../models/JobTitle';
 import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
+import { Constants } from '../shared/constants';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,7 @@ export class JobTitleService {
 
   constructor(private http: HttpClient) { }
 
-  url = `${environment.baseApi}/JobTitles`;
+  url = `${environment.urlAddress}/` + Constants.jobTitleRoute;
 
   refreshJobTitles() {
     return this.http.get(this.url).toPromise().then(res => this.jobTitles = res as JobTitle[])

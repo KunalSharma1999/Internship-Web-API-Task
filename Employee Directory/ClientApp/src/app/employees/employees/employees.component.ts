@@ -2,11 +2,11 @@ import { Component, OnInit, ViewChild} from '@angular/core';
 import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Filter } from 'src/app/models/Filter';
-import { Alphabets } from 'src/app/shared/constants/constants';
 import { Mode } from 'src/app/shared/enums/mode';
 import { EmployeeService } from 'src/app/services/employee.service';
 import { JobTitleService } from '../../services/jobtitle.service';
 import { EmployeeCard } from 'src/app/models/EmployeeCard';
+import { Constants } from 'src/app/shared/constants';
 
 @Component({
   selector: 'app-employees',
@@ -16,7 +16,7 @@ import { EmployeeCard } from 'src/app/models/EmployeeCard';
 
 export class EmployeesComponent implements OnInit {
   @ViewChild('content') modalDialogContent;
-  alphabets = Alphabets;
+  alphabets = Constants.Alphabets;
   filter: Filter;
   alphabetFilter: string = null;
   searchKeyWord: string = null;

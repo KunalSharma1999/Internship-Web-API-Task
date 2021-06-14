@@ -13,9 +13,9 @@ import { AuthService } from '../shared/services/auth.service';
   providedIn: 'root'
 })
 export class EmployeeService {
-  url = Constants.apiRoot+"/Employees";
-  
-  route = "api/Employees";
+ 
+  url = `${environment.urlAddress}`;
+  route = Constants.employeeRoute;
 
   employees: EmployeeCard[] = [];
 
@@ -31,20 +31,20 @@ export class EmployeeService {
   }
 
   getEmployeeById(id: number):any {
-    return this.http.get(this.url + '/' + id).toPromise();  
+    return this.http.get(this.createCompleteRoute(this.route, this.envUrl.urlAddress) + '/' + id).toPromise();  
   }
 
   addEmployee(employee: Employee): Observable<Employee> {
     const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
-    return this.http.post<Employee>(this.url, employee, httpOptions);
+    return this.http.post<Employee>(this.createCompleteRoute(this.route, this.envUrl.urlAddress), employee, httpOptions);
   }  
 
   updateEmployee(employee: Employee): Observable<Employee> {  
     const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
-    return this.http.put<Employee>(this.url, employee, httpOptions);  
+    return this.http.put<Employee>(this.createCompleteRoute(this.route, this.envUrl.urlAddress), employee, httpOptions);  
   }
 
   deleteEmployee(id: number): Observable<Employee> {
-    return this.http.delete<Employee>(this.url + '/' + id);
+    return this.http.delete<Employee>(this.createCompleteRoute(this.route, this.envUrl.urlAddress) + '/' + id);
   }
 }

@@ -1,12 +1,14 @@
 ﻿using Employee_Directory.Contracts;
 using Employee_Directory.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace Employee_Directory.Controllers
+namespace WebApi.Controllers
 {
     [Route("api/[controller]")]
+    [Authorize]
     [ApiController]
     public class DepartmentsController : ControllerBase
     {
