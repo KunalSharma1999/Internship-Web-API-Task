@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EmployeeDirectoryAuth.Data.Migrations.IdentityServer.ApplicationDb
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210610081807_InitialIdentityServerApplicationDbMigration")]
+    [Migration("20210615061432_InitialIdentityServerApplicationDbMigration")]
     partial class InitialIdentityServerApplicationDbMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -21,7 +21,7 @@ namespace EmployeeDirectoryAuth.Data.Migrations.IdentityServer.ApplicationDb
                 .HasAnnotation("ProductVersion", "5.0.6")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("EmployeeDirectoryAuth.Models.ApplicationUser", b =>
+            modelBuilder.Entity("EmployeeDirectory.Models.ApplicationUser", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
@@ -39,6 +39,9 @@ namespace EmployeeDirectoryAuth.Data.Migrations.IdentityServer.ApplicationDb
 
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("bit");
+
+                    b.Property<string>("FullName")
+                        .HasColumnType("nvarchar(150)");
 
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("bit");
@@ -228,7 +231,7 @@ namespace EmployeeDirectoryAuth.Data.Migrations.IdentityServer.ApplicationDb
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("EmployeeDirectoryAuth.Models.ApplicationUser", null)
+                    b.HasOne("EmployeeDirectory.Models.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -237,7 +240,7 @@ namespace EmployeeDirectoryAuth.Data.Migrations.IdentityServer.ApplicationDb
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("EmployeeDirectoryAuth.Models.ApplicationUser", null)
+                    b.HasOne("EmployeeDirectory.Models.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -252,7 +255,7 @@ namespace EmployeeDirectoryAuth.Data.Migrations.IdentityServer.ApplicationDb
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("EmployeeDirectoryAuth.Models.ApplicationUser", null)
+                    b.HasOne("EmployeeDirectory.Models.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -261,7 +264,7 @@ namespace EmployeeDirectoryAuth.Data.Migrations.IdentityServer.ApplicationDb
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
-                    b.HasOne("EmployeeDirectoryAuth.Models.ApplicationUser", null)
+                    b.HasOne("EmployeeDirectory.Models.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)

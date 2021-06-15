@@ -32,4 +32,10 @@
   <ItemGroup>
     <Folder Include="Data\Migrations\" />
   </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Employee_Directory.Contracts\EmployeeDirectory.Contracts.csproj" />
+    <ProjectReference Include="..\Employee_Directory.Models\EmployeeDirectory.Models.csproj" />
+    <ProjectReference Include="..\Employee_Directory.Services\EmployeeDirectory.Services.csproj" />
+  </ItemGroup>
 </Project>

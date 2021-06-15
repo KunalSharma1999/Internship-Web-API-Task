@@ -2,7 +2,7 @@
 // Licensed under the Apache License, Version 2.0. See LICENSE in the project root for license information.
 
 
-using EmployeeDirectoryAuth.Models;
+using EmployeeDirectory.Models;
 using IdentityModel;
 using IdentityServer4.Events;
 using IdentityServer4.Extensions;
@@ -146,6 +146,28 @@ namespace IdentityServerHost.Quickstart.UI
             // something went wrong, show form with error
             var vm = await BuildLoginViewModelAsync(model);
             return View(vm);
+        }
+
+        [HttpPost]
+        [Route("api/[controller]")]
+        public async Task<IdentityResult> Register([FromBody] ApplicationUserModel model)
+        {
+
+            var user = new ApplicationUser
+            {
+                UserName = model.UserName,
+                Email = model.Email,
+                FullName = model.FullName
+            };
+
+            var result = await _userManager.CreateAsync(user, model.Password);
+
+            await _userManager.AddClaimAsync(user, new System.Security.Claims.Claim("userName", user.UserName));
+            await _userManager.AddClaimAsync(user, new System.Security.Claims.Claim("name", user.FullName));
+            await _userManager.AddClaimAsync(user, new System.Security.Claims.Claim("email", user.Email));
+            await _userManager.AddClaimAsync(user, new System.Security.Claims.Claim("role", "Admin"));
+
+            return result;
         }
 
 

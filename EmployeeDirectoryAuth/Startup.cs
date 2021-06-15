@@ -1,9 +1,8 @@
 ﻿// Copyright (c) Brock Allen & Dominick Baier. All rights reserved.
 // Licensed under the Apache License, Version 2.0. See LICENSE in the project root for license information.
 
-
+using EmployeeDirectory.Models;
 using EmployeeDirectoryAuth.Data;
-using EmployeeDirectoryAuth.Models;
 using IdentityServer4;
 using IdentityServer4.EntityFramework.DbContexts;
 using IdentityServer4.EntityFramework.Mappers;
@@ -36,6 +35,17 @@ namespace EmployeeDirectoryAuth
 
             var connectionString = Configuration.GetConnectionString("DefaultConnection");
 
+            services.AddCors(options =>
+            {
+                options.AddPolicy("CorsPolicy",
+                                  builder =>
+                                  {
+                                      builder.AllowAnyOrigin()
+                                             .AllowAnyHeader()
+                                             .AllowAnyMethod();
+                                  });
+            });
+
             services.AddControllersWithViews();
 
             services.AddDbContext<ApplicationDbContext>(options =>
@@ -44,6 +54,16 @@ namespace EmployeeDirectoryAuth
             services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
+
+            services.Configure<IdentityOptions>(options =>
+            {
+                options.Password.RequireDigit = false;
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequireLowercase = false;
+                options.Password.RequireUppercase = false;
+                options.Password.RequiredLength = 4;
+            }
+           );
 
             var builder = services.AddIdentityServer(options =>
             {
@@ -95,7 +115,7 @@ namespace EmployeeDirectoryAuth
             }
 
             app.UseStaticFiles();
-
+            app.UseCors("CorsPolicy");
             app.UseRouting();
             app.UseIdentityServer();
             app.UseAuthorization();
