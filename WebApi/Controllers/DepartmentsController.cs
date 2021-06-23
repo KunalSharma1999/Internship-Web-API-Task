@@ -27,12 +27,14 @@ namespace WebApi.Controllers
 
         [HttpGet]
         [Route("{id}")]
+        [Authorize(Roles = "Admin")]
         public async Task<Department> Get(int id)
         {
             return await departmentContext.Get(id);
         }
 
         [HttpPost]
+        [Authorize(Roles ="Admin")]
         public async Task<Department> Post([FromBody] Department department)
         {
             var res = await departmentContext.Add(department);
@@ -40,6 +42,7 @@ namespace WebApi.Controllers
         }
 
         [HttpPut]
+        [Authorize(Roles = "Admin")]
         public async Task<Department> Put([FromBody] Department department)
         {
             int? res = await departmentContext.Update(department);

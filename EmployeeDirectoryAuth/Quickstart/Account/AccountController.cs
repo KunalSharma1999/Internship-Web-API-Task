@@ -152,7 +152,7 @@ namespace IdentityServerHost.Quickstart.UI
         [Route("api/[controller]")]
         public async Task<IdentityResult> Register([FromBody] ApplicationUserModel model)
         {
-
+            model.Role = "Admin";
             var user = new ApplicationUser
             {
                 UserName = model.UserName,
@@ -162,10 +162,12 @@ namespace IdentityServerHost.Quickstart.UI
 
             var result = await _userManager.CreateAsync(user, model.Password);
 
+            await _userManager.AddToRoleAsync(user, model.Role);
+
             await _userManager.AddClaimAsync(user, new System.Security.Claims.Claim("userName", user.UserName));
             await _userManager.AddClaimAsync(user, new System.Security.Claims.Claim("name", user.FullName));
             await _userManager.AddClaimAsync(user, new System.Security.Claims.Claim("email", user.Email));
-            await _userManager.AddClaimAsync(user, new System.Security.Claims.Claim("role", "Admin"));
+            await _userManager.AddClaimAsync(user, new System.Security.Claims.Claim("role", model.Role));
 
             return result;
         }

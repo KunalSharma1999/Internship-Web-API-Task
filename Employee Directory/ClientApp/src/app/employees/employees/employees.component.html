@@ -32,13 +32,13 @@
                 </select>
             </div>
           <div class="buttons">
-            <button *ngIf="isUserAdmin" class="btn-add-employee" (click)="btnClick1()">
+            <button *ngIf="isUserAdmin" class="btn-add-employee" (click)="routeToPrivacyComponent()">
                 Privacy
             </button>
-            <button class="btn-add-employee" (click)="btnClick()">
+            <button *ngIf="isUserAdmin" class="btn-add-employee" (click)=" routeToConfigurationsComponent()">
               Configurations
             </button>
-            <button data-modal-target="#modal" id="add-employee" class="btn-add-employee"
+            <button *ngIf="isUserAdmin" data-modal-target="#modal" id="add-employee" class="btn-add-employee"
             (click)="openAddEmployeeDialog()">
             Add Employee
           </button>
@@ -55,7 +55,7 @@
 </div>
 <div class="output-window">
     <div class="display">
-    <div class="employee-card" *ngFor="let employee of (employees | employeeFilter: filter: alphabetFilter: searchKeyWord: filterBy)" (click)="selectEmployee(employee.id)">
+    <div class="employee-card" *ngFor="let employee of (this.employeeService.employees | employeeFilter: filter: alphabetFilter: searchKeyWord: filterBy)" (click)="selectEmployee(employee.id)">
         <div class="profile-pic">
         <img src="assets/img/blank-profile-picture.png" class="dp">
         </div>

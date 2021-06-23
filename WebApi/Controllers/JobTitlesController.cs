@@ -27,12 +27,14 @@ namespace WebApi.Controllers
 
         [HttpGet]
         [Route("{id}")]
+        [Authorize(Roles = "Admin")]
         public async Task<JobTitle> Get(int id)
         {
             return await jobTitleContext.Get(id);
         }
 
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public async Task<JobTitle> Post([FromBody] JobTitle jobtitle)
         {
             var res = await jobTitleContext.Add(jobtitle);
@@ -40,6 +42,7 @@ namespace WebApi.Controllers
         }
 
         [HttpPut]
+        [Authorize(Roles = "Admin")]
         public async Task<JobTitle> Put([FromBody] JobTitle jobtitle)
         {
             int? res = await jobTitleContext.Update(jobtitle);

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { UserManager, User, UserManagerSettings } from 'oidc-client';
-import { Subject } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { Constants } from '../constants';
 
 @Injectable({
@@ -37,6 +37,7 @@ export class AuthService {
     .then(user => {
       if(this._user !== user){
         this._loginChangedSubject.next(this.checkUser(user));
+        this.getName();
       }
 
       this._user = user;
@@ -74,6 +75,14 @@ export class AuthService {
     .then(user => {
       return user?.profile.role === 'Admin';
     })
+  }
+
+  name:string;
+
+  public getName()
+  {
+    this._userManager.getUser()
+    .then(user => this.name =  user.profile.name)
   }
 
   private checkUser = (user : User): boolean => {

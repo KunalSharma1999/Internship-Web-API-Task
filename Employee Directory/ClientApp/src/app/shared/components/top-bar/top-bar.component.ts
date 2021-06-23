@@ -8,10 +8,9 @@ import { AuthService } from '../../services/auth.service';
   styleUrls: ['./top-bar.component.css']
 })
 export class TopBarComponent implements OnInit {
-
   public isUserAuthenticated: boolean = false;
 
-  constructor(private _authService: AuthService, private router: Router) { }
+  constructor(public _authService: AuthService, private router: Router) { }
 
   ngOnInit(): void {
     this._authService.loginChanged

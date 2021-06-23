@@ -19,7 +19,7 @@ const routes: Routes = [
   { path: 'privacy', component: PrivacyComponent,  canActivate: [AuthGuardService], data: { roles: ['Admin'] } },
   { path: 'unauthorized', component: UnauthorizedComponent },
   { path: 'employees', component: EmployeesComponent,canActivate: [AuthGuardService]},
-  { path: 'configurations', component: ConfigurationsComponent,canActivate: [AuthGuardService]},
+  { path: 'configurations', component: ConfigurationsComponent,canActivate: [AuthGuardService], data: { roles: ['Admin'] } },
   { path: 'signin-callback', component: SigninRedirectCallbackComponent },
   { path: 'signout-callback', component: SignoutRedirectCallbackComponent },
   { path: '**', redirectTo: '/404', pathMatch: 'full' }

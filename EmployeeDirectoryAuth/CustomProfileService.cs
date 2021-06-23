@@ -24,15 +24,18 @@ namespace EmployeeDirectoryAuth
             { 
                 var subjectId = context.Subject.GetSubjectId();
                 var user = _applicationDbContext.Users.Where(u => u.Id == subjectId).FirstOrDefault();
+                var userClaims = _applicationDbContext.UserClaims.Where(user => user.UserId == subjectId);
 
-                var claims = new List<Claim>
+                List<Claim> claims = new List<Claim>();
+
+                foreach(Microsoft.AspNetCore.Identity.IdentityUserClaim<string> claim in userClaims)
                 {
-                    new Claim("userName", user.UserName),
-                    new Claim("name", user.FullName),
-                    new Claim("email", user.Email),
-                    new Claim("role", "Admin")
-			    };
+                    var claimType = claim.ClaimType;
+                    var claimValue = claim.ClaimValue;
 
+                    claims.Add(new Claim(claimType, claimValue));
+
+                }
                 context.IssuedClaims = claims;
                 return Task.FromResult(0);
             }

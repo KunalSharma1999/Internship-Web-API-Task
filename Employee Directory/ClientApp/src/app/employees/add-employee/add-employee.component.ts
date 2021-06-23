@@ -51,7 +51,7 @@ export class AddEmployeeComponent implements OnInit {
     if (confirm('Are you sure to delete this record?')) {
       this.employeeService.deleteEmployee(this.employeeIdUpdate).subscribe(
         () => {
-          this.getEmployees();
+          this.employeeService.getEmployees();
           this.employeeIdUpdate = null;
           this.employeeForm.reset();
           this.toastr.info('Deleted sucessfully', 'Employee Details Register');
@@ -65,7 +65,7 @@ export class AddEmployeeComponent implements OnInit {
     if (this.employeeIdUpdate == null) {
       this.employeeService.addEmployee(employee).subscribe(  
         () => {
-          this.getEmployees();
+          this.employeeService.getEmployees();
           this.employeeForm.reset();
           this.toastr.success('Submitted successfully', 'Employee Details Register');
         }  
@@ -75,7 +75,7 @@ export class AddEmployeeComponent implements OnInit {
     {
     employee.id = this.employeeIdUpdate;
       this.employeeService.updateEmployee(employee).subscribe(() => {
-      this.getEmployees();
+        this.employeeService.getEmployees();
       this.employeeIdUpdate = null;
       this.employeeForm.reset();
       this.toastr.success('Updated successfully', 'Employee Details Register');
@@ -104,13 +104,6 @@ export class AddEmployeeComponent implements OnInit {
 
   updatePreferredName() {
     this.employeeForm.get('preferredName').setValue(this.employeeForm.get('firstName').value + ' ' + this.employeeForm.get('lastName').value);
-  }
-
-  public getEmployees = () => {
-    this.employeeService.getEmployees()
-    .subscribe(res => {
-      this.employees = res as EmployeeCard[];
-    })
   }
 }
 

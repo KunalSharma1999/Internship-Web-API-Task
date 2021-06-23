@@ -34,6 +34,7 @@ namespace WebApi.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public async Task<Employee> Post([FromBody] Employee employee)
         {
             var res = await employeeContext.Add(employee);
@@ -41,6 +42,7 @@ namespace WebApi.Controllers
         }
 
         [HttpPut]
+        [Authorize(Roles = "Admin")]
         public async Task<Employee> Put([FromBody] Employee employee)
         {
             int? res = await employeeContext.Update(employee);
@@ -49,6 +51,7 @@ namespace WebApi.Controllers
 
         [HttpDelete]
         [Route("{id}")]
+        [Authorize(Roles = "Admin")]
         public async Task<bool> Delete(int id)
         {
             int? res = await employeeContext.Delete(id);

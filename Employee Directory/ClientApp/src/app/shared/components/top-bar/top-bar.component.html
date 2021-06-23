@@ -8,7 +8,8 @@
     </div>
     <div class="my-profile">
         <h4>
-            Welcome
+            Welcome, 
+            <span *ngIf="isUserAuthenticated" class="profile-name">{{_authService.name}}</span>
         </h4>
         <div class="profile-pic">
             <img src="assets/img/blank-profile-picture.png" class="dp">

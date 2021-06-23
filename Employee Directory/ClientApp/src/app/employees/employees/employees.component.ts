@@ -25,7 +25,6 @@ export class EmployeesComponent implements OnInit {
   employeeId: number;
   mode: Mode;
   public employees: EmployeeCard[];
-  public isUserAuthenticated: boolean = false;
   public isUserAdmin: boolean = false;
 
   constructor(
@@ -33,18 +32,11 @@ export class EmployeesComponent implements OnInit {
 
     ngOnInit(): void {
       this.isAdmin();
-      this.getEmployees();
+      this.employeeService.getEmployees();
     }
 
   filterSelected(filter: Filter) {
     this.filter = filter;
-  }
-
-  public getEmployees = () => {
-    this.employeeService.getEmployees()
-    .subscribe(res => {
-      this.employees = res as EmployeeCard[];
-    })
   }
 
   clearSearch() {

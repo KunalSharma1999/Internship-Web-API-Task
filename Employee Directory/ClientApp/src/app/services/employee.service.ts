@@ -23,7 +23,7 @@ export class EmployeeService {
   }
 
   public getEmployees = () => {
-    return this.http.get(this.createCompleteRoute(this.route, this.envUrl.urlAddress));
+    return this.http.get(this.createCompleteRoute(this.route, this.envUrl.urlAddress)).toPromise().then(res => this.employees = res as EmployeeCard[]);
   }
  
   public getData = (route: string) => {

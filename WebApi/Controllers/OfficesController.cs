@@ -27,12 +27,14 @@ namespace WebApi.Controllers
 
         [HttpGet]
         [Route("{id}")]
+        [Authorize(Roles = "Admin")]
         public async Task<Office> Getoffice(int id)
         {
             return await officeContext.Get(id);
         }
 
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public async Task<Office> Post([FromBody] Office office)
         {
             var res = await officeContext.Add(office);
@@ -40,6 +42,7 @@ namespace WebApi.Controllers
         }
 
         [HttpPut]
+        [Authorize(Roles = "Admin")]
         public async Task<Office> Put([FromBody] Office office)
         {
             int? res = await officeContext.Update(office);
