@@ -3,6 +3,7 @@ using Employee_Directory.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace WebApi.Controllers
@@ -52,6 +53,15 @@ namespace WebApi.Controllers
         {
             int? res = await employeeContext.Delete(id);
             return res != null;
+        }
+
+        [HttpGet("Privacy")]
+        [Authorize(Roles = "Admin")]
+        public IActionResult Privacy()
+        {
+            var claims = User.Claims.Select(c => new { c.Type, c.Value }).ToList();
+
+            return Ok(claims);
         }
     }
 }

@@ -7,6 +7,7 @@ import { EmployeeService } from 'src/app/services/employee.service';
 import { JobTitleService } from '../../services/jobtitle.service';
 import { EmployeeCard } from 'src/app/models/EmployeeCard';
 import { Constants } from 'src/app/shared/constants';
+import { AuthService } from 'src/app/shared/services/auth.service';
 
 @Component({
   selector: 'app-employees',
@@ -24,13 +25,16 @@ export class EmployeesComponent implements OnInit {
   employeeId: number;
   mode: Mode;
   public employees: EmployeeCard[];
+  public isUserAuthenticated: boolean = false;
+  public isUserAdmin: boolean = false;
 
   constructor(
-    private modalService: NgbModal, public employeeService: EmployeeService, public jobTitleService: JobTitleService, private router: Router) {}
+    private _authService: AuthService, private modalService: NgbModal, public employeeService: EmployeeService, public jobTitleService: JobTitleService, private router: Router) {}
 
-  ngOnInit(){
-    this.getEmployees();
-  }
+    ngOnInit(): void {
+      this.isAdmin();
+      this.getEmployees();
+    }
 
   filterSelected(filter: Filter) {
     this.filter = filter;
@@ -59,6 +63,10 @@ export class EmployeesComponent implements OnInit {
     this.router.navigateByUrl("/configurations");
   }
 
+  btnClick1() {
+    this.router.navigateByUrl("/privacy");
+  }
+
   openAddEmployeeDialog() {
     this.mode = Mode.Add;
     this.openEmployeeDialog();
@@ -67,5 +75,12 @@ export class EmployeesComponent implements OnInit {
   private openEmployeeDialog() {
     this.modalService.open(this.modalDialogContent, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
     }).catch(() => {});
+  }
+
+  public isAdmin = () => {
+    return this._authService.checkIfUserIsAdmin()
+    .then(res => {
+      this.isUserAdmin = res;
+    })
   }
 }

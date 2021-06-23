@@ -13,7 +13,7 @@ export class AuthService {
 
   public loginChanged = this._loginChangedSubject.asObservable();
 
-  private get idpSettings(): UserManagerSettings {
+  private get idpSettings() : UserManagerSettings {
     return {
       authority: Constants.idpAuthority,
       client_id: Constants.clientId,
@@ -24,7 +24,7 @@ export class AuthService {
     }
   }
 
-  constructor() {
+  constructor() { 
     this._userManager = new UserManager(this.idpSettings);
   }
 
@@ -34,28 +34,23 @@ export class AuthService {
 
   public isAuthenticated = (): Promise<boolean> => {
     return this._userManager.getUser()
-      .then(user => {
-        if (this._user !== user) {
-          this._loginChangedSubject.next(this.checkUser(user));
-        }
+    .then(user => {
+      if(this._user !== user){
+        this._loginChangedSubject.next(this.checkUser(user));
+      }
 
-        this._user = user;
+      this._user = user;
 
-        return this.checkUser(user);
-      })
-  }
-
-  private checkUser = (user: User): boolean => {
-    return !!user && !user.expired;
+      return this.checkUser(user);
+    })
   }
 
   public finishLogin = (): Promise<User> => {
     return this._userManager.signinRedirectCallback()
-      .then(user => {
-        this._user = user;
-        this._loginChangedSubject.next(this.checkUser(user));
-        return user;
-      })
+    .then(user => {
+      this._loginChangedSubject.next(this.checkUser(user));
+      return user;
+    })
   }
 
   public logout = () => {
@@ -69,8 +64,19 @@ export class AuthService {
 
   public getAccessToken = (): Promise<string> => {
     return this._userManager.getUser()
-      .then(user => {
-        return !!user && !user.expired ? user.access_token : null;
-      })
+    .then(user => {
+      return !!user && !user.expired ? user.access_token : null;
+    })
+  }
+
+  public checkIfUserIsAdmin = (): Promise<boolean> => {
+    return this._userManager.getUser()
+    .then(user => {
+      return user?.profile.role === 'Admin';
+    })
+  }
+
+  private checkUser = (user : User): boolean => {
+    return !!user && !user.expired;
   }
 }

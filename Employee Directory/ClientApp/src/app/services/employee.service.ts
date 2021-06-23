@@ -26,6 +26,10 @@ export class EmployeeService {
     return this.http.get(this.createCompleteRoute(this.route, this.envUrl.urlAddress));
   }
  
+  public getData = (route: string) => {
+    return this.http.get(this.createCompleteRoute(route, this.envUrl.urlAddress));
+  }
+  
   private createCompleteRoute = (route: string, envAddress: string) => {
     return `${envAddress}/${route}`;
   }

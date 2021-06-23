@@ -16,6 +16,8 @@ import { SignoutRedirectCallbackComponent } from './signout-redirect-callback/si
 import { AuthInterceptorService } from './shared/services/auth-interceptor.service';
 import { RegistrationComponent } from './user/registration/registration.component';
 import { UserComponent } from './user/user.component';
+import { PrivacyComponent } from './privacy/privacy.component';
+import { UnauthorizedComponent } from './unauthorized/unauthorized.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +26,9 @@ import { UserComponent } from './user/user.component';
     SigninRedirectCallbackComponent,
     SignoutRedirectCallbackComponent,
     RegistrationComponent,
-    UserComponent
+    UserComponent,
+    PrivacyComponent,
+    UnauthorizedComponent
   ],
   imports: [
     BrowserModule,

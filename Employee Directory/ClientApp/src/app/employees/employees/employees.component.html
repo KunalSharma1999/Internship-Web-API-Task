@@ -32,6 +32,9 @@
                 </select>
             </div>
           <div class="buttons">
+            <button *ngIf="isUserAdmin" class="btn-add-employee" (click)="btnClick1()">
+                Privacy
+            </button>
             <button class="btn-add-employee" (click)="btnClick()">
               Configurations
             </button>
