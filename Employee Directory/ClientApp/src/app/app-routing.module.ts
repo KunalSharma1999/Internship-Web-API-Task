@@ -8,6 +8,7 @@ import { RegistrationComponent } from './user/registration/registration.componen
 import { ConfigurationsComponent } from './employees/configurations/configurations.component';
 import { PrivacyComponent } from './privacy/privacy.component';
 import { UnauthorizedComponent } from './unauthorized/unauthorized.component';
+import { AuthGuardService } from './shared/guards/auth-guard.service';
 
 const routes: Routes = [
  {path: '', redirectTo:'user/registration', pathMatch:'full'},
@@ -15,10 +16,10 @@ const routes: Routes = [
   children: [
     {path: 'registration', component: RegistrationComponent }
   ]},
-  { path: 'privacy', component: PrivacyComponent },
+  { path: 'privacy', component: PrivacyComponent,  canActivate: [AuthGuardService], data: { roles: ['Admin'] } },
   { path: 'unauthorized', component: UnauthorizedComponent },
-  { path: 'employees', component: EmployeesComponent},
-  { path: 'configurations', component: ConfigurationsComponent},
+  { path: 'employees', component: EmployeesComponent,canActivate: [AuthGuardService]},
+  { path: 'configurations', component: ConfigurationsComponent,canActivate: [AuthGuardService]},
   { path: 'signin-callback', component: SigninRedirectCallbackComponent },
   { path: 'signout-callback', component: SignoutRedirectCallbackComponent },
   { path: '**', redirectTo: '/404', pathMatch: 'full' }
