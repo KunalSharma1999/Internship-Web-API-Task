@@ -51,11 +51,11 @@ export class EmployeesComponent implements OnInit {
     this.openEmployeeDialog();
   }
 
-  btnClick() {
+  routeToConfigurationsComponent() {
     this.router.navigateByUrl("/configurations");
   }
 
-  btnClick1() {
+  routeToPrivacyComponent() {
     this.router.navigateByUrl("/privacy");
   }
 
