@@ -2,7 +2,7 @@
 // Licensed under the Apache License, Version 2.0. See LICENSE in the project root for license information.
 
 
-using EmployeeDirectory.Models;
+using EmployeeDirectory.DataModels;
 using IdentityModel;
 using IdentityServer4.Events;
 using IdentityServer4.Extensions;

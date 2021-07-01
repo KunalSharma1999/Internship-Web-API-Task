@@ -1,5 +1,5 @@
-using Employee_Directory.Contracts;
-using Employee_Directory.Services;
+using EmployeeDirectory.Contracts;
+using EmployeeDirectory.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.SpaServices.AngularCli;

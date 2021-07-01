@@ -5,7 +5,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Employee_Directory.Models\EmployeeDirectory.Models.csproj" />
+    <ProjectReference Include="..\EmployeeDirectory.Models\EmployeeDirectory.Models.csproj" />
+    <ProjectReference Include="..\Employee_Directory.Models\EmployeeDirectory.DataModels.csproj" />
   </ItemGroup>
 
 </Project>

@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
+import { AuthService } from 'src/app/shared/services/auth.service';
 import { Department } from '../../../models/Department';
 import { JobTitle } from '../../../models/JobTitle';
 import { DepartmentService } from '../../../services/department.service';
@@ -18,6 +19,8 @@ export class JobTitlesComponent implements OnInit {
   jobTitleIdUpdate = null;
   @Input() jobTitleId: number;
   @Input() jobTitleMode: Mode;
+  jobTitleCreatedBy: string;
+  jobTitleCreatedOn: Date;
 
   constructor(public readonly departmentService: DepartmentService, private readonly jobTitleService: JobTitleService, private modalService: NgbModal, private toastr: ToastrService) { }
 

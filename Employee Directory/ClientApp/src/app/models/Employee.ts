@@ -22,6 +22,5 @@ export class Employee{
         this.departmentId = args.departmentId;
         this.officeId = args.officeId;
         this.jobTitleId = args.jobTitleId;
-        
     }
 }

@@ -1,8 +1,8 @@
-﻿using Employee_Directory.Models;
+﻿using EmployeeDirectory.Models;
 
-namespace Employee_Directory.Contracts
+namespace EmployeeDirectory.Contracts
 {
-    public interface IOfficeService: IConfiguraton<Office>
+    public interface IOfficeService: IMaintanable<OfficeViewModel>
     {
     }
 }

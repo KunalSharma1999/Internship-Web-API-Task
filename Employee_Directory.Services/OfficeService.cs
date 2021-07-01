@@ -1,38 +1,55 @@
-﻿using Employee_Directory.Contracts;
-using Employee_Directory.Models;
+﻿using EmployeeDirectory.Contracts;
+using EmployeeDirectory.DataModels;
+using EmployeeDirectory.Models;
+using PetaPoco;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace Employee_Directory.Services
+namespace EmployeeDirectory.Services
 {
     public class OfficeService: IOfficeService
     {
         private readonly PetaPoco.Database db;
 
-        public OfficeService(PetaPoco.Database database)
+        private AutoMapper.IMapper mapper;
+
+        public OfficeService(PetaPoco.Database database, AutoMapper.IMapper mapper)
         {
             this.db = database;
+            this.mapper = mapper;
         }
 
-        public IEnumerable<Office> Get()
+        public async Task<IEnumerable<OfficeViewModel>> Get()
         {
-            return db.Query<Office>();
+            var offices = await db.FetchAsync<Office>();
+            var offcs = mapper.Map<IEnumerable<OfficeViewModel>>(offices);
+            return offcs;
         }
 
-        public async Task<Office> Get(int id)
+        public async Task<OfficeViewModel> Get(int id)
         {
-            return await db.SingleAsync<Office>(id);
+            var office = await db.SingleAsync<Office>(id);
+            var offc = mapper.Map<OfficeViewModel>(office);
+            return offc;
         }
 
-        public async Task<object> Add(Office office)
+        public Task<object> Add(OfficeViewModel office)
         {
-            return await db.InsertAsync(office);
+            var offc = mapper.Map<Office>(office);
+            offc.CreatedOn = DateTime.Now;
+            offc.ModifiedOn = DateTime.Now;
+            return db.InsertAsync(offc);
 
         }
 
-        public async Task<int> Update(Office office)
+        public Task<int> Update(OfficeViewModel office)
         {
-            return await db.UpdateAsync(office);
+            var offc = mapper.Map<Office>(office);
+            var ofc = db.SingleAsync<Office>(offc.Id);
+            offc.CreatedOn = ofc.Result.CreatedOn;
+            offc.ModifiedOn = DateTime.Now;
+            return db.UpdateAsync(offc);
         }
     }
 }

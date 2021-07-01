@@ -1,6 +1,8 @@
 ﻿using PetaPoco;
+using System;
+using System.ComponentModel.DataAnnotations;
 
-namespace Employee_Directory.Models
+namespace EmployeeDirectory.DataModels
 {
     [TableName("Departments")]
     [PrimaryKey("Id")]
@@ -8,6 +10,14 @@ namespace Employee_Directory.Models
     {
         public int Id { get; set; }
 
-        public string Name { get; set; }        
+        public string Name { get; set; }    
+        
+        public DateTime CreatedOn { get; set; }
+
+        public string CreatedBy { get; set; }
+
+        public DateTime ModifiedOn { get; set; }
+
+        public string ModifiedBy { get; set; }
     }
 }

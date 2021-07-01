@@ -1,52 +1,62 @@
-﻿using Employee_Directory.Contracts;
-using Employee_Directory.Models;
+﻿using EmployeeDirectory.Contracts;
+using EmployeeDirectory.DataModels;
+using EmployeeDirectory.Models;
+using EmployeeDirectory.WebApi.Controllers;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using PetaPoco;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace WebApi.Controllers
 {
-    [Route("api/[controller]")]
-    [Authorize]
-    [ApiController]
-    public class DepartmentsController : ControllerBase
+    public class DepartmentsController : BaseController
     {
-        private readonly IDepartmentService departmentContext;
+        private readonly IDepartmentService _departmentService;
 
-        public DepartmentsController(IDepartmentService dc)
+        public DepartmentsController(IDepartmentService departmentService)
         {
-            departmentContext = dc;
+            _departmentService = departmentService;
         }
 
         [HttpGet]
-        public IEnumerable<Department> Get()
+        public Task<IEnumerable<DepartmentViewModel>> Get()
         {
-            return departmentContext.Get();
+            return _departmentService.Get();
         }
 
         [HttpGet]
         [Route("{id}")]
         [Authorize(Roles = "Admin")]
-        public async Task<Department> Get(int id)
+        public async Task<DepartmentViewModel> Get(int id)
         {
-            return await departmentContext.Get(id);
+            return await _departmentService.Get(id);
         }
 
         [HttpPost]
         [Authorize(Roles ="Admin")]
-        public async Task<Department> Post([FromBody] Department department)
+        public async Task<DepartmentViewModel> Post([FromBody] DepartmentViewModel department)
         {
-            var res = await departmentContext.Add(department);
-            return res != null ? department : null;
+            if (ModelState.IsValid)
+            {
+                var res = await _departmentService.Add(department);
+                return res != null ? department : null;
+            }
+            else
+                return null;
         }
 
         [HttpPut]
         [Authorize(Roles = "Admin")]
-        public async Task<Department> Put([FromBody] Department department)
+        public async Task<DepartmentViewModel> Put([FromBody] DepartmentViewModel department)
         {
-            int? res = await departmentContext.Update(department);
-            return res != null ? department : null;
+            if (ModelState.IsValid)
+            {
+                int? res = await _departmentService.Update(department);
+                return res != null ? department : null;
+            }
+            else
+                return null;
         }
     }
 }

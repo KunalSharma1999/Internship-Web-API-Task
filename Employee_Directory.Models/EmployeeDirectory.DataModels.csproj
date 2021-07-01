@@ -2,6 +2,8 @@
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
+    <AssemblyName>EmployeeDirectory.DataModels</AssemblyName>
+    <RootNamespace>EmployeeDirectory.DataModels</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>

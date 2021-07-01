@@ -1,8 +1,8 @@
-﻿using Employee_Directory.Models;
+﻿using EmployeeDirectory.Models;
 
-namespace Employee_Directory.Contracts
+namespace EmployeeDirectory.Contracts
 {
-    public interface IJobTitleService: IConfiguraton<JobTitle>
+    public interface IJobTitleService: IMaintanable<JobTitleViewModel>
     {
     }
 }

@@ -1,43 +1,61 @@
-﻿using Employee_Directory.Contracts;
-using Employee_Directory.Models;
+﻿using EmployeeDirectory.Contracts;
+using EmployeeDirectory.DataModels;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using System.Linq;
+using PetaPoco;
+using EmployeeDirectory.Models;
+using AutoMapper;
+using System;
 
-namespace Employee_Directory.Services
+namespace EmployeeDirectory.Services
 {
     public class EmployeeService: IEmployeeService
     {
         private readonly PetaPoco.Database db;
 
-        public EmployeeService(PetaPoco.Database database)
+        private AutoMapper.IMapper mapper;
+
+        public EmployeeService(PetaPoco.Database database, AutoMapper.IMapper mapper)
         {
             this.db = database;
+            this.mapper = mapper;
         }
 
-        public IEnumerable<EmployeeCard> Get()
+        public async Task<IEnumerable<EmployeeCard>> Get()
         {
-            return db.Query<EmployeeCard>(Constants.Employee.GetEmployees);
+            var data = await db.FetchAsync<EmployeeCard>(Constants.Employee.GetEmployees);
+            return data;
         }
 
-        public async Task<Employee> Get(int id)
+        public async Task<EmployeeViewModel> Get(int id)
         {
-            return await db.SingleAsync<Employee>(id);
+            var employee = await db.SingleAsync<Employee>(id);
+            var emp = mapper.Map<EmployeeViewModel>(employee);
+            return emp;
         }
 
-        public async Task<object> Add(Employee employee)
+        public Task<object> Add(EmployeeViewModel employee)
         {
-            return await db.InsertAsync(employee);
-            
+            // Convert viewmodel to DataModel
+            var emp = mapper.Map<Employee>(employee);
+            emp.CreatedOn = DateTime.Now;
+            emp.ModifiedOn = DateTime.Now;
+            return db.InsertAsync(emp);
         }
 
-        public async Task<int> Update(Employee employee)
+        public Task<int> Update(EmployeeViewModel employee)
         {
-              return await db.UpdateAsync(employee);
+            var emp = mapper.Map<Employee>(employee);
+            var empl = db.SingleAsync<Employee>(emp.Id);
+            emp.CreatedOn = empl.Result.CreatedOn;
+            emp.ModifiedOn = DateTime.Now;
+            return db.UpdateAsync(emp);
         }
 
-        public async Task<int> Delete(int id)
+        public Task<int> Delete(int id)
         {
-            return await db.DeleteAsync<Employee>(id);
+            return db.DeleteAsync<Employee>(id);
         }
     }
 }

@@ -35,7 +35,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Employee_Directory.Contracts\EmployeeDirectory.Contracts.csproj" />
-    <ProjectReference Include="..\Employee_Directory.Models\EmployeeDirectory.Models.csproj" />
+    <ProjectReference Include="..\Employee_Directory.Models\EmployeeDirectory.DataModels.csproj" />
     <ProjectReference Include="..\Employee_Directory.Services\EmployeeDirectory.Services.csproj" />
   </ItemGroup>
 </Project>

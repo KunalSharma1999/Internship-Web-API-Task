@@ -1,4 +1,4 @@
-using EmployeeDirectory.Models;
+using EmployeeDirectory.DataModels;
 using IdentityModel;
 using IdentityServer4;
 using IdentityServer4.Events;

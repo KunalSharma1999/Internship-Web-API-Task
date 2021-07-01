@@ -1,8 +1,8 @@
-﻿using Employee_Directory.Models;
+﻿using EmployeeDirectory.Models;
 
-namespace Employee_Directory.Contracts
+namespace EmployeeDirectory.Contracts
 {
-    public interface IDepartmentService: IConfiguraton<Department>
+    public interface IDepartmentService: IMaintanable<DepartmentViewModel>
     {
     }
 }

@@ -1,37 +1,54 @@
-﻿using Employee_Directory.Contracts;
-using Employee_Directory.Models;
+﻿using EmployeeDirectory.Contracts;
+using EmployeeDirectory.DataModels;
+using EmployeeDirectory.Models;
+using PetaPoco;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace Employee_Directory.Services
+namespace EmployeeDirectory.Services
 {
     public class JobTitleService: IJobTitleService
     {
         private readonly PetaPoco.Database db;
 
-        public JobTitleService(PetaPoco.Database database)
+        private AutoMapper.IMapper mapper;
+
+        public JobTitleService(PetaPoco.Database database, AutoMapper.IMapper mapper)
         {
             this.db = database;
+            this.mapper = mapper;
         }
 
-        public IEnumerable<JobTitle> Get()
+        public async Task<IEnumerable<JobTitleViewModel>> Get()
         {
-             return db.Query<JobTitle>();
+            var jobTitles = await db.FetchAsync<JobTitle>();
+            var jobs = mapper.Map<IEnumerable<JobTitleViewModel>>(jobTitles);
+            return jobs;
         }
 
-        public async Task<JobTitle> Get(int id)
+        public async Task<JobTitleViewModel> Get(int id)
         {
-            return await db.SingleAsync<JobTitle>(id);
+            var jobTitle = await db.SingleAsync<JobTitle>(id);
+            var job = mapper.Map<JobTitleViewModel>(jobTitle);
+            return job;
         }
 
-        public async Task<object> Add(JobTitle jobTitle)
+        public Task<object> Add(JobTitleViewModel jobTitle)
         {
-            return await db.InsertAsync(jobTitle);
+            var job = mapper.Map<JobTitle>(jobTitle);
+            job.CreatedOn = DateTime.Now;
+            job.ModifiedOn = DateTime.Now;
+            return db.InsertAsync(job);
         }
 
-        public async Task<int> Update(JobTitle jobTitle)
+        public Task<int> Update(JobTitleViewModel jobTitle)
         {
-            return await db.UpdateAsync(jobTitle);
+            var job = mapper.Map<JobTitle>(jobTitle);
+            var jb = db.SingleAsync<JobTitle>(job.Id);
+            job.CreatedOn = jb.Result.CreatedOn;
+            job.ModifiedOn = DateTime.Now;
+            return db.UpdateAsync(jobTitle);
         }
     }
 }

@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
+import { AuthService } from 'src/app/shared/services/auth.service';
 import { Department } from '../../../models/Department';
 import { DepartmentService } from '../../../services/department.service';
 import { Mode } from '../../../shared/enums/mode';
@@ -16,6 +17,8 @@ export class DepartmentsComponent implements OnInit {
   departments: Department[] = [];
   @Input() departmentId: number;
   @Input() departmentMode: Mode;
+  departmentCreatedBy: any;
+  departmentCreatedOn: any;
 
   constructor(private readonly departmentService: DepartmentService, private modalService: NgbModal, private toastr: ToastrService) { }
 

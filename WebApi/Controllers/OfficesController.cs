@@ -1,52 +1,62 @@
-﻿using Employee_Directory.Contracts;
-using Employee_Directory.Models;
+﻿using EmployeeDirectory.Contracts;
+using EmployeeDirectory.DataModels;
+using EmployeeDirectory.Models;
+using EmployeeDirectory.WebApi.Controllers;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using PetaPoco;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace WebApi.Controllers
 {
-    [Route("api/[controller]")]
-    [Authorize]
-    [ApiController]
-    public class OfficesController : ControllerBase
+    public class OfficesController : BaseController
     {
-        private readonly IOfficeService officeContext;
+        private readonly IOfficeService _officeService;
 
-        public OfficesController(IOfficeService oc)
+        public OfficesController(IOfficeService officeService)
         {
-            officeContext = oc;
+            _officeService = officeService;
         }
 
         [HttpGet]
-        public IEnumerable<Office> Get()
+        public Task<IEnumerable<OfficeViewModel>> Get()
         {
-            return officeContext.Get();
+            return _officeService.Get();
         }
 
         [HttpGet]
         [Route("{id}")]
         [Authorize(Roles = "Admin")]
-        public async Task<Office> Getoffice(int id)
+        public async Task<OfficeViewModel> Getoffice(int id)
         {
-            return await officeContext.Get(id);
+            return await _officeService.Get(id);
         }
 
         [HttpPost]
         [Authorize(Roles = "Admin")]
-        public async Task<Office> Post([FromBody] Office office)
+        public async Task<OfficeViewModel> Post([FromBody] OfficeViewModel office)
         {
-            var res = await officeContext.Add(office);
-            return res != null ? office : null;
+            if (ModelState.IsValid)
+            {
+                var res = await _officeService.Add(office);
+                return res != null ? office : null;
+            }
+            else
+                return null;
         }
 
         [HttpPut]
         [Authorize(Roles = "Admin")]
-        public async Task<Office> Put([FromBody] Office office)
+        public async Task<OfficeViewModel> Put([FromBody] OfficeViewModel office)
         {
-            int? res = await officeContext.Update(office);
-            return res != null ? office : null;
+            if (ModelState.IsValid)
+            {
+                int? res = await _officeService.Update(office);
+                return res != null ? office : null;
+            }
+            else
+                return null;
         }
     }
 }

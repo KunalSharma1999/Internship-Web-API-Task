@@ -1,4 +1,4 @@
-﻿using EmployeeDirectory.Models;
+﻿using EmployeeDirectory.DataModels;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 

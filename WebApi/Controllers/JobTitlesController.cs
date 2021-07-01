@@ -1,52 +1,62 @@
-﻿using Employee_Directory.Contracts;
-using Employee_Directory.Models;
+﻿using EmployeeDirectory.Contracts;
+using EmployeeDirectory.DataModels;
+using EmployeeDirectory.Models;
+using EmployeeDirectory.WebApi.Controllers;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using PetaPoco;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace WebApi.Controllers
 {
-    [Route("api/[controller]")]
-    [Authorize]
-    [ApiController]
-    public class JobTitlesController : ControllerBase
+    public class JobTitlesController : BaseController
     {
-        private readonly IJobTitleService jobTitleContext;
+        private readonly IJobTitleService _jobTitleService;
 
-        public JobTitlesController(IJobTitleService jc)
+        public JobTitlesController(IJobTitleService jobTitleService)
         {
-            jobTitleContext = jc;
+            _jobTitleService = jobTitleService;
         }
 
         [HttpGet]
-        public IEnumerable<JobTitle> Get()
+        public Task<IEnumerable<JobTitleViewModel>> Get()
         {
-            return jobTitleContext.Get();
+            return _jobTitleService.Get();
         }
 
         [HttpGet]
         [Route("{id}")]
         [Authorize(Roles = "Admin")]
-        public async Task<JobTitle> Get(int id)
+        public async Task<JobTitleViewModel> Get(int id)
         {
-            return await jobTitleContext.Get(id);
+            return await _jobTitleService.Get(id);
         }
 
         [HttpPost]
         [Authorize(Roles = "Admin")]
-        public async Task<JobTitle> Post([FromBody] JobTitle jobtitle)
+        public async Task<JobTitleViewModel> Post([FromBody] JobTitleViewModel jobtitle)
         {
-            var res = await jobTitleContext.Add(jobtitle);
-            return res != null ? jobtitle : null;
+            if (ModelState.IsValid)
+            {
+                var res = await _jobTitleService.Add(jobtitle);
+                return res != null ? jobtitle : null;
+            }
+            else
+                return null;
         }
 
         [HttpPut]
         [Authorize(Roles = "Admin")]
-        public async Task<JobTitle> Put([FromBody] JobTitle jobtitle)
+        public async Task<JobTitleViewModel> Put([FromBody] JobTitleViewModel jobtitle)
         {
-            int? res = await jobTitleContext.Update(jobtitle);
-            return res != null ? jobtitle : null;
+            if (ModelState.IsValid)
+            {
+                int? res = await _jobTitleService.Update(jobtitle);
+                return res != null ? jobtitle : null;
+            }
+            else
+                return null;
         }
     }
 }

@@ -1,18 +1,20 @@
-﻿using Employee_Directory.Models;
+﻿using EmployeeDirectory.DataModels;
+using EmployeeDirectory.Models;
+using PetaPoco;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace Employee_Directory.Contracts
+namespace EmployeeDirectory.Contracts
 {
     public interface IEmployeeService
     {
-        IEnumerable<EmployeeCard> Get();
+        Task<IEnumerable<EmployeeCard>> Get();
 
-        Task<Employee> Get(int id);
+        Task<EmployeeViewModel> Get(int id);
 
-        Task<object> Add(Employee employee);
+        Task<object> Add(EmployeeViewModel employee);
 
-        Task<int> Update(Employee employee);
+        Task<int> Update(EmployeeViewModel employee);
 
         Task<int> Delete(int id);
     }

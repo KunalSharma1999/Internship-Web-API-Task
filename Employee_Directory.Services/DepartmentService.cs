@@ -1,37 +1,55 @@
-﻿using Employee_Directory.Contracts;
-using Employee_Directory.Models;
+﻿using AutoMapper;
+using EmployeeDirectory.Contracts;
+using EmployeeDirectory.DataModels;
+using EmployeeDirectory.Models;
+using PetaPoco;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace Employee_Directory.Services
+namespace EmployeeDirectory.Services
 {
     public class DepartmentService: IDepartmentService
     {
         private readonly PetaPoco.Database db;
 
-        public DepartmentService(PetaPoco.Database database)
+        private AutoMapper.IMapper mapper;
+
+        public DepartmentService(PetaPoco.Database database, AutoMapper.IMapper mapper)
         {
             this.db = database;
+            this.mapper = mapper;
         }
 
-        public IEnumerable<Department> Get()
+        public async Task<IEnumerable<DepartmentViewModel>> Get()
         {
-            return db.Query<Department>();
+            var departments = await db.FetchAsync<Department>();
+            var depts = mapper.Map<IEnumerable<DepartmentViewModel>>(departments);
+            return depts;
         }
 
-        public async Task<Department> Get(int id)
+        public async Task<DepartmentViewModel> Get(int id)
         {
-             return await db.SingleAsync<Department>(id);
+            var department = await db.SingleAsync<Department>(id);
+            var dept = mapper.Map<DepartmentViewModel>(department);
+            return dept;
         }
 
-        public async Task<object> Add(Department department)
+        public Task<object> Add(DepartmentViewModel department)
         {
-            return await db.InsertAsync(department);
+            var dept = mapper.Map<Department>(department);
+            dept.CreatedOn = DateTime.Now;
+            dept.ModifiedOn = DateTime.Now;
+            return db.InsertAsync(dept);
         }
 
-        public async Task<int> Update(Department department)
+        public Task<int> Update(DepartmentViewModel department)
         {
-            return await db.UpdateAsync(department);
+            var dept = mapper.Map<Department>(department);
+            var deptmnt = db.SingleAsync<Department>(dept.Id);
+            dept.CreatedOn = deptmnt.Result.CreatedOn;
+            dept.ModifiedOn = DateTime.Now;
+            return db.UpdateAsync(dept);
         }
     }
 }

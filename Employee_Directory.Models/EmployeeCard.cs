@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Employee_Directory.Models
+namespace EmployeeDirectory.DataModels
 {
     public class EmployeeCard
     {
@@ -17,5 +17,8 @@ namespace Employee_Directory.Models
         public string  JobTitle { get; set; }
 
         public string Office { get; set; }
+
+        public string Name { get; set; }
+
     }
 }

@@ -3,16 +3,20 @@
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
     <NoWin32Manifest>true</NoWin32Manifest>
+    <AssemblyName>EmployeeDirectory.WebApi</AssemblyName>
+    <RootNamespace>EmployeeDirectory.WebApi</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.1.1" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="5.0.7" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="5.6.3" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\EmployeeDirectory.Models\EmployeeDirectory.Models.csproj" />
     <ProjectReference Include="..\Employee_Directory.Contracts\EmployeeDirectory.Contracts.csproj" />
-    <ProjectReference Include="..\Employee_Directory.Models\EmployeeDirectory.Models.csproj" />
+    <ProjectReference Include="..\Employee_Directory.Models\EmployeeDirectory.DataModels.csproj" />
     <ProjectReference Include="..\Employee_Directory.Services\EmployeeDirectory.Services.csproj" />
   </ItemGroup>
 

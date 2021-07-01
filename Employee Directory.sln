@@ -7,13 +7,15 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EmployeeDirectory", "Employ
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EmployeeDirectory.Services", "Employee_Directory.Services\EmployeeDirectory.Services.csproj", "{D8DBD7DE-CD1F-4DE9-98B8-D00CF680772B}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EmployeeDirectory.Models", "Employee_Directory.Models\EmployeeDirectory.Models.csproj", "{F56E5F64-05A8-43CA-A547-749673397E97}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EmployeeDirectory.DataModels", "Employee_Directory.Models\EmployeeDirectory.DataModels.csproj", "{F56E5F64-05A8-43CA-A547-749673397E97}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EmployeeDirectory.Contracts", "Employee_Directory.Contracts\EmployeeDirectory.Contracts.csproj", "{05065B54-D499-44B3-8D25-A050F1E58B4B}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EmployeeDirectoryAuth", "EmployeeDirectoryAuth\EmployeeDirectoryAuth.csproj", "{52C59ECF-BAA2-4C7C-AD1C-7AC27CB2DE45}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EmployeeDirectory.Auth", "EmployeeDirectoryAuth\EmployeeDirectory.Auth.csproj", "{52C59ECF-BAA2-4C7C-AD1C-7AC27CB2DE45}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApi", "WebApi\WebApi.csproj", "{DCAE5D51-5B64-4965-BF2E-AB086F8A813C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EmployeeDirectory.WebApi", "WebApi\EmployeeDirectory.WebApi.csproj", "{DCAE5D51-5B64-4965-BF2E-AB086F8A813C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmployeeDirectory.Models", "EmployeeDirectory.Models\EmployeeDirectory.Models.csproj", "{36464B8A-9239-440C-873B-13818A750218}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +47,10 @@ Global
 		{DCAE5D51-5B64-4965-BF2E-AB086F8A813C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DCAE5D51-5B64-4965-BF2E-AB086F8A813C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DCAE5D51-5B64-4965-BF2E-AB086F8A813C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{36464B8A-9239-440C-873B-13818A750218}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{36464B8A-9239-440C-873B-13818A750218}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{36464B8A-9239-440C-873B-13818A750218}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{36464B8A-9239-440C-873B-13818A750218}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

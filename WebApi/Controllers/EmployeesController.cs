@@ -1,52 +1,62 @@
-﻿using Employee_Directory.Contracts;
-using Employee_Directory.Models;
+﻿using EmployeeDirectory.Contracts;
+using EmployeeDirectory.DataModels;
+using EmployeeDirectory.Models;
+using EmployeeDirectory.WebApi.Controllers;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using PetaPoco;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace WebApi.Controllers
 {
-    [Route("api/[controller]")]
-    [Authorize]
-    [ApiController]
-    public class EmployeesController : ControllerBase
+    public class EmployeesController : BaseController
     {
-        private readonly IEmployeeService employeeContext;
+        private readonly IEmployeeService _employeeService;
        
-        public EmployeesController(IEmployeeService ec)
+        public EmployeesController(IEmployeeService employeeService)
         {
-            employeeContext = ec;
+            _employeeService = employeeService;
         }
 
         [HttpGet]
-        public IEnumerable<EmployeeCard> Get()
+        public Task<IEnumerable<EmployeeCard>> Get()
         {
-            return employeeContext.Get();
+            return _employeeService.Get();
         }
 
         [HttpGet]
         [Route("{id}")]
-        public async Task<Employee> Get(int id)
+        public async Task<EmployeeViewModel> Get(int id)
         {
-            return await employeeContext.Get(id);
+            return await _employeeService.Get(id);
         }
 
         [HttpPost]
         [Authorize(Roles = "Admin")]
-        public async Task<Employee> Post([FromBody] Employee employee)
+        public async Task<EmployeeViewModel> Post([FromBody] EmployeeViewModel employee)
         {
-            var res = await employeeContext.Add(employee);
-            return res != null ? employee : null;
+            if(ModelState.IsValid)
+            {
+                var res = await _employeeService.Add(employee);
+                return res != null ? employee : null;
+            }
+            else
+                return null;
         }
 
         [HttpPut]
         [Authorize(Roles = "Admin")]
-        public async Task<Employee> Put([FromBody] Employee employee)
+        public async Task<EmployeeViewModel> Put([FromBody] EmployeeViewModel employee)
         {
-            int? res = await employeeContext.Update(employee);
-            return res != null ? employee : null;
+            if (ModelState.IsValid)
+            {
+                int? res = await _employeeService.Update(employee);
+                return res != null ? employee : null;
+            }
+            else
+                return null;
         }
 
         [HttpDelete]
@@ -54,7 +64,7 @@ namespace WebApi.Controllers
         [Authorize(Roles = "Admin")]
         public async Task<bool> Delete(int id)
         {
-            int? res = await employeeContext.Delete(id);
+            int? res = await _employeeService.Delete(id);
             return res != null;
         }
 

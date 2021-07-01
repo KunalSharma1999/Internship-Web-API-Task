@@ -9,6 +9,7 @@ import { OfficeService } from 'src/app/services/office.service';
 import { JobTitleService } from 'src/app/services/jobtitle.service';
 import { ToastrService } from 'ngx-toastr';
 import { EmployeeCard } from 'src/app/models/EmployeeCard';
+import { AuthService } from 'src/app/shared/services/auth.service';
 
 @Component({
   selector: 'app-add-employee',
@@ -22,6 +23,8 @@ export class AddEmployeeComponent implements OnInit {
   employeeIdUpdate = null; 
   formTitle: string = "Enter Employee Details";
   employees: EmployeeCard[];
+  employeeCreatedOn: any;
+  employeeCreatedBy: any;
 
   constructor(private employeeService: EmployeeService, private modalService: NgbModal, private toastr: ToastrService, public departmentService: DepartmentService, public officeService: OfficeService, public jobTitleService: JobTitleService) {}
 
@@ -73,7 +76,7 @@ export class AddEmployeeComponent implements OnInit {
     }
     else
     {
-    employee.id = this.employeeIdUpdate;
+      employee.id = this.employeeIdUpdate;
       this.employeeService.updateEmployee(employee).subscribe(() => {
         this.employeeService.getEmployees();
       this.employeeIdUpdate = null;
@@ -86,6 +89,8 @@ export class AddEmployeeComponent implements OnInit {
   loadEmployeeToEdit(employeeId: number) {
     this.employeeService.getEmployeeById(employeeId).then(employee => { 
       this.employeeIdUpdate = employee.id;
+      this.employeeCreatedOn = employee.createdOn;
+      this.employeeCreatedBy = employee.createdBy;
       this.employeeForm.patchValue(employee);
     });
   } 

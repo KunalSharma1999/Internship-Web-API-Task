@@ -1,5 +1,5 @@
-using Employee_Directory.Contracts;
-using Employee_Directory.Services;
+using EmployeeDirectory.Contracts;
+using EmployeeDirectory.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -26,9 +26,11 @@ namespace WebApi
             services.AddScoped<IOfficeService, OfficeService>();
             services.AddScoped<IJobTitleService, JobTitleService>();
 
+            services.AddAutoMapper(typeof(MappingProfile));
+
             services.AddScoped((a) =>
             {
-                return new PetaPoco.Database(connectionString: Configuration.GetConnectionString("DefaultConnection"), providerName: "System.Data.SqlClient");
+                return new PetaPoco.Database(connectionString: Configuration.GetConnectionString("DefaultConnection"), providerName: Configuration.GetSection("ProviderNames")["DefaultProvider"]);
             }
           );
 

@@ -1,4 +1,4 @@
-﻿namespace Employee_Directory.Services
+﻿namespace EmployeeDirectory.Services
 {
     public static class Constants
     {

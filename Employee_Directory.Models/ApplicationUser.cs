@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace EmployeeDirectory.Models
+namespace EmployeeDirectory.DataModels
 {
     public class ApplicationUser : IdentityUser
     {

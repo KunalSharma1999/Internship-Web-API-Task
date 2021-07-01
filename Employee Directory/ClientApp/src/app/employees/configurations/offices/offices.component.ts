@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
+import { AuthService } from 'src/app/shared/services/auth.service';
 import { Office } from '../../../models/Office';
 import { OfficeService } from '../../../services/office.service';
 import { Mode } from '../../../shared/enums/mode';
@@ -15,6 +16,8 @@ export class OfficesComponent implements OnInit {
   officeIdUpdate = null;
   @Input() officeId: number;
   @Input() officeMode: Mode;
+  officeCreatedOn: Date;
+  officeCreatedBy: string;
 
   constructor(private readonly officeService: OfficeService, private modalService: NgbModal, private toastr: ToastrService) { }
 
