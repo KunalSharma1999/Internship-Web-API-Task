@@ -35,20 +35,24 @@ namespace EmployeeDirectory.Services
             return dept;
         }
 
-        public Task<object> Add(DepartmentViewModel department)
+        public Task<object> Add(DepartmentViewModel department, string user)
         {
             var dept = mapper.Map<Department>(department);
             dept.CreatedOn = DateTime.Now;
+            dept.CreatedBy = user;
             dept.ModifiedOn = DateTime.Now;
+            dept.ModifiedBy = user;
             return db.InsertAsync(dept);
         }
 
-        public Task<int> Update(DepartmentViewModel department)
+        public Task<int> Update(DepartmentViewModel department, string user)
         {
             var dept = mapper.Map<Department>(department);
             var deptmnt = db.SingleAsync<Department>(dept.Id);
             dept.CreatedOn = deptmnt.Result.CreatedOn;
+            dept.CreatedBy = deptmnt.Result.CreatedBy;
             dept.ModifiedOn = DateTime.Now;
+            dept.ModifiedBy = user;
             return db.UpdateAsync(dept);
         }
     }

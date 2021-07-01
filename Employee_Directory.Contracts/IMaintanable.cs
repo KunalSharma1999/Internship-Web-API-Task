@@ -10,8 +10,8 @@ namespace EmployeeDirectory.Contracts
 
         Task<T> Get(int id);
 
-        Task<object> Add(T t);
+        Task<object> Add(T t, string user);
 
-        Task<int> Update(T t);
+        Task<int> Update(T t, string user);
     }
 }

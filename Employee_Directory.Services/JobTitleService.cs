@@ -34,20 +34,24 @@ namespace EmployeeDirectory.Services
             return job;
         }
 
-        public Task<object> Add(JobTitleViewModel jobTitle)
+        public Task<object> Add(JobTitleViewModel jobTitle, string user)
         {
             var job = mapper.Map<JobTitle>(jobTitle);
             job.CreatedOn = DateTime.Now;
+            job.CreatedBy = user;
             job.ModifiedOn = DateTime.Now;
+            job.ModifiedBy = user;
             return db.InsertAsync(job);
         }
 
-        public Task<int> Update(JobTitleViewModel jobTitle)
+        public Task<int> Update(JobTitleViewModel jobTitle, string user)
         {
             var job = mapper.Map<JobTitle>(jobTitle);
             var jb = db.SingleAsync<JobTitle>(job.Id);
             job.CreatedOn = jb.Result.CreatedOn;
+            job.CreatedBy = jb.Result.CreatedBy;
             job.ModifiedOn = DateTime.Now;
+            job.ModifiedBy = user;
             return db.UpdateAsync(jobTitle);
         }
     }

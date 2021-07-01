@@ -35,21 +35,25 @@ namespace EmployeeDirectory.Services
             return emp;
         }
 
-        public Task<object> Add(EmployeeViewModel employee)
+        public Task<object> Add(EmployeeViewModel employee, string user)
         {
             // Convert viewmodel to DataModel
             var emp = mapper.Map<Employee>(employee);
             emp.CreatedOn = DateTime.Now;
+            emp.CreatedBy = user;
             emp.ModifiedOn = DateTime.Now;
+            emp.ModifiedBy = user;
             return db.InsertAsync(emp);
         }
 
-        public Task<int> Update(EmployeeViewModel employee)
+        public Task<int> Update(EmployeeViewModel employee, string user)
         {
             var emp = mapper.Map<Employee>(employee);
             var empl = db.SingleAsync<Employee>(emp.Id);
             emp.CreatedOn = empl.Result.CreatedOn;
+            emp.CreatedBy = empl.Result.CreatedBy;
             emp.ModifiedOn = DateTime.Now;
+            emp.ModifiedBy = user;
             return db.UpdateAsync(emp);
         }
 

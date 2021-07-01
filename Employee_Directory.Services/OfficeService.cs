@@ -1,6 +1,7 @@
 ﻿using EmployeeDirectory.Contracts;
 using EmployeeDirectory.DataModels;
 using EmployeeDirectory.Models;
+using Microsoft.AspNetCore.Mvc;
 using PetaPoco;
 using System;
 using System.Collections.Generic;
@@ -34,21 +35,25 @@ namespace EmployeeDirectory.Services
             return offc;
         }
 
-        public Task<object> Add(OfficeViewModel office)
+        public Task<object> Add(OfficeViewModel office, string user)
         {
             var offc = mapper.Map<Office>(office);
             offc.CreatedOn = DateTime.Now;
+            offc.CreatedBy = user;
             offc.ModifiedOn = DateTime.Now;
+            offc.ModifiedBy = user;
             return db.InsertAsync(offc);
 
         }
 
-        public Task<int> Update(OfficeViewModel office)
+        public Task<int> Update(OfficeViewModel office, string user)
         {
             var offc = mapper.Map<Office>(office);
             var ofc = db.SingleAsync<Office>(offc.Id);
             offc.CreatedOn = ofc.Result.CreatedOn;
+            offc.CreatedBy = ofc.Result.CreatedBy;
             offc.ModifiedOn = DateTime.Now;
+            offc.ModifiedBy = user;
             return db.UpdateAsync(offc);
         }
     }

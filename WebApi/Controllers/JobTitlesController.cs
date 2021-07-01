@@ -39,7 +39,8 @@ namespace WebApi.Controllers
         {
             if (ModelState.IsValid)
             {
-                var res = await _jobTitleService.Add(jobtitle);
+                var user = User.FindFirst(x => x.Type.Equals("userName"))?.Value;
+                var res = await _jobTitleService.Add(jobtitle, user);
                 return res != null ? jobtitle : null;
             }
             else
@@ -52,7 +53,8 @@ namespace WebApi.Controllers
         {
             if (ModelState.IsValid)
             {
-                int? res = await _jobTitleService.Update(jobtitle);
+                var user = User.FindFirst(x => x.Type.Equals("userName"))?.Value;
+                int? res = await _jobTitleService.Update(jobtitle, user);
                 return res != null ? jobtitle : null;
             }
             else

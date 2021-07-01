@@ -39,7 +39,8 @@ namespace WebApi.Controllers
         {
             if (ModelState.IsValid)
             {
-                var res = await _officeService.Add(office);
+                var user = User.FindFirst(x => x.Type.Equals("userName"))?.Value;
+                var res = await _officeService.Add(office,user);
                 return res != null ? office : null;
             }
             else
@@ -52,7 +53,8 @@ namespace WebApi.Controllers
         {
             if (ModelState.IsValid)
             {
-                int? res = await _officeService.Update(office);
+                var user = User.FindFirst(x => x.Type.Equals("userName"))?.Value;
+                int? res = await _officeService.Update(office, user);
                 return res != null ? office : null;
             }
             else
