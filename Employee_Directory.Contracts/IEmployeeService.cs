@@ -12,9 +12,9 @@ namespace EmployeeDirectory.Contracts
 
         Task<EmployeeViewModel> Get(int id);
 
-        Task<object> Add(EmployeeViewModel employee, string user);
+        Task<object> Add(EmployeeViewModel employee);
 
-        Task<int> Update(EmployeeViewModel employee, string user);
+        Task<int> Update(EmployeeViewModel employee);
 
         Task<int> Delete(int id);
     }

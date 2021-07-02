@@ -25,6 +25,7 @@ namespace WebApi
             services.AddScoped<IDepartmentService, DepartmentService>();
             services.AddScoped<IOfficeService, OfficeService>();
             services.AddScoped<IJobTitleService, JobTitleService>();
+            services.AddHttpContextAccessor();
 
             services.AddAutoMapper(typeof(MappingProfile));
 

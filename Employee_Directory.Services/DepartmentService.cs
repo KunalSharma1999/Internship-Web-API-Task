@@ -2,6 +2,7 @@
 using EmployeeDirectory.Contracts;
 using EmployeeDirectory.DataModels;
 using EmployeeDirectory.Models;
+using Microsoft.AspNetCore.Http;
 using PetaPoco;
 using System;
 using System.Collections.Generic;
@@ -15,10 +16,13 @@ namespace EmployeeDirectory.Services
 
         private AutoMapper.IMapper mapper;
 
-        public DepartmentService(PetaPoco.Database database, AutoMapper.IMapper mapper)
+        private readonly IHttpContextAccessor _httpContextAccessor;
+
+        public DepartmentService(PetaPoco.Database database, AutoMapper.IMapper mapper, IHttpContextAccessor httpContextAccessor)
         {
             this.db = database;
             this.mapper = mapper;
+            _httpContextAccessor = httpContextAccessor;
         }
 
         public async Task<IEnumerable<DepartmentViewModel>> Get()
@@ -35,24 +39,26 @@ namespace EmployeeDirectory.Services
             return dept;
         }
 
-        public Task<object> Add(DepartmentViewModel department, string user)
+        public Task<object> Add(DepartmentViewModel department)
         {
+            var currentUserName = _httpContextAccessor.HttpContext.User.FindFirst(x => x.Type.Equals("userName"))?.Value;
             var dept = mapper.Map<Department>(department);
             dept.CreatedOn = DateTime.Now;
-            dept.CreatedBy = user;
+            dept.CreatedBy = currentUserName;
             dept.ModifiedOn = DateTime.Now;
-            dept.ModifiedBy = user;
+            dept.ModifiedBy = currentUserName;
             return db.InsertAsync(dept);
         }
 
-        public Task<int> Update(DepartmentViewModel department, string user)
+        public Task<int> Update(DepartmentViewModel department)
         {
+            var currentUserName = _httpContextAccessor.HttpContext.User.FindFirst(x => x.Type.Equals("userName"))?.Value;
             var dept = mapper.Map<Department>(department);
             var deptmnt = db.SingleAsync<Department>(dept.Id);
             dept.CreatedOn = deptmnt.Result.CreatedOn;
             dept.CreatedBy = deptmnt.Result.CreatedBy;
             dept.ModifiedOn = DateTime.Now;
-            dept.ModifiedBy = user;
+            dept.ModifiedBy = currentUserName;
             return db.UpdateAsync(dept);
         }
     }

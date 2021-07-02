@@ -1,6 +1,7 @@
 ﻿using EmployeeDirectory.Contracts;
 using EmployeeDirectory.DataModels;
 using EmployeeDirectory.Models;
+using Microsoft.AspNetCore.Http;
 using PetaPoco;
 using System;
 using System.Collections.Generic;
@@ -14,10 +15,13 @@ namespace EmployeeDirectory.Services
 
         private AutoMapper.IMapper mapper;
 
-        public JobTitleService(PetaPoco.Database database, AutoMapper.IMapper mapper)
+        private readonly IHttpContextAccessor _httpContextAccessor;
+
+        public JobTitleService(PetaPoco.Database database, AutoMapper.IMapper mapper, IHttpContextAccessor httpContextAccessor)
         {
             this.db = database;
             this.mapper = mapper;
+            _httpContextAccessor = httpContextAccessor;
         }
 
         public async Task<IEnumerable<JobTitleViewModel>> Get()
@@ -34,24 +38,26 @@ namespace EmployeeDirectory.Services
             return job;
         }
 
-        public Task<object> Add(JobTitleViewModel jobTitle, string user)
+        public Task<object> Add(JobTitleViewModel jobTitle)
         {
+            var currentUserName = _httpContextAccessor.HttpContext.User.FindFirst(x => x.Type.Equals("userName"))?.Value;
             var job = mapper.Map<JobTitle>(jobTitle);
             job.CreatedOn = DateTime.Now;
-            job.CreatedBy = user;
+            job.CreatedBy = currentUserName;
             job.ModifiedOn = DateTime.Now;
-            job.ModifiedBy = user;
+            job.ModifiedBy = currentUserName;
             return db.InsertAsync(job);
         }
 
-        public Task<int> Update(JobTitleViewModel jobTitle, string user)
+        public Task<int> Update(JobTitleViewModel jobTitle)
         {
+            var currentUserName = _httpContextAccessor.HttpContext.User.FindFirst(x => x.Type.Equals("userName"))?.Value;
             var job = mapper.Map<JobTitle>(jobTitle);
             var jb = db.SingleAsync<JobTitle>(job.Id);
             job.CreatedOn = jb.Result.CreatedOn;
             job.CreatedBy = jb.Result.CreatedBy;
             job.ModifiedOn = DateTime.Now;
-            job.ModifiedBy = user;
+            job.ModifiedBy = currentUserName;
             return db.UpdateAsync(jobTitle);
         }
     }
